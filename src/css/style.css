@@ -1,0 +1,27 @@
+/* ================= BASE-STYLES & UTILS ================= */
+
+@import './base/common.css';
+@import './base/reset.css';
+/* @import './utils/'; */
+
+/* ================= COMMON LAYOUTS ================= */
+
+@import './header.css';
+@import './footer.css';
+
+/* ================= HOME-PAGE ================= */
+
+@import './home/hero.css';
+@import './home/trends.css';
+@import './home/upcoming.css';
+
+/* ================= CATALOG-PAGE ================= */
+
+@import './catalog/hero.css';
+@import './catalog/search.css';
+@import './catalog/search-result.css';
+
+/* ================= LIBRARY-PAGE ================= */
+
+@import './library/hero.css';
+@import './library/film-list.css';
