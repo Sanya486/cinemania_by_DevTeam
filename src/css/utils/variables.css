@@ -1,0 +1,14 @@
+:root {
+    --accent-color: #F87719;
+    --dark-color: #111111;
+    --light-color:#FFFFFF;
+    --light-theme-dark-text-color: #282828;
+    --light-theme-medium-text-color: #595959;
+    --dark-theme-dark-text-color: #B7B7B7;
+    --dark-theme-light-text-color: #F8F8F8;
+
+    --linear-gradient-first: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%);;
+    --linear-gradient-second: linear-gradient(141.22deg, #F84119 9.4%, rgba(248, 159, 25, 0.68) 91.91%);
+
+    --action-transition: cubic-bezier(0.4, 0, 0.2, 1);
+}

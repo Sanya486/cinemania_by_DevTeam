@@ -1,9 +1,14 @@
+/* ======================== MOBILE STYLES ======================== */
 
+
+/* ======================== TABLET STYLES ======================== */
 @media screen and (min-width:768px)  {
-    
+    /* .container прописувати не потрібно */
+
 }
 
-
-@media screen and (min-width:768px)  {
+/* ======================== DESKTOP STYLES ======================== */
+@media screen and (min-width:1280px)  {
+    /* .container прописувати не потрібно */
     
 }

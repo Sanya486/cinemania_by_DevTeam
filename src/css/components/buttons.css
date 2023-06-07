@@ -1,0 +1,150 @@
+.main-accent-btn {
+    background: var( --linear-gradient-first);
+    border: none;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.56;
+}
+
+/* main light button */
+
+.main-light-btn {
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 1.56;
+    border: none;
+    margin: 1px;
+
+    color: var(--accent-color);
+}
+
+.main-light-btn::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    margin: -1px;
+    background: var(--linear-gradient-first);
+    border-radius: 74px;
+}
+
+/* main accent small btn */
+
+.main-accent-sml-btn {
+    background: var( --linear-gradient-first);
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.14;
+}
+
+/* main light small button */
+
+.main-light-sml-btn {
+    position: relative;
+    display: inline-block;
+    background-color: #fff;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.14;
+    border: none;
+    margin: 1px;
+
+    color: var(--accent-color);
+}
+
+.main-light-sml-btn::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    margin: -1px;
+    background: var(--linear-gradient-first);
+    border-radius: 74px;
+}
+
+
+/* <!-- "Remove from my library" and "Add to my library"s with dark background --> */
+
+.rm-dark-bcg-btn{
+    position: relative;
+    display: inline-block;
+    background-color: var(--dark-color);
+    color: var(--light-color);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.33;
+    border: none;
+    margin: 1px;
+}
+
+.rm-dark-bcg-btn::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    margin: -1px;
+    background: var(--linear-gradient-first);
+    border-radius: 74px;
+}
+
+/* <!-- "Remove from my library" and "Add to my library" with light background --> */
+
+.rm-light-bcg-btn{
+    background-color: transparent;
+    border: none;
+    color: var(--accent-color);
+    font-size: 12px;
+    line-height: 1.33;
+}
+
+/* <!-- "Remove from my library" and "Add to my library" with light background and gradient border --> */
+
+.rm-light-bcg-grd-btn {
+    position: relative;
+    display: inline-block;
+    background-color: var(--light-color);
+    color: var(--dark-color);
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.33;
+    border: none;
+    margin: 1px;
+}
+
+.rm-light-bcg-grd-btn::before{
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: -1;
+    margin: -1px;
+    background: var(--linear-gradient-first);
+    border-radius: 74px;
+}
+
+/* <!-- "Remove from my library" and "Add to my library" with dark background and  without gradient border --> */
+
+.rm-dark-bcg-nogrd-btn {
+    background: var(--dark-color);
+    border: none;
+    font-size: 12px;
+    font-weight: 500;
+    line-height: 1.33;
+    color: var(--accent-color);
+}
+
