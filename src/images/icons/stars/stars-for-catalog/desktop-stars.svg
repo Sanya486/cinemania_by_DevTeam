@@ -1,0 +1,14 @@
+<svg aria-hidden="true" style="position:absolute;width:0;height:0;overflow:hidden" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="empty-star-icon" viewBox="0 0 36 32">
+      <path stroke-linejoin="round" stroke-width="2" d="M33.75 12.625H21.656L18 1.375l-3.656 11.25H2.25l9.844 6.75-3.797 11.25L18 23.594l9.703 7.031-3.797-11.25 9.844-6.75z"/>
+    </symbol>
+    <symbol id="full-star-icon" viewBox="0 0 36 32">
+      <path d="M27.704 31.75a1.123 1.123 0 0 1-.66-.211l-9.043-6.556-9.043 6.556a1.125 1.125 0 0 1-1.727-1.271l3.527-10.446-9.141-6.268A1.125 1.125 0 0 1 2.25 11.5h11.277L16.93 1.027a1.121 1.121 0 0 1 1.071-.778 1.126 1.126 0 0 1 1.071.778l3.403 10.477h11.277a1.117 1.117 0 0 1 1.075.792 1.126 1.126 0 0 1-.439 1.261l-9.144 6.265 3.525 10.443a1.13 1.13 0 0 1-.151 1.015 1.128 1.128 0 0 1-.913.47z"/>
+    </symbol>
+    <symbol id="half-star-icon" viewBox="0 0 32 32">
+      <path stroke-linejoin="round" stroke-width="1.778" d="M30 13H19.25L16 3l-3.25 10H2l8.75 6-3.375 10L16 22.75 24.625 29 21.25 19 30 13z"/>
+      <path d="M16 3v19.75L7.375 29l3.375-10L2 13h10.75L16 3z"/>
+    </symbol>
+  </defs>
+</svg>
