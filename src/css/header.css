@@ -2,23 +2,18 @@
 
 /* body.light .hero-title */
 
-
 .header {
   background-color: var(--dark-color);
+
   height: 48px;
-}
-
-.header-container {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-logotype-box {
-  margin-top: 15px;
-  margin-bottom: 15px;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+.header-content-wrap {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .logo-text {
@@ -30,12 +25,12 @@
 }
 
 .mobile-home-link {
-  font-size: 12px;
-  font-weight: var(--medium);
-  padding-top: 15px;
-  padding-bottom: 15px;
   margin-left: auto;
   margin-right: auto;
+
+  font-size: 12px;
+  font-weight: var(--medium);
+  line-height: 14.06px;
   color: var(--dark-theme-dark-text-color);
 }
 
@@ -50,27 +45,35 @@
 .switcher-icons {
   display: flex;
   justify-content: space-between;
-  align-content: center;
   align-items: center;
-}
 
-.moon-icon {
-  margin-left: 2.94;
-  margin-top: 3.75;
-  margin-bottom: 4.5;
-}
-
-.handle-icon {
-  margin-right: 2.2;
-  margin-top: 2.25;
-  margin-bottom: 2.25;
+  padding-right: 2.2;
+  padding-left: 2.94;
 }
 
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
+
   .header {
     height: 60px;
+
+    padding-top: 12px;
+    padding-bottom: 12px;
+  }
+
+  .header-logo-wrap {
+    display: flex;
+    justify-content: flex-start;
+    align-items:center;
+  }
+
+  .logo-text {
+    margin-left: 8px;
+    display: flex;
+    font-size: 24px;
+    font-weight: var(--regular);
+    color: var(--dark-theme-light-text-color);
   }
 
   .mobile-home-link {
@@ -84,15 +87,6 @@
   .header-nav-list {
     display: flex;
     gap: 40px;
-  }
-
-  .header-logo {
-    display: flex;
-    margin-right: 59px;
-
-    font-size: 24px;
-    font-weight: var(--regular);
-    color: var(--dark-theme-light-text-color);
   }
 
   .header-nav-item {
