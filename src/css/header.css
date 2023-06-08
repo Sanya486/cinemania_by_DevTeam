@@ -1,4 +1,8 @@
 /* ======================== MOBILE STYLES ======================== */
+
+/* body.light .hero-title */
+
+
 .header {
   background-color: var(--dark-color);
   height: 48px;
@@ -6,12 +10,18 @@
 
 .header-container {
   display: flex;
-  margin: 0 auto;
-  height: 100%;
   align-items: center;
+  justify-content: center;
 }
 
-.header-logo {
+.header-logotype-box {
+  margin-top: 15px;
+  margin-bottom: 15px;
+  padding-top: 8px;
+  padding-bottom: 8px;
+}
+
+.logo-text {
   display: none;
 }
 
@@ -30,12 +40,30 @@
 }
 
 .color-switch {
-  margin-left: 164px;
   background: var(--linear-gradient-first);
-  width: 60px;
-  height: 24px;
+  width: 44px;
+  height: 18px;
   border-radius: 194px;
   border: none;
+}
+
+.switcher-icons {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  align-items: center;
+}
+
+.moon-icon {
+  margin-left: 2.94;
+  margin-top: 3.75;
+  margin-bottom: 4.5;
+}
+
+.handle-icon {
+  margin-right: 2.2;
+  margin-top: 2.25;
+  margin-bottom: 2.25;
 }
 
 /* ======================== TABLET STYLES ======================== */
