@@ -6,7 +6,13 @@
 
 <section class="header">
   <div class="container header-container">
-    <a class="header-logo" href="index.html">Cinemania</a>
+    <div class="header-logotype-box">
+      <svg class="logo-pic" width="32" height="32">
+        <use href="images/icons/other-icons.svg#small-logo"></use>
+      </svg>
+      <a class="logo-text" href="index.html">Cinemania</a>
+    </div>
+
     <a class="mobile-home-link link" href="">HOME</a>
 
     <nav class="header-nav">
@@ -24,10 +30,22 @@
     </nav>
 
     <div class="color-switcher-container color-switch">
-      <label class="switch">
-        <!-- <input type="checkbox"> -->
-        <span class="slider round"></span>
-      </label>
+      <ul class="switcher-icons">
+        <li class="switcher-item">
+          <svg class="moon-icon" width="9.53" height="9.75">
+            <use
+              href="images/icons/theme-switcher/dark-theme-icons.svg#small-moon-icon"
+            ></use>
+          </svg>
+        </li>
+        <li class="switcher-item">
+          <svg class="handle-icon" width="13.2" height="13.5">
+            <use
+              href="images/icons/theme-switcher/dark-theme-icons.svg#small-switch-handle"
+            ></use>
+          </svg>
+        </li>
+      </ul>
     </div>
   </div>
 </section>
