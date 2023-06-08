@@ -4,7 +4,7 @@
   -->
   <!-- <img src="images/logo.png" alt="" width="320" /> -->
 
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css" integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css" integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
   <link rel="stylesheet" href="../../css/modals/film-info.css" />
   <link rel="stylesheet" href="../../css/base/common.css" />
   <link rel="stylesheet" href="../../css/components/buttons.css" />
@@ -13,11 +13,13 @@
   <link rel="stylesheet" href="../../css/utils/variables.css" />
 
     <section class="container modal-film-info">
+    <div class="container">  
       <div class="backdrop film-info" data-modal>
+        
         <button class="close-modal" data-modal-close type="button">
-          <svg class="close" width="8" height="8">
-            <use href=""></use>
-          </svg>
+          <symbol id="closer-icon" viewBox="0 0 32 32">
+            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.667" d="M30 30 2 2m28 0L2 30"/>
+          </symbol>
         </button> 
 
         <div> 
@@ -57,7 +59,7 @@
          </ul>
         </div>
       </div>
-
+    </div>
     </section>  
 
 

@@ -22,7 +22,11 @@
     width: 24px;
     height: 24px;
     background-color: inherit;
-    outline: 1px solid wheat
+    border: none
+}
+
+.film-info .close-modal #closer-icon {
+    color: white
 }
 
 .film-info img {
