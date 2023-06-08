@@ -4,9 +4,32 @@
   -->
   <!-- <img src="images/logo.png" alt="" width="320" /> -->
 
-
 <section class="search">
     <div class="container">
-        
+      <h2 class="section-search-block" style="display: none;">section search block</h2>
+      <form class="search-form" id="search-form">
+        <div class="field-wrap-search-form">
+          <label class="film-name-search-form">
+            <input class="input-film-name-search-form" type="text" name="searchQuery" placeholder="Search">
+            <span class="modal-span"></span>
+          </label>
+
+          <label class="film-name-search-form" for="yearOfFilm">
+            <select class="year-of-film-search-form" id="yearOfFilm" name="yearOfFilm">
+                <option value="2020">2020</option>
+                <option value="2021">2021</option>
+                <option value="2022">2022</option>
+                <option value="2023">2023</option>
+            </select>
+        </label>
+          
+          <button class="search-form-btn" type="submit">Q
+            <svg class="search-form-svg" width="18" height="18">
+              <use href="#"></use>
+          </svg>
+          </button>
+        </div>
+     
+      </form>
     </div>
 </section>
