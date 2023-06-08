@@ -1,14 +1,45 @@
 /* ======================== MOBILE STYLES ======================== */
+@import '../components/container.css';
 
+.home-trends {
+  background-color: var(--dark-color);
+  padding-top: 40;
+  padding-bottom: 32px;
+}
+
+.home-trends-wrap {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.home-titles {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 1.19;
+  text-transform: uppercase;
+  color: var(--light-color);
+  margin: 0;
+}
+
+.home-trends-btn {
+  background-color: inherit;
+  border: none;
+  color: var(--accent-color);
+  font-weight: 500;
+  font-size: 16px;
+  font-family: inherit;
+  line-height: 1.19;
+  margin: 0;
+  padding: 0;
+}
 
 /* ======================== TABLET STYLES ======================== */
-@media screen and (min-width:768px)  {
-    /* .container прописувати не потрібно */
-
+@media screen and (min-width: 768px) {
+  /* .container прописувати не потрібно */
 }
 
 /* ======================== DESKTOP STYLES ======================== */
-@media screen and (min-width:1280px)  {
-    /* .container прописувати не потрібно */
-    
+@media screen and (min-width: 1280px) {
+  /* .container прописувати не потрібно */
 }
