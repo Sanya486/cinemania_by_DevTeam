@@ -1,10 +1,25 @@
 /* ======================== MOBILE STYLES ======================== */
+.card-location-search-result {
 
+}
+.card-list-search-result {
+
+}
+.card-item-search-result{
+margin-bottom: 16px;
+}
 
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width:768px)  {
     /* .container прописувати не потрібно */
-
+    .card-list-search-result {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 24px;
+        row-gap: 64px;
+    }
+   
 }
 
 /* ======================== DESKTOP STYLES ======================== */
