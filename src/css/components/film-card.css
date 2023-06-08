@@ -1,0 +1,101 @@
+/* ======================== MOBILE STYLES ======================== */
+
+.film-card{
+    position: relative;
+    width: 280px;
+    height: 406px;
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%), url('/src/images/mobile-picture.png');
+    background-size: cover;
+    background-repeat: no-repeat;
+    border: 1px solid red;
+    border-radius: 5%;
+    margin: 0;
+}
+
+.film-card-info{
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    font-size: 12px;
+    line-height: calc(20 / 12);
+    font-weight: var(--medium);
+}
+
+.film-name{
+    text-transform: uppercase;
+    color: var(--light-color);
+    margin: 0;
+}
+
+.film-feature{
+    position: relative;
+    display: flex;
+    margin: 0 auto;
+    color: var(--dark-theme-dark-text-color);
+    margin: 0;
+}
+
+.film-wrap{
+    display: flex;
+    row-gap: 5px;
+}
+
+.film-genre{
+    margin: 0;
+}
+
+.film-delimiter{
+    margin: 0 5px;
+}
+
+.film-year{
+    margin: 0;
+}
+
+.film-rating{
+    position: absolute;
+    display: flex;
+    right: 12px;
+    bottom: 16px;
+}
+
+.rating-item{
+    width: 12px;
+    height: 12px;
+}
+
+.rating-icon{
+    width: 11.25px;
+    height: 10.5px;
+    fill: red;
+}
+
+/* ========================     ABLET STYLES ======================== */
+@media screen and (min-width:768px)  {
+    /* .container прописувати не потрібно */
+
+    .film-card{
+        width: 224px;
+        height: 325px;     
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%), url('/src/images/tablet-picture.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        border: 1px solid greenyellow;
+        border-radius: 5%;
+    }
+
+}
+
+/* ======================== DESKTOP STYLES ======================== */
+@media screen and (min-width:1280px)  {
+    /* .container прописувати не потрібно */
+    .film-card{
+        width: 395px;
+        height: 574px;
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%), url('/src/images/desktop-picture.png');
+        background-size: cover;
+        background-repeat: no-repeat;
+        border: 1px solid violet;
+        border-radius: 5%;
+    }
+}

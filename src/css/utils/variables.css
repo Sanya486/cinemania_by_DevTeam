@@ -11,4 +11,8 @@
     --linear-gradient-second: linear-gradient(141.22deg, #F84119 9.4%, rgba(248, 159, 25, 0.68) 91.91%);
 
     --action-transition: cubic-bezier(0.4, 0, 0.2, 1);
+
+    --regular: 400;
+    --medium: 500;
+    --bold: 700;
 }
