@@ -38,9 +38,39 @@
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
+  .home-trends {
+    padding-top: 52px;
+    padding-bottom: 44px;
+  }
+
+  .home-trends-title {
+    font-size: 24px;
+    line-height: 1.16;
+  }
+
+  .home-trends-btn {
+    font-size: 24px;
+    line-height: 1.16;
+  }
+
+  .home-trends-list {
+    display: flex;
+    gap: 16px;
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width: 1280px) {
   /* .container прописувати не потрібно */
+  .home-trends {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+  .home-trends-title, .home-trends-btn {
+    font-size: 28px;
+    line-height: 1.18;
+  }
+  .home-trends-wrap {
+    margin-bottom: 28px;
+  }
 }
