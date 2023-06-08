@@ -1,14 +1,88 @@
 /* ======================== MOBILE STYLES ======================== */
 
+.home-hero {
+  height: 380px;
+  max-width: 320px;
+  margin: 0 auto;
+  position: relative;
+  padding: 40px 0 80px;
+  background-image: linear-gradient(
+      86.77deg,
+      #111111 30.38%,
+      rgba(17, 17, 17, 0) 65.61%
+    ),
+    url(/src/images/basic-hero/mobile/basic-hero-1x.jpg);
+  background-color: #111111;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
 
+@media (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .home-hero {
+    background-image: linear-gradient(
+        86.77deg,
+        #111111 30.38%,
+        rgba(17, 17, 17, 0) 65.61%
+      ),
+      url(/src/images/basic-hero/mobile/basic-hero-2x.jpg);
+  }
+}
 /* ======================== TABLET STYLES ======================== */
-@media screen and (min-width:768px)  {
-    /* .container прописувати не потрібно */
+@media screen and (min-width: 768px) {
+  /* .container прописувати не потрібно */
+  .home-hero {
+    height: 432px;
+    max-width: 768px;
+    background-position-x: 241px;
 
+    background-image: linear-gradient(
+        82.55deg,
+        #111111 10.6%,
+        rgba(17, 17, 17, 0) 72.95%
+      ),
+      url(/src/images/basic-hero/tablet/basic-hero-1x.jpg);
+  }
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .home-hero {
+      background-image: linear-gradient(
+          82.55deg,
+          #111111 10.6%,
+          rgba(17, 17, 17, 0) 72.95%
+        ),
+        url(/src/images/basic-hero/tablet/basic-hero-2x.jpg);
+    }
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */
-@media screen and (min-width:1280px)  {
-    /* .container прописувати не потрібно */
-    
+@media screen and (min-width: 1280px) {
+  /* .container прописувати не потрібно */
+  .home-hero {
+    height: 720px;
+    max-width: 1280px;
+    background-position-x: 345px;
+
+    background-image: linear-gradient(
+        83.16deg,
+        #111111 10.85%,
+        rgba(17, 17, 17, 0) 60.05%
+      ),
+      url(/src/images/basic-hero/desktop/basic-hero-1x.jpg);
+  }
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .home-hero {
+      background-image: linear-gradient(
+          83.16deg,
+          #111111 10.85%,
+          rgba(17, 17, 17, 0) 60.05%
+        ),
+        url(/src/images/basic-hero/desktop/basic-hero-1x.jpg);
+    }
+  }
 }
