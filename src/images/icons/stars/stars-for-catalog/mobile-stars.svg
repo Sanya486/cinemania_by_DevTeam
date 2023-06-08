@@ -1,5 +1,9 @@
 <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <defs>
+<linearGradient id="second-gradient-set" x1="10%" y1="0%" x2="90%" y2="100%" >
+<stop offset="9.4%" style="stop-color:rgb(248,65,25);stop-opacity:1.00" />
+<stop offset="91.91%" style="stop-color:rgb(248,159,25);stop-opacity:1.00" />
+</linearGradient>
 <symbol id="empty-star-icon" viewBox="0 0 32 32">
 <path stroke-linejoin="round" stroke-linecap="butt" stroke-miterlimit="4" stroke-width="2.2857" d="M30 13h-10.75l-3.25-10-3.25 10h-10.75l8.75 6-3.375 10 8.625-6.25 8.625 6.25-3.375-10 8.75-6z"></path>
 </symbol>

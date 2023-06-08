@@ -7,13 +7,14 @@
     background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%), url('/src/images/components/mobile-picture.png');
     background-size: cover;
     background-repeat: no-repeat;
-    /* border: 1px solid red; */
     border-radius: 5px;
     margin: 0;
 }
 
 .film-card-info{
+    max-width: 100%;
     position: absolute;
+    right: 12px;
     left: 12px;
     bottom: 12px;
     font-size: 12px;
@@ -27,47 +28,37 @@
     margin: 0;
 }
 
-.film-feature{
-    position: relative;
-    display: flex;
-    margin: 0 auto;
-    color: var(--dark-theme-dark-text-color);
-    margin: 0;
-}
-
 .film-wrap{
     display: flex;
-    row-gap: 5px;
-}
-
-.film-genre{
+    justify-content: space-between;
+    margin: 0 auto;
     margin: 0;
 }
 
-.film-delimiter{
-    margin: 0 5px;
-}
-
-.film-year{
-    margin: 0;
+.film-feature{
+    color: var(--dark-theme-dark-text-color);
 }
 
 .film-rating{
-    position: absolute;
+    height: 14px;
     display: flex;
+    justify-content: space-between;
+    align-items: center;
     right: 12px;
     bottom: 16px;
+    padding: 0;
+    margin: 0;
+    column-gap: 4px;
 }
 
 .rating-item{
-    width: 12px;
-    height: 12px;
+    width: 14px;
+    height: 100%;
 }
 
 .rating-icon{
-    width: 11.25px;
-    height: 10.5px;
-    fill: red;
+    width: 13.12px;
+    height: 12.25px;
 }
 
 /* ======================== TABLET STYLES ======================== */
@@ -76,12 +67,22 @@
 
     .film-card{
         width: 224px;
-        height: 325px;     
-        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%), url('/src/images/components/tablet-picture.png');
-        background-size: cover;
-        background-repeat: no-repeat;
-        /* border: 1px solid greenyellow; */
-        border-radius: 5px;
+        height: 325px;   
+        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%), url('/src/images/components/tablet-picture.png');  
+    }
+    
+    .film-card-info{
+        line-height: calc(18 / 12);
+    }
+    
+    .rating-item{
+        width: 10px;
+        height: 10px;
+    }
+    
+    .rating-icon{
+        width: 9.37px;
+        height: 8.75px;
     }
 
 }
@@ -93,9 +94,23 @@
         width: 395px;
         height: 574px;
         background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%), url('/src/images/components/desktop-picture.png');
-        background-size: cover;
-        background-repeat: no-repeat;
-        /* border: 1px solid violet; */
-        border-radius: 5px;
+    }
+
+    .film-card-info{
+        right: 20px;
+        left: 20px;
+        bottom: 20px;
+        font-size: 20px;
+        line-height: calc(23 / 20);
+    }
+    
+    .rating-item{
+        width: 18px;
+        height: 18px;
+    }
+    
+    .rating-icon{
+        width: 16.87px;
+        height: 15.75px;
     }
 }
