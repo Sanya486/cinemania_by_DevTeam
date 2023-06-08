@@ -1,5 +1,9 @@
 /* ======================== MOBILE STYLES ======================== */
 @import '../components/container.css';
+:root {
+  --main-line-height: 1.19;
+  --main-font-size: 16px;
+}
 
 .home-trends {
   background-color: var(--dark-color);
@@ -15,8 +19,8 @@
 
 .home-trends-title {
   font-weight: var(--medium);
-  font-size: 16px;
-  line-height: 1.19;
+  font-size: var(--main-font-size);
+  line-height: var(--main-line-height);
   text-transform: uppercase;
   color: var(--light-color);
   margin: 0;
@@ -27,20 +31,53 @@
   border: none;
   color: var(--accent-color);
   font-weight: var(--medium);
-  font-size: 16px;
+  font-size: var(--main-font-size);
   font-family: inherit;
-  line-height: 1.19;
+  line-height: var(--main-line-height);
   margin: 0;
   padding: 0;
   cursor: pointer;
 }
 
+body.light .home-trends{
+  background-color: var(--light-color);
+}
+
+body.light .home-trends-title {
+  color: var(--dark-color);
+}
+
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
+  .home-trends {
+    padding-top: 52px;
+    padding-bottom: 44px;
+  }
+
+  .home-trends-title, .home-trends-btn {
+    font-size: 24px;
+    line-height: 1.16;
+  }
+
+  .home-trends-list {
+    display: flex;
+    gap: 16px;
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width: 1280px) {
   /* .container прописувати не потрібно */
+  .home-trends {
+    padding-top: 80px;
+    padding-bottom: 60px;
+  }
+  .home-trends-title, .home-trends-btn {
+    font-size: 28px;
+    line-height: 1.18;
+  }
+  .home-trends-wrap {
+    margin-bottom: 28px;
+  }
 }
