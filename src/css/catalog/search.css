@@ -1,5 +1,58 @@
-/* ======================== MOBILE STYLES ======================== */
+/* @import '/src/css/components/container.css';
 
+@import '/src/css/components/buttons.css';
+
+@import '/src/css/utils/hidden.css';
+
+@import '/src/css/utils/variables.css'; */
+
+/* ======================== MOBILE STYLES ======================== */
+body.lite .container{
+
+}
+
+.search {
+}
+.container {
+}
+.section-search-block {
+}
+
+.search-form {
+    margin-bottom: 16px;
+}
+
+.field-wrap-search-form {
+    display: flex;
+flex-direction: row;
+align-items: center;
+padding: 10px 142px 10px 20px;
+gap: 10px;
+
+position: absolute;
+width: 224px;
+height: 40px;
+left: 20px;
+top: 468px;
+
+
+
+border: 1px solid #FFFFFF;
+border-radius: 8px;
+
+}
+.film-name-search-form {
+}
+.input-film-name-search-form {
+}
+.modal-span {
+}
+.year-of-film-search-form {
+}
+.search-form-btn {
+}
+.search-form-svg {
+}
 
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width:768px)  {
