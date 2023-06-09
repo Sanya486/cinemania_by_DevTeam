@@ -29,3 +29,9 @@
 
 @import './library/hero.css';
 @import './library/film-list.css';
+
+/* ================= MODALS-PAGE ================= */
+
+@import './modals/dev-team.css';
+@import './modals/film-info.css';
+@import './modals/film-trailer.css';
