@@ -3,6 +3,7 @@
 @import './base/common.css';
 @import './utils/hidden.css';
 @import './utils/variables.css';
+@import './components/container.css';
 @import './components/buttons.css';
 @import './components/film-card.css';
 
