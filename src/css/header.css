@@ -8,7 +8,7 @@
   height: 48px;
 }
 
-.backdrop {
+.backdrop-mob-menu {
   position: fixed;
   top: 0;
   left: 0;
@@ -24,23 +24,23 @@
 }
 
 .mob-menu {
-  position: fixed;
-  top: 0;
+  position: relative;
   left: 0;
 
-  overflow-y: auto;
-
-  transform: translateX(0);
-  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1);
-
-  width: 76%;
-  height: 100vh;
+  width: 204px;
+  height: 100%;
   padding-top: 80px;
   padding-left: 20px;
 
   background: #171717;
   border-radius: 0px 8px 8px 0px;
+
+  transition: left 300ms;
 }
+
+/* .menu-hidden {
+  left: -100%;
+} */
 
 .menu-container {
   max-width: 266px;
@@ -69,7 +69,7 @@
   gap: 24px;
 }
 
-.mobile-home-link {
+.mob-menu-link {
   margin-left: auto;
   margin-right: auto;
   padding-top: 15px;
@@ -125,7 +125,7 @@
     display: none;
   }
 
-  .modal-backdrop.backdrop {
+  .modal-backdrop.backdrop-mob-menu {
     display: none;
   }
 }
