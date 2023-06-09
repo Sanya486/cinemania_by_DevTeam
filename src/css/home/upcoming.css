@@ -1,14 +1,261 @@
 /* ======================== MOBILE STYLES ======================== */
+:root {
+  --main-font-size: 16px;
+  --main-line-height: 1.19;
+}
 
+.home-upcoming {
+  background-color: var(--dark-color);
+  padding-bottom: 40px;
+}
+
+.home-upcoming-film-wrap-js {
+  margin-bottom: 20px;
+}
+
+.text {
+  margin: 0;
+  font-weight: var(--medium);
+  font-size: var(--main-font-size);
+  line-height: var(--main-line-height);
+}
+
+.home-upcoming-title {
+  text-transform: uppercase;
+  color: var(--light-color);
+  margin-bottom: 24px;
+}
+
+.home-upcoming-film-poster {
+  display: block;
+  align-items: center;
+  width: 280px;
+  height: 402px;
+  background-color: #4b5857;
+  margin-bottom: 24px;
+  border-radius: 5px;
+}
+
+.home-upcoming-film-title {
+  font-size: 20px;
+  line-height: 1.15;
+  color: var(--light-color);
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.home-upcoming-film-info-list {
+  margin-bottom: 20px;
+}
+
+.home-upcoming-film-info-item {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100%;
+}
+
+.home-upcoming-film-info-item-wrap {
+  display: flex;
+  flex-direction: column;
+  flex-basis: 100%;
+  flex: 1;
+}
+
+.home-upcoming-film-info-item:not(:last-of-type) {
+  margin-bottom: 12px;
+}
+
+.home-upcoming-film-info-item-text {
+  color: var(--dark-theme-dark-text-color);
+}
+
+.home-upcoming-film-info-date {
+  color: var(--accent-color);
+}
+
+.home-upcoming-film-info-rating {
+  color: var(--dark-theme-light-text-color);
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+}
+
+.home-upcoming-film-info-rating-number {
+  background-color: #fff;
+  font-size: 14px;
+  line-height: 1.14;
+  border-radius: 5px;
+  color: var(--dark-color);
+  padding: 1px 8px;
+  display: flex;
+  align-items: center;
+}
+
+.home-upcoming-film-info-rating-number:last-of-type {
+  padding: 1px 4px;
+}
+
+.home-upcoming-film-info-popularity,
+.home-upcoming-film-info-genres {
+  color: var(--light-color);
+}
+
+.home-upcoming-film-about {
+  text-transform: uppercase;
+  color: var(--dark-theme-dark-text-color);
+  margin-bottom: 16px;
+}
+
+.home-upcoming-film-about-text {
+  font-weight: var(--regular);
+  font-size: 14px;
+  line-height: 1.43;
+  color: var(--dark-theme-light-text-color);
+}
+
+.home-upcoming .main-accent-sml-btn {
+  font-size: 12px;
+  line-height: 1.16;
+}
+
+/* light-theme styles */
+
+body.light .home-upcoming {
+  background-color: var(--light-color);
+}
+
+body.light .home-upcoming-title,
+body.light .home-upcoming-film-title,
+body.light .home-upcoming-film-info-item-text,
+body.light .home-upcoming-film-about {
+  color: var(--dark-color);
+}
+
+body.light .home-upcoming-film-about-text,
+body.light .light-theme-color {
+  color: var(--light-theme-dark-text-color);
+}
+
+body.light .home-upcoming-film-info-rating-number {
+  background-color: var(--dark-theme-light-text-color);
+}
 
 /* ======================== TABLET STYLES ======================== */
-@media screen and (min-width:768px)  {
-    /* .container прописувати не потрібно */
+@media screen and (min-width: 768px) {
+  /* .container прописувати не потрібно */
+  .home-upcoming {
+    padding-bottom: 77px;
+  }
 
+  .home-upcoming-title {
+    font-size: 24px;
+    line-height: 1.16;
+  }
+
+  .home-upcoming-film-poster {
+    width: 704px;
+    height: 400px;
+    margin-bottom: 32px;
+  }
+
+  .home-upcoming-film-title {
+    font-size: 28px;
+    line-height: 1.18;
+    margin-bottom: 24px;
+  }
+
+  .home-upcoming-film-info-list {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    row-gap: 12px;
+  }
+
+  .home-upcoming-film-info-item {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: initial;
+    width: 50%;
+  }
+
+  .home-upcoming-film-info-item:not(:last-of-type) {
+    margin-bottom: 0;
+  }
+
+  .home-upcoming-film-info-item-wrap {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1;
+  }
+
+  .home-upcoming .main-accent-sml-btn {
+    font-size: 14px;
+    line-height: 1.14;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .home-upcoming-film-info-list {
+    height: 51px;
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */
-@media screen and (min-width:1280px)  {
-    /* .container прописувати не потрібно */
-    
+@media screen and (min-width: 1280px) {
+  /* .container прописувати не потрібно */
+  .home-upcoming {
+    padding-bottom: 100px;
+  }
+
+  .home-upcoming .container {
+    position: relative;
+  }
+
+  .home-upcoming-title {
+    font-size: 28px;
+    line-height: 1.18;
+    margin-bottom: 28px;
+  }
+
+  .home-upcoming-film-title {
+    font-size: 32px;
+    line-height: 38px;
+    margin-bottom: 28px;
+  }
+
+  .home-upcoming-film-wrap-js {
+    display: flex;
+    gap: 16px;
+    margin: 0;
+  }
+
+  .home-upcoming-film-info-wrap {
+    width: 390px;
+  }
+
+  .home-upcoming-film-info-list {
+    display: block;
+  }
+
+  .home-upcoming-film-poster {
+    width: 805px;
+    height: 458px;
+    margin: 0;
+  }
+
+  .home-upcoming-film-info-item {
+    width: 77%;
+  }
+  
+  .home-upcoming-film-info-item:not(:last-of-type) {
+    margin-bottom: 12px;
+  }
+
+  .home-upcoming .main-accent-sml-btn {
+    position: absolute;
+    bottom: 0;
+    left: 853px;
+  }
 }

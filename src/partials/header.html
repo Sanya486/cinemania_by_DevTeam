@@ -6,22 +6,55 @@
 
 <section class="header">
   <div class="container header-container">
-    <a class="header-logo" href="index.html">Cinemania</a>
-    <a class="mobile-home-link link" href="">HOME</a>
-
-    <nav class="header-nav">
-      <ul class="header-nav-list">
-        <li class="header-nav-item header-home">
-          <a href="index.html">HOME</a>
+    <div class="header-content-wrap">
+      <ul class="header-logo-wrap">
+        <li class="logo-item-img">
+          <a href="index.html">
+            <svg class="logo-pic" width="32" height="32">
+              <use href="images/icons/other-icons.svg#small-logo"></use>
+            </svg>
+          </a>
         </li>
-        <li class="header-nav-item header-catalog">
-          <a href="catalog.html">CATALOG</a>
-        </li>
-        <li class="header-nav-item header-library">
-          <a href="library.html">MY LIBRARY</a>
+        <li class="logo-item-text">
+          <a href="index.html"><span class="logo-text">Cinemania</span></a>
         </li>
       </ul>
-    </nav>
-    <button class="color-switch">🌓</button>
+
+      <a class="mobile-home-link link" href="">HOME</a>
+
+      <nav class="header-nav">
+        <ul class="header-nav-list">
+          <li class="header-nav-item header-home">
+            <a href="index.html">HOME</a>
+          </li>
+          <li class="header-nav-item header-catalog">
+            <a href="catalog.html">CATALOG</a>
+          </li>
+          <li class="header-nav-item header-library">
+            <a href="library.html">MY LIBRARY</a>
+          </li>
+        </ul>
+      </nav>
+
+      <div class="color-switcher-container color-switch">
+        <ul class="switcher-icons">
+          <li class="switcher-item">
+            <svg class="moon-icon" width="11.4" height="11.7">
+              <use
+                href="images/icons/theme-switcher/dark-theme-icons.svg#small-moon-icon"
+              ></use>
+            </svg>
+            <!-- </li>
+        <li class="switcher-item">
+          <svg class="handle-icon" width="13.2" height="13.5">
+            <use
+              href="images/icons/theme-switcher/dark-theme-icons.svg#small-switch-handle"
+            ></use>
+          </svg>
+        </li> -->
+          </li>
+        </ul>
+      </div>
+    </div>
   </div>
 </section>
