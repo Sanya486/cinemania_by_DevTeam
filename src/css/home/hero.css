@@ -1,9 +1,187 @@
 /* ======================== MOBILE STYLES ======================== */
 
 .home-hero {
+  padding: 40px 0 80px;
+  /* max-width: 320px;
+  margin-left: auto;
+  margin-right: auto; */
+  position: relative;
+  background-color: var(--dark-color);
+  background-image: linear-gradient(
+      86.77deg,
+      #111111 10.38%,
+      rgba(17, 17, 17, 0) 65.61%
+    ),
+    url(/src/images/basic-hero/mobile/basic-hero-1x.jpg);
+  background-size: auto 380px;
+  background-position-x: 92px;
+  /* background-size: cover; */
+  background-repeat: no-repeat;
+  /* background-position: center; */
+}
+
+@media (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .home-hero {
+    background-image: linear-gradient(
+        86.77deg,
+        #111111 10.38%,
+        rgba(17, 17, 17, 0) 65.61%
+      ),
+      url(/src/images/basic-hero/mobile/basic-hero-2x.jpg);
+  }
+}
+
+.hero-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 199px;
+  font-family: inherit;
+  color: var(--light-color);
+  font-weight: var(--bold);
+  font-size: 32px;
+  line-height: 1.18;
+}
+
+.hero-info {
+  width: 166px;
+  margin-top: 8px;
+  color: var(--dark-theme-light-text-color);
+  font-family: inherit;
+  font-weight: var(--regular);
+  font-size: 14px;
+  line-height: 1.14;
+}
+
+.home-hero .btn {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
+.hero-info span {
+  display: none;
+}
+
+/* ======================== TABLET STYLES ======================== */
+@media screen and (min-width: 768px) {
+  /* .container прописувати не потрібно */
+  .home-hero {
+    padding: 62px 0;
+    /* max-width: 320px;
+  margin-left: auto;
+  margin-right: auto; */
+    position: relative;
+    background-color: var(--dark-color);
+    background-image: linear-gradient(
+        86.77deg,
+        #111111 10.38%,
+        rgba(17, 17, 17, 0) 65.61%
+      ),
+      url(/src/images/basic-hero/tablet/basic-hero-1x.jpg);
+    background-size: auto 432px;
+    background-position-x:195px;
+    
+    /* background-size: cover; */
+    background-repeat: no-repeat;
+    
+  }
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .home-hero {
+      background-image: linear-gradient(
+          86.77deg,
+          #111111 10.38%,
+          rgba(17, 17, 17, 0) 65.61%
+        ),
+        url(/src/images/basic-hero/tablet/basic-hero-2x.jpg);
+    }
+  }
+
+  .hero-title {
+    margin-top: 0;
+    margin-bottom: 0;
+    width: 332px;
+    font-size: 44px;
+  }
+
+  .hero-info {
+    width: 357px;
+  }
+  .hero-info span {
+    display: block;
+  }
+
+  .home-hero .btn {
+    margin-top: 32px;
+    font-size: 14px;
+  }
+}
+/* ======================== DESKTOP STYLES ======================== */
+@media screen and (min-width: 1280px) {
+  /* .container прописувати не потрібно */
+  .home-hero .container{
+    padding-left: 134px;
+  }
+  .home-hero {
+    padding: 169px 0;
+    /* max-width: 320px;
+  margin-left: auto;
+  margin-right: auto; */
+    position: relative;
+    background-color: var(--dark-color);
+    background-image: linear-gradient(
+        86.77deg,
+        #111111 2%,
+        rgba(17, 17, 17, 0) 65.61%
+      ),
+      url(/src/images/basic-hero/desktop/basic-hero-1x.jpg);
+    background-size: auto 720px;
+    /* background-size: cover; */
+    background-repeat: no-repeat;
+    /* background-position: center; */
+    background-position-x: 322px;
+  }
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .home-hero {
+      background-image: linear-gradient(
+          86.77deg,
+          #111111 2%,
+          rgba(17, 17, 17, 0) 65.61%
+        ),
+        url(/src/images/basic-hero/desktop/basic-hero-2x.jpg);
+    }
+  }
+
+  .hero-title {
+    width: 464px;
+    font-size: 64px;
+    line-height: 1.17;
+  }
+  .hero-info {
+    width: 464px;
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.18;
+  }
+  .home-hero .btn {
+    /* position: unset; */
+    font-size: 18px;
+  }
+}
+
+/* ----- */
+/* 
+.home-hero {
   height: 380px;
   max-width: 320px;
-  margin: 0 auto;
+  margin-left: auto;
+  margin-right: auto;
   position: relative;
   padding: 40px 0 80px;
   background-image: linear-gradient(
@@ -12,9 +190,10 @@
       rgba(17, 17, 17, 0) 65.61%
     ),
     url(/src/images/basic-hero/mobile/basic-hero-1x.jpg);
-  background-color: #111111;
+  background-color: var(--dark-color);
   background-size: cover;
   background-repeat: no-repeat;
+  background-position: center;
 }
 
 @media (min-device-pixel-ratio: 2),
@@ -29,9 +208,10 @@
       url(/src/images/basic-hero/mobile/basic-hero-2x.jpg);
   }
 }
-/* ======================== TABLET STYLES ======================== */
-@media screen and (min-width: 768px) {
-  /* .container прописувати не потрібно */
+
+/* ======================== MOBILE STYLES ======================== */
+/* 
+@media screen and (min-width: 480px) {
   .home-hero {
     height: 432px;
     max-width: 768px;
@@ -58,10 +238,15 @@
   }
 }
 
-/* ======================== DESKTOP STYLES ======================== */
-@media screen and (min-width: 1280px) {
+/* ======================== TABLET STYLES ======================== */
+/* @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
-  .home-hero {
+/* }  */
+
+/* ======================== DESKTOP STYLES ======================== */
+/* @media screen and (min-width: 1280px) {
+  /* .container прописувати не потрібно */
+/* .home-hero {
     height: 720px;
     max-width: 1280px;
     background-position-x: 345px;
@@ -85,4 +270,4 @@
         url(/src/images/basic-hero/desktop/basic-hero-1x.jpg);
     }
   }
-}
+}   */
