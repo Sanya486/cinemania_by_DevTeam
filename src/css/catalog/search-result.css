@@ -1,29 +1,117 @@
 /* ======================== MOBILE STYLES ======================== */
-.card-location-search-result {
 
-}
 .card-list-search-result {
-
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 16px;
+  margin-bottom: 20px;
 }
-.card-item-search-result{
-margin-bottom: 16px;
+
+.card-item-search-result {
+  display: none;
+  position: relative;
+  width: 100%;
+  height: 406px;
+  border-radius: 5px;
+  overflow: hidden;
+  background-image: url('../../images/library-hero/tablet/library-hero-1x.jpg');
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+@media (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .card-item-search-result {
+    background-image: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 63.48%,
+        rgba(0, 0, 0, 0.9) 92.16%
+      ),
+      url('../../images/library-hero/tablet/library-hero-2x.jpg');
+  }
+}
+
+.card-item-search-result::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0) 63.48%,
+    rgba(0, 0, 0, 0.9) 92.16%
+  );
+  pointer-events: none;
+}
+
+.card-item-search-result img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.main-accent-btn {
+  display: none;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.main-accent-btn:hover,
+.main-accent-btn:focus {
+  background: #fff;
+  color: var(--accent-color);
+  border: 2px solid var(--linear-gradient-first);
 }
 
 /* ======================== TABLET STYLES ======================== */
-@media screen and (min-width:768px)  {
-    /* .container прописувати не потрібно */
-    .card-list-search-result {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: center;
-        gap: 24px;
-        row-gap: 64px;
+
+@media screen and (min-width: 768px) {
+  /* .container прописувати не потрібно */
+  .card-list-search-result {
+    flex-direction: row;
+    column-gap: 16px;
+    row-gap: 28px;
+    margin-bottom: 45px;
+    background-image: linear-gradient(
+        180deg,
+        rgba(0, 0, 0, 0) 63.48%,
+        rgba(0, 0, 0, 0.9) 92.16%
+      ),
+      url('../../images/library-hero/desktop/library-hero-1x.jpg');
+  }
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .card-item-search-result {
+      background-image: linear-gradient(
+          180deg,
+          rgba(0, 0, 0, 0) 63.48%,
+          rgba(0, 0, 0, 0.9) 92.16%
+        ),
+        url('../../images/library-hero/desktop/library-hero-2x.jpg');
     }
-   
+  }
+
+  .card-item-search-result {
+    width: calc((100% - 2 * 16px) / 3);
+    height: 325px;
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */
-@media screen and (min-width:1280px)  {
-    /* .container прописувати не потрібно */
-    
+
+@media screen and (min-width: 1280px) {
+  /* .container прописувати не потрібно */
+  .card-list-search-result {
+    row-gap: 32px;
+  }
+
+  .card-item-search-result {
+    height: 574px;
+  }
 }

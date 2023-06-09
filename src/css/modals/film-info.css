@@ -1,6 +1,6 @@
 /* ======================== MOBILE STYLES ======================== */
 
-.film-info {
+.modal-film-info .film-info {
     position: relative;
     padding: 20px 16px 52px 16px;
 
@@ -16,11 +16,11 @@
     font-weight: 500;
 
     z-index: 10;
-    margin-bottom: 300px;
-    margin-top: 300px
+    /* margin-bottom: 300px;
+    margin-top: 300px */
 }
 
-.film-info .close-modal {
+.modal-film-info .film-info .close-modal {
     display: block;
     margin-left: auto;
 
@@ -30,35 +30,33 @@
     border: none;
 }
 
-
-
-.film-info .close-modal svg {
-    stroke: var(--dark-theme-light-text-color);
+.modal-film-info .film-info .close-modal svg {
+    fill: --dark-theme-light-text-color;
 
     transition: stroke 250ms var(--action-transition);
 }
 
-.film-info .close-modal svg:hover {
+.modal-film-info .film-info .close-modal svg:hover {
     stroke: var(--accent-color);
 }
 
-.film-info img {
-    width: 100%;
+.modal-film-info .film-info img {
     max-width: 248px;
+    width: 100%;
     height: 315px;
 
     margin-top: 8px;
     border-radius: 5px;
 }
 
-.film-info .movie-title {
+.modal-film-info .film-info .movie-title {
     margin-top: 22px;
     font-size: 20px;
     line-height: 23px;
     color: var(--light-color);
 }
 
-.film-info .movie-info {
+.modal-film-info .film-info .movie-info {
     display: flex;
     margin-top: 29px;
 
@@ -68,23 +66,23 @@
     
 }
 
-.film-info .movie-info .info {
-    width: 156px;
+.modal-film-info .film-info .movie-info .info {
+    width: 55%;
 }
 
-.film-info .movie-info .info ul li:not(:last-child),
-.film-info .movie-info .params ul li:not(:last-child)  {
+.modal-film-info .film-info .movie-info .info ul li:not(:last-child),
+.modal-film-info .film-info .movie-info .params ul li:not(:last-child)  {
     padding-bottom: 12px
 }
 
-.film-info .movie-info .params {
+.modal-film-info .film-info .movie-info .params {
     font-size: 14px;
     line-height: 16px;   
     color: var(--light-color);
 }
 
-.film-info .movie-info .params .vote,
-.film-info .movie-info .params .votes {
+.modal-film-info .film-info .movie-info .params .vote,
+.modal-film-info .film-info .movie-info .params .votes {
     display: inline-block;
     width: 33px;
     background-color: var(--light-color);
@@ -96,54 +94,55 @@
     line-height: 14px;
 }
 
-.film-info .movie-info .params .votes {
+.modal-film-info .film-info .movie-info .params .votes {
     width: 36px;
 }
 
-.film-info .about {
+.modal-film-info .film-info .about {
     font-weight: 400;
 }
 
-.film-info .about h2 {
+.modal-film-info .film-info .about h2 {
+
   font-size: 14px;
   line-height: 16px;  
   color: var(--dark-theme-dark-text-color);
 }
 
-.film-info .about p {
+.modal-film-info .film-info .about p {
   font-size: 12px;
   line-height: 20px; 
   color: var(--dark-theme-light-text-color)
 }
 
-.film-info .btn-list {
+.modal-film-info .film-info .btn-list {
     display: flex;
     gap: 8px
 }
 
-.main-accent-sml-btn.modal {
+.modal-film-info .main-accent-sml-btn.modal {
     font-size: 12px;
     line-height: 1.33;
 
     transition: box-shadow 250ms var(--action-transition);
 }
 
-.main-accent-sml-btn.modal:hover {
+.modal-film-info .main-accent-sml-btn.modal:hover {
     box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);   
 }
 
-.rm-dark-bcg-btn.module{
+.modal-film-info .rm-dark-bcg-btn.module{
     position: absolute;
     z-index: 20;
 }
 
-.rm-light-bcg-grd-btn.module::before{
+.modal-film-info .rm-light-bcg-grd-btn.module::before{
     z-index: 19;
-    
+
     transition: box-shadow 250ms var(--action-transition);
 }
 
-/* .rm-light-bcg-grd-btn.module::before:hover {
+/* .modal-film-info .rm-light-bcg-grd-btn.module::before:hover {
     box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);   
 } */
 
@@ -161,74 +160,77 @@
   
     transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
       visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
-  } 
+  } */
+
 
 
 /* ======================== TABLET STYLES ======================== */
+/* ======================== TABLET STYLES ======================== */
 @media screen and (min-width:768px)  {
- .film-info {
-    max-width: 704px;
-    padding: 24px 24px 44px 44px;
- }
-
- .film-info .flex {
-    display: flex;
-    gap: 16px;
-    flex-direction: row;
-    flex-wrap: nowrap;
-  }
-
-  .film-info img {
-    width: 294px;
-    height: 400px;
-    margin-top: 0;
-    outline: 1px solid yellow
-  }
-
-  .film-info .movie-title {
-    margin-top: 0;
-    font-size: 24px;
-    line-height: 28px;
-  } 
-}
-
-/* ======================== DESKTOP STYLES ======================== */
-@media screen and (min-width:1280px)  {
-    .film-info {
-        max-width: 846px;
-        padding: 40px 40px 40px 60px;
-     }
-    
-     .film-info .flex {
-        gap: 20px;
-      }   
-
-      .film-info img {
-        width: 375px;
-        height: 478px;
-      }
-
-      .film-info .movie-title {
-        font-size: 24px;
-        line-height: 32px;
-      } 
-
-      .film-info .movie-info {
-        font-size: 16px;
-        line-height: 19px; 
-      }
-
-      .film-info .movie-info .params .vote,
-      .film-info .movie-info .params .votes {
-        font-size: 14px;
-        line-height: 16px; 
-       }
-
-       .film-info .about h2 {
-        font-size: 16px;
-       } 
-
-       .film-info .about p {
-        font-size: 14px;
-       }
+    .modal-film-info .film-info {
+       max-width: 704px;
+       padding: 24px 24px 44px 44px;
     }
+   
+    .modal-film-info .film-info .flex {
+       display: flex;
+       gap: 16px;
+       flex-direction: row;
+       flex-wrap: nowrap;
+     }
+   
+     .modal-film-info .film-info img {
+       width: 294px;
+       height: 400px;
+       margin-top: 0;
+       outline: 1px solid yellow
+     }
+   
+     .modal-film-info .film-info .movie-title {
+       margin-top: 0;
+       font-size: 24px;
+       line-height: 28px;
+     } 
+   }
+   
+   /* ======================== DESKTOP STYLES ======================== */
+   @media screen and (min-width:1280px)  {
+        .modal-film-info .film-info {
+           max-width: 846px;
+           padding: 40px 40px 40px 60px;
+        }
+       
+        .modal-film-info .film-info .flex {
+           gap: 20px;
+         }   
+   
+         .modal-film-info .film-info img {
+           width: 375px;
+           height: 478px;
+         }
+   
+         .modal-film-info .film-info .movie-title {
+           font-size: 24px;
+           line-height: 32px;
+         } 
+   
+         .modal-film-info .film-info .movie-info {
+           font-size: 16px;
+           line-height: 19px; 
+         }
+   
+         .modal-film-info .film-info .movie-info .params .vote,
+         .modal-film-info .film-info .movie-info .params .votes {
+           font-size: 14px;
+           line-height: 16px; 
+          }
+   
+          .modal-film-info .film-info .about h2 {
+           font-size: 16px;
+          } 
+   
+          .modal-film-info .film-info .about p {
+           font-size: 14px;
+          }
+       }
+   

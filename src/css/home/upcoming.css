@@ -52,6 +52,7 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  align-items: center;
   width: 100%;
 }
 
@@ -117,6 +118,10 @@
 .home-upcoming .main-accent-sml-btn {
   font-size: 12px;
   line-height: 1.16;
+}
+
+.home-upcoming-film-about-text {
+  margin-bottom: 20px;
 }
 
 /* light-theme styles */
@@ -209,10 +214,6 @@ body.light .home-upcoming-film-info-rating-number {
     padding-bottom: 100px;
   }
 
-  .home-upcoming .container {
-    position: relative;
-  }
-
   .home-upcoming-title {
     font-size: 28px;
     line-height: 1.18;
@@ -248,14 +249,8 @@ body.light .home-upcoming-film-info-rating-number {
   .home-upcoming-film-info-item {
     width: 77%;
   }
-  
+
   .home-upcoming-film-info-item:not(:last-of-type) {
     margin-bottom: 12px;
-  }
-
-  .home-upcoming .main-accent-sml-btn {
-    position: absolute;
-    bottom: 0;
-    left: 853px;
   }
 }
