@@ -1,14 +1,46 @@
 /* ======================== MOBILE STYLES ======================== */
+.footer {
+  background-color: var(--dark-color);
+  padding-bottom: 28px;
+}
+.footer-content-wrapper {
+  margin-left: auto;
+  margin-right: auto;
+  display: flex;
+  flex-direction: column;
+  flex-wrap: wrap;
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
 
+.footer-text {
+  font-size: 14px;
+  font-weight: var(--regular);
+  color: var(--dark-theme-dark-text-color);
+}
 
+.footer-text.lower{
+  margin-top: 8px;
+}
+
+.footer-text.command-link{
+  text-decoration: underline;
+}
+
+.footer-heart-icon{
+
+  fill: var(--accent-color);
+  margin-left: 10px;
+  margin-right: 10px;
+
+}
 /* ======================== TABLET STYLES ======================== */
-@media screen and (min-width:768px)  {
-    /* .container прописувати не потрібно */
-
+@media screen and (min-width: 768px) {
+  /* .container прописувати не потрібно */
 }
 
 /* ======================== DESKTOP STYLES ======================== */
-@media screen and (min-width:1280px)  {
-    /* .container прописувати не потрібно */
-    
+@media screen and (min-width: 1280px) {
+  /* .container прописувати не потрібно */
 }
