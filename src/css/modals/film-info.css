@@ -31,7 +31,7 @@
 }
 
 .modal-film-info .film-info .close-modal svg {
-    fill: --dark-theme-light-text-color;
+   stroke: var(--dark-theme-light-text-color);
 
     transition: stroke 250ms var(--action-transition);
 }
@@ -183,7 +183,6 @@
        width: 294px;
        height: 400px;
        margin-top: 0;
-       outline: 1px solid yellow
      }
    
      .modal-film-info .film-info .movie-title {
