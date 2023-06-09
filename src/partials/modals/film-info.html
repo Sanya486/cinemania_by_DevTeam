@@ -4,7 +4,7 @@
   -->
   <!-- <img src="images/logo.png" alt="" width="320" /> -->
 
-  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css" integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg==" crossorigin="anonymous" referrerpolicy="no-referrer" /> -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/modern-normalize/2.0.0/modern-normalize.min.css" integrity="sha512-4xo8blKMVCiXpTaLzQSLSw3KFOVPWhm/TRtuPVc4WG6kUgjH6J03IBuG7JZPkcWMxJ5huwaBpOpnwYElP/m6wg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
   <link rel="stylesheet" href="../../css/modals/film-info.css" />
   <link rel="stylesheet" href="../../css/base/common.css" />
   <link rel="stylesheet" href="../../css/components/buttons.css" />
@@ -14,12 +14,14 @@
 
     <section class="container modal-film-info">
     <div class="container">  
-      <div class="backdrop film-info" data-modal>
+      <div class="film-info" data-modal>
         
-        <button class="close-modal" data-modal-close type="button">
-          <symbol id="closer-icon" viewBox="0 0 32 32">
-            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="2.667" d="M30 30 2 2m28 0L2 30"/>
-          </symbol>
+        <button class="close-modal" type="button">
+          <svg width="24" height="24">
+            <use
+              href="../../images/icons/other-icons.svg#closer-icon"
+            ></use>
+          </svg>
         </button> 
 
         <div> 
@@ -53,12 +55,12 @@
               John Wick (Keanu Reeves) takes on his most lethal adversaries yet in the upcoming fourth instalment of the series. With the price on his head ever increasing, John Wick uncovers a path to defeating The High Table. But before he can earn his freedom, Wick must face off against a new enemy with powerful alliances across the globe and forces that turn old friends into foes.
             </p>
           </div>  
-          <ul class="btn-list">
+          <div class="btn-list">
             <button class="main-accent-sml-btn btn modal">Watch trailer</button>
             <button class="rm-dark-bcg-btn btn modal">Add to my library</button>
-         </ul>
-        </div>
-      </div>
+          </div>
+          </div>
+       </div>
     </div>
     </section>  
 

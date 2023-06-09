@@ -1,18 +1,22 @@
 /* ======================== MOBILE STYLES ======================== */
 
 .film-info {
+    position: relative;
     padding: 20px 16px 52px 16px;
 
     background-color: var(--dark-color);
     box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
     border-radius: 16px;
 
-    width: 280px;
-    height: 847px;
+    max-width: 280px;
+    width: 100%;
 
     font-family: 'Roboto';
     font-style: normal;
     font-weight: 500;
+
+    z-index: 10;
+    margin-bottom: 300px
 }
 
 .film-info .close-modal {
@@ -22,15 +26,16 @@
     width: 24px;
     height: 24px;
     background-color: inherit;
-    border: none
+    border: none;
 }
 
-.film-info .close-modal #closer-icon {
-    color: white
+.film-info .close-modal svg {
+    fill: --dark-theme-light-text-color;
 }
 
 .film-info img {
-    width: 248px;
+    max-width: 248px;
+    width: 100%;
     height: 315px;
 
     margin-top: 8px;
@@ -55,7 +60,7 @@
 }
 
 .film-info .movie-info .info {
-    width: 156px;
+    width: 55%;
 }
 
 .film-info .movie-info .info ul li:not(:last-child),
@@ -107,35 +112,18 @@
 }
 
 .main-accent-sml-btn.modal {
-    background: var( --linear-gradient-first);
-    border: none;
     font-size: 12px;
     line-height: 1.33;
 }
 
-.rm-dark-bcg-btn.modal{
-    position: relative;
-    display: inline-block;
-    background-color: var(--dark-color);
-    color: var(--light-color);
-    font-size: 12px;
-    line-height: 1.33;
-    border: 1px solid yellow;
-    margin: 1px;
-}
-
-/* .rm-dark-bcg-btn.modal::before{
-    content: "";
+.rm-dark-bcg-btn.module{
     position: absolute;
-    top: 0;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    z-index: -1;
-    margin: -1px;
-    background: var(--linear-gradient-first);
-    border-radius: 74px;
-} */
+    z-index: 20;
+}
+
+.rm-light-bcg-grd-btn.module::before{
+    z-index: 19;
+}
 
 /* .backdrop {
     position: fixed;
