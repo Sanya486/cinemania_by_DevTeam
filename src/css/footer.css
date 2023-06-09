@@ -1,6 +1,7 @@
 /* ======================== MOBILE STYLES ======================== */
 .footer {
   background-color: var(--dark-color);
+  padding-top: 4px;
   padding-bottom: 28px;
 }
 
