@@ -1,9 +1,6 @@
 /* ======================== MOBILE STYLES ======================== */
 
-/* body.light .hero-title */
-
 .header {
-
   top: 40px;
   width: 100%;
 
@@ -12,6 +9,10 @@
   height: 48px;
   padding-top: 8px;
   padding-bottom: 8px;
+}
+
+body.light .header {
+  background-color: var(--light-color);
 }
 
 .header-content-wrap {
@@ -38,21 +39,41 @@
   color: var(--dark-theme-dark-text-color);
 }
 
-.color-switch {
+body.light .mobile-menu-link {
+  color: var(--light-theme-medium-text-color);
+}
+
+label {
+  pointer-events: none;
+}
+
+.theme-switch-input {
+  display: none;
+}
+
+:checked + .color-theme-switcher-wrapper > .selector-icon {
+  left: calc(100% - 40px);
+}
+
+.color-theme-switcher-wrapper {
+  position: relative;
   background: var(--linear-gradient-first);
   width: 44px;
   height: 18px;
   border-radius: 194px;
   border: none;
+  cursor: pointer;
+  pointer-events: all;
 }
 
-.switcher-icons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-
-  padding-right: 2.2;
-  padding-left: 2.94;
+.selector-icon {
+  width: 13.2px;
+  height: 13.5px;
+  position: absolute;
+  top: 40%;
+  left: 27px;
+  transform: translateY(-45%);
+  transition: left 0.25s ease;
 }
 
 /* ------------ Mob Menu ---------------- */
@@ -125,15 +146,19 @@
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
 
-  .mobile-backdrop {
-    display: none;
-  }
-
   .header {
     height: 60px;
 
     padding-top: 12px;
     padding-bottom: 12px;
+  }
+
+  .mobile-menu-link {
+    display: none;
+  }
+
+  .mobile-backdrop {
+    display: none;
   }
 
   .header-logo-wrap {
@@ -150,8 +175,8 @@
     color: var(--dark-theme-light-text-color);
   }
 
-  .mobile-home-link {
-    display: none;
+  body.light .logo-text {
+    color: var(--light-theme-dark-text-color);
   }
 
   .header-nav {
@@ -165,6 +190,10 @@
 
   .header-nav-item {
     color: var(--dark-theme-dark-text-color);
+  }
+
+  body.light .header-nav-item {
+    color: var(--light-theme-medium-text-color);
   }
 
   .mob-menu-btn {
