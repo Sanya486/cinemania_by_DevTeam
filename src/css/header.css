@@ -3,6 +3,10 @@
 /* body.light .hero-title */
 
 .header {
+  position: absolute;
+  top: 40px;
+  width: 100%;
+
   background-color: var(--dark-color);
 
   height: 48px;
@@ -91,6 +95,14 @@
 
   .header-nav-item {
     color: var(--dark-theme-dark-text-color);
+  }
+
+  .mob-menu-btn {
+    display: none;
+  }
+
+  .modal-backdrop.backdrop-mob-menu {
+    display: none;
   }
 }
 
