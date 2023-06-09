@@ -9,10 +9,6 @@
   padding-bottom: 40px;
 }
 
-.home-upcoming-film-wrap-js {
-  margin-bottom: 20px;
-}
-
 .text {
   margin: 0;
   font-weight: var(--medium);
@@ -26,13 +22,18 @@
   margin-bottom: 24px;
 }
 
-.home-upcoming-film-poster {
-  display: block;
-  align-items: center;
+.home-upcoming-film-poster-wrap {
+  position: relative;
   width: 280px;
   height: 402px;
-  background-color: #4b5857;
+  display: block;
+  align-items: center;
   margin-bottom: 24px;
+}
+
+.home-upcoming-film-poster {
+  width: 100%;
+  height: 100%;
   border-radius: 5px;
 }
 
@@ -158,10 +159,30 @@ body.light .home-upcoming-film-info-rating-number {
     line-height: 1.16;
   }
 
-  .home-upcoming-film-poster {
+  .home-upcoming-film-poster-wrap {
+    position: relative;
     width: 704px;
     height: 400px;
     margin-bottom: 32px;
+  }
+
+  .home-upcoming-film-poster-overlay {
+    content: ' ';
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    display: block;
+    z-index: 2;
+    background: linear-gradient(
+      307.47deg,
+      rgba(0, 0, 0, 0.2) 23.85%,
+      rgba(0, 0, 0, 0) 47.27%
+    );
+  }
+
+  .home-upcoming-film-poster {
+    width: 704px;
+    height: 400px;
   }
 
   .home-upcoming-film-title {
@@ -173,7 +194,6 @@ body.light .home-upcoming-film-info-rating-number {
   .home-upcoming-film-info-list {
     display: flex;
     flex-wrap: wrap;
-    flex-direction: column;
     row-gap: 12px;
   }
 
@@ -202,8 +222,14 @@ body.light .home-upcoming-film-info-rating-number {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
-  .home-upcoming-film-info-list {
-    height: 51px;
+  .home-upcoming-film-info-item {
+    align-items: flex-start;
+  }
+  .home-upcoming-film-info-item:nth-of-type(2) {
+    order: 1;
+  }
+  .home-upcoming-film-info-item:nth-of-type(4) {
+    order: 1;
   }
 }
 
@@ -238,6 +264,17 @@ body.light .home-upcoming-film-info-rating-number {
 
   .home-upcoming-film-info-list {
     display: block;
+  }
+
+  .home-upcoming-film-poster-wrap {
+    width: 805px;
+    height: 458px;
+    margin: 0;
+  }
+
+  .home-upcoming-film-poster {
+    width: 100%;
+    height: 100%;
   }
 
   .home-upcoming-film-poster {
