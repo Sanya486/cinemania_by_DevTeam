@@ -20,6 +20,9 @@
   "dependencies": {
     "modern-normalize": "^1.1.0"
   },
+  "alias": {
+    "process": false
+ },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
     "axios": "^1.4.0",
