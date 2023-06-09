@@ -20,12 +20,10 @@
   "dependencies": {
     "modern-normalize": "^1.1.0"
   },
-  "alias": {
-    "process": false
- },
   "devDependencies": {
     "@parcel/transformer-sass": "^2.6.0",
     "axios": "^1.4.0",
+    "buffer": "^6.0.3",
     "notiflix": "^3.2.6",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
