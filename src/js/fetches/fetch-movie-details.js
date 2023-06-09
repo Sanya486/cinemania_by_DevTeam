@@ -16,6 +16,7 @@ const fetchMovieDetails = async (movieId) => {
     const popularity = data.popularity;
     const genres = data.genres.map((genre) => genre.name).join(' ');
     const date = data.release_date;
+    const id = data.id;
 
     return {
       poster,
@@ -27,6 +28,7 @@ const fetchMovieDetails = async (movieId) => {
       genres,
       date,
       smallPoster,
+      id,
     };
 };
 
