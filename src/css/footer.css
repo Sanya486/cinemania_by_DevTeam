@@ -5,11 +5,13 @@
 }
 
 .footer-content-wrapper {
+  max-width: 236px;
+  max-height: 40px;
   margin-left: auto;
   margin-right: auto;
+
   display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+
   text-align: center;
   align-items: center;
   align-content: center;
@@ -17,32 +19,41 @@
 
 .footer-text {
   font-size: 14px;
+  line-height: 16px;
   font-weight: var(--regular);
   color: var(--dark-theme-dark-text-color);
 }
 
-.footer-text.lower{
-  margin-top: 8px;
-}
-
-.footer-text.command-link{
+.footer-text.command-link {
   text-decoration: underline;
 }
 
-.footer-heart-icon{
-
+.footer-heart-icon {
   fill: var(--accent-color);
   margin-left: 10px;
   margin-right: 10px;
-
+  margin-top: 9.62;
 }
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
+  .footer {
+    padding-bottom: 40px;
+  }
+  .footer-content-wrapper {
+    max-width: 482px;
+  }
+
+  .footer-text {
+    font-size: 16px;
+    line-height: 19px;
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width: 1280px) {
   /* .container прописувати не потрібно */
+  .footer {
+    padding-bottom: 80px;
+  }
 }
-
