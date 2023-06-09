@@ -1,5 +1,145 @@
 /* ======================== MOBILE STYLES ======================== */
 
+.film-info {
+    position: relative;
+    padding: 20px 16px 52px 16px;
+
+    background-color: var(--dark-color);
+    box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+    border-radius: 16px;
+
+    max-width: 280px;
+    width: 100%;
+
+    font-family: 'Roboto';
+    font-style: normal;
+    font-weight: 500;
+
+    z-index: 10;
+    margin-bottom: 300px
+}
+
+.film-info .close-modal {
+    display: block;
+    margin-left: auto;
+
+    width: 24px;
+    height: 24px;
+    background-color: inherit;
+    border: none;
+}
+
+.film-info .close-modal svg {
+    fill: --dark-theme-light-text-color;
+}
+
+.film-info img {
+    max-width: 248px;
+    width: 100%;
+    height: 315px;
+
+    margin-top: 8px;
+    border-radius: 5px;
+}
+
+.film-info .movie-title {
+    margin-top: 22px;
+    font-size: 20px;
+    line-height: 23px;
+    color: var(--light-color);
+}
+
+.film-info .movie-info {
+    display: flex;
+    margin-top: 29px;
+
+    font-size: 14px;
+    line-height: 16px;
+    color: var(--dark-theme-dark-text-color);;
+    
+}
+
+.film-info .movie-info .info {
+    width: 55%;
+}
+
+.film-info .movie-info .info ul li:not(:last-child),
+.film-info .movie-info .params ul li:not(:last-child)  {
+    padding-bottom: 12px
+}
+
+.film-info .movie-info .params {
+    font-size: 14px;
+    line-height: 16px;   
+    color: var(--light-color);
+}
+
+.film-info .movie-info .params .vote,
+.film-info .movie-info .params .votes {
+    display: inline-block;
+    width: 33px;
+    background-color: var(--light-color);
+    border-radius: 5px;
+
+    text-align: center;
+    color: var(--dark-color);
+    font-size: 12px;
+    line-height: 14px;
+}
+
+.film-info .movie-info .params .votes {
+    width: 36px;
+}
+
+.film-info .about {
+    font-weight: 400;
+}
+
+.film-info .about h2 {
+  font-size: 14px;
+  line-height: 16px;  
+  color: var(--dark-theme-dark-text-color);
+}
+
+.film-info .about p {
+  font-size: 12px;
+  line-height: 20px; 
+  color: var(--dark-theme-light-text-color)
+}
+
+.film-info .btn-list {
+    display: flex;
+}
+
+.main-accent-sml-btn.modal {
+    font-size: 12px;
+    line-height: 1.33;
+}
+
+.rm-dark-bcg-btn.module{
+    position: absolute;
+    z-index: 20;
+}
+
+.rm-light-bcg-grd-btn.module::before{
+    z-index: 19;
+}
+
+/* .backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+  
+    width: 100%;
+    height: 100%;
+  
+    background-color: var(--navy-blue-modal);
+  
+    transition: opacity 250ms cubic-bezier(0.4, 0, 0.2, 1),
+      visibility 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  } */
+
+
 
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width:768px)  {
