@@ -1,42 +1,86 @@
 /* ======================== MOBILE STYLES ======================== */
-
 .home-hero {
+  background-color: #111111;
+}
+
+.home-hero-content {
+    padding-top: 40px;
+    padding-bottom: 80px;
+  }
+
+.home-hero > .container {
   height: 380px;
-  max-width: 320px;
-  margin: 0 auto;
-  position: relative;
-  padding: 40px 0 80px;
+  width: 320px;
   background-image: linear-gradient(
       86.77deg,
-      #111111 30.38%,
+      #111111 10.38%,
       rgba(17, 17, 17, 0) 65.61%
     ),
     url(/src/images/basic-hero/mobile/basic-hero-1x.jpg);
   background-color: #111111;
   background-size: cover;
   background-repeat: no-repeat;
+  background-position-x: 76px;
 }
 
 @media (min-device-pixel-ratio: 2),
   (min-resolution: 192dpi),
   (min-resolution: 2dppx) {
-  .home-hero {
+  .home-hero .container {
     background-image: linear-gradient(
         86.77deg,
-        #111111 30.38%,
+        #111111 10.38%,
         rgba(17, 17, 17, 0) 65.61%
       ),
       url(/src/images/basic-hero/mobile/basic-hero-2x.jpg);
   }
 }
+.home-hero-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 199px;
+  font-family: inherit;
+  color: var(--light-color);
+  font-weight: var(--bold);
+  font-size: 32px;
+  line-height: 1.18;
+}
+
+.home-hero-description {
+  width: 166px;
+  margin-top: 8px;
+  color: var(--dark-theme-light-text-color);
+  font-family: inherit;
+  font-weight: var(--regular);
+  font-size: 14px;
+  line-height: 1.14;
+}
+
+.home-hero-description span {
+  display: none;
+}
+
+.home-hero .btn {
+  margin-top: 20px;
+  font-size: 12px;
+}
+
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
-  .home-hero {
-    height: 432px;
-    max-width: 768px;
-    background-position-x: 241px;
 
+  .home-hero-content {
+    padding-top: 62px;
+    padding-bottom: 62px;
+  }
+
+  .home-hero > .container {
+    height: 372px;
+    width: 768px;
+    /* padding-top: 62px;
+    padding-bottom: 62px; */
+    background-position-x: 200px;
+    background-repeat: no-repeat;
     background-image: linear-gradient(
         82.55deg,
         #111111 10.6%,
@@ -47,7 +91,7 @@
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-    .home-hero {
+    .home-hero > .container {
       background-image: linear-gradient(
           82.55deg,
           #111111 10.6%,
@@ -56,33 +100,75 @@
         url(/src/images/basic-hero/tablet/basic-hero-2x.jpg);
     }
   }
+  .home-hero-title {
+    margin-bottom: 0;
+    width: 357px;
+    font-size: 44px;
+  }
+  .home-hero-description {
+    width: 357px
+  }
+
+  .home-hero-description span {
+    display: block;
+  }
+
+  .home-hero .btn {
+    margin-top: 32px;
+    font-size: 14px;
+    line-height: 1.42;
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width: 1280px) {
   /* .container прописувати не потрібно */
-  .home-hero {
-    height: 720px;
-    max-width: 1280px;
-    background-position-x: 345px;
+  .home-hero-content {
+    padding-top: 169px;
+    padding-bottom: 169px;
+  }
 
+  .home-hero > .container {
+    height: 660px;
+    width: 1280px;
+    background-position-x: 265px;
+    /* background-position-x: 200px; */
+    background-repeat: no-repeat;
+    background-size: cover;
     background-image: linear-gradient(
-        83.16deg,
-        #111111 10.85%,
-        rgba(17, 17, 17, 0) 60.05%
+        82.55deg,
+        #111111 10.6%,
+        rgba(17, 17, 17, 0) 72.95%
       ),
       url(/src/images/basic-hero/desktop/basic-hero-1x.jpg);
   }
   @media (min-device-pixel-ratio: 2),
     (min-resolution: 192dpi),
     (min-resolution: 2dppx) {
-    .home-hero {
+    .home-hero > .container {
       background-image: linear-gradient(
-          83.16deg,
-          #111111 10.85%,
-          rgba(17, 17, 17, 0) 60.05%
+          82.55deg,
+          #111111 10.6%,
+          rgba(17, 17, 17, 0) 72.95%
         ),
-        url(/src/images/basic-hero/desktop/basic-hero-1x.jpg);
+        url(/src/images/basic-hero/desktop/basic-hero-2x.jpg);
     }
+  }
+
+  .home-hero-title {
+    width: 464px;
+    font-size: 64px;
+    line-height: 1.17;
+  }
+  .home-hero-description {
+    width: 464px;
+    margin-top: 16px;
+    font-size: 16px;
+    line-height: 1.18;
+  }
+
+  .home-hero .btn {
+    /* position: unset; */
+    font-size: 18px;
   }
 }
