@@ -4,9 +4,14 @@ const refs = {
   mobMenu: document.querySelector('#js-mob-menu'),
 };
 
-menuBtn.addEventListener('click', onBtnMenuClick);
+refs.menuBtn.addEventListener('click', e => {
+  e.preventDefault();
 
-function onBtnMenuClick() {
   refs.mobBackdrop.classList.remove('is-hidden');
   refs.mobMenu.classList.remove('menu-hidden');
-}
+});
+
+refs.mobBackdrop.addEventListener('click', () => {
+  refs.mobBackdrop.classList.add('is-hidden');
+  refs.mobMenu.classList.add('menu-hidden');
+});
