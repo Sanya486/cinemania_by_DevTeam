@@ -1,4 +1,4 @@
-import { fetchMovieDetails } from './fetches/fetch-movie-details.js';
+import { fetchMovieDetails } from '../fetches/fetch-movie-details.js';
 
 fetchMovieDetails(54235)
   .then(responce => {

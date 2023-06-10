@@ -1,4 +1,4 @@
-(() => {
+
     const refs = {
       openModalBtns: document.querySelectorAll('[data-modal-bt-open]'),
       closeModalBtn: document.querySelector('[data-modal-bt-close]'),
@@ -26,4 +26,3 @@
         disableBodyScroll();
       }
     }
-  })();
