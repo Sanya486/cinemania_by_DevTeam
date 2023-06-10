@@ -7,6 +7,10 @@ body, button, link, textarea, input {
     font-family: 'Roboto', sans-serif;
 }
 
+body {
+    background-color: var(--dark-color);
+}
+
 button{
     cursor: pointer;
 }

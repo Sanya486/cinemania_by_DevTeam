@@ -14,7 +14,7 @@ const fetchMovieDetails = async (movieId) => {
     const voteAverage = data.vote_average;
     const voteCount = data.vote_count;
     const popularity = data.popularity;
-    const genres = data.genres.map((genre) => genre.name).join(' ');
+    const genres = data.genres.map((genre) => genre.name).join(', ');
     const date = data.release_date;
     const id = data.id;
 

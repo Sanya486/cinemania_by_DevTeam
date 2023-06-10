@@ -20,6 +20,9 @@ async function fetchUpcoming() {
 const refs = {
   filmBlock: document.querySelector('.home-upcoming-film-wrap-js'),
 };
+let filmInfo;
+let arr = [];
+let localArr = localStorage.getItem('films-id-array');
 
 window.addEventListener('load', onLoadPage);
 
@@ -40,12 +43,16 @@ async function onChooseCurrentFilm(films) {
   const randomFilm = Math.floor(Math.random() * 20);
   const filmId = films.slice(randomFilm, randomFilm + 1)[0].id;
   try {
-    const filmInfo = await fetchMovieDetails(filmId);
+    filmInfo = await fetchMovieDetails(filmId);
     onRenderMarkup(filmInfo);
+    onAddBtnListener();
+    onCheckLocalStorage();
   } catch (error) {
     onError(error);
   }
 }
+
+let btnRef;
 
 function onRenderMarkup(film) {
   const currentPoster = onCheckViewport();
@@ -90,7 +97,7 @@ function onRenderMarkup(film) {
             </ul>
           <p class="home-upcoming-film-about text">About</p>
           <p class="home-upcoming-film-about-text text">Reclusive author Loretta Sage writes about exotic places in her popular adventure novels that feature a handsome cover model named Alan. While on tour promoting her new book with Alan, Loretta gets kidnapped by an eccentric billionaire who hopes she can lead him to an ancient city's lost treasure from her latest story. Determined to prove he can be a hero in real life and not just on the pages of her books, Alan sets off to rescue her.</p>
-          <button class="main-accent-sml-btn btn" type="button">Add to my library</button>
+          <button class="main-accent-sml-btn btn home-upcoming-btn-js" type="button">Add to my library</button>
         </div>`;
   refs.filmBlock.innerHTML = markup;
 }
@@ -110,6 +117,54 @@ function onCheckCurrentPoster(currentPoster, film) {
     return `https://image.tmdb.org/t/p/original/${film.poster}`;
   }
   return `https://image.tmdb.org/t/p/original/${film.smallPoster}`;
+}
+
+function onAddBtnListener() {
+  btnRef = document.querySelector('.home-upcoming-btn-js');
+  btnRef.addEventListener('click', onAddIdFilmInLocaleStorage);
+}
+
+function onCheckLocalStorage() {
+  if (JSON.parse(localArr).includes(filmInfo.id)) {
+    toggleBtnStyles('Remove from my library');
+  }
+}
+
+function onAddIdFilmInLocaleStorage() {
+  try {
+    if (localArr === null) {
+      arr.push(filmInfo.id);
+      localStorage.setItem('films-id-array', JSON.stringify(arr));
+      localArr = localStorage.getItem('films-id-array');
+      toggleBtnStyles('Remove from my library');
+      return;
+    }
+    let parseLocalStorage = JSON.parse(localArr);
+
+    if (!parseLocalStorage.includes(filmInfo.id)) {
+      parseLocalStorage.push(filmInfo.id);
+      localStorage.setItem('films-id-array', JSON.stringify(parseLocalStorage));
+      localArr = localStorage.getItem('films-id-array');
+      toggleBtnStyles('Remove from my library');
+      return;
+    }
+    if (parseLocalStorage.includes(filmInfo.id)) {
+      const idx = parseLocalStorage.indexOf(filmInfo.id);
+      parseLocalStorage.splice(idx, 1);
+      localStorage.setItem('films-id-array', JSON.stringify(parseLocalStorage));
+      localArr = localStorage.getItem('films-id-array');
+      toggleBtnStyles('Add to my library');
+    }
+  } catch (error) {
+    Notify.failure('Please, try one more time')
+  }
+  
+}
+
+function toggleBtnStyles(text) {
+  btnRef.textContent = text;
+  btnRef.classList.toggle('remove-js');
+  btnRef.classList.toggle('main-accent-sml-btn');
 }
 
 function onError(error) {

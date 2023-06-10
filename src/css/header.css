@@ -1,7 +1,5 @@
 /* ======================== MOBILE STYLES ======================== */
 
-/* body.light .hero-title */
-
 .header {
   top: 40px;
   width: 100%;
@@ -15,6 +13,10 @@
 
 body.light .header {
   background-color: var(--light-color);
+}
+
+.current {
+  color: var(--accent-color);
 }
 
 .header-content-wrap {
@@ -57,16 +59,17 @@ label {
   pointer-events: none;
 }
 
-.input {
+.theme-switch-input {
   display: none;
 }
 
-:checked + .toggle-wrapper > .selector {
-  left: calc(90% - 11.5px);
+:checked + .color-theme-switcher-wrapper > .selector-icon {
+  left: calc(100% - 40px);
 }
 
-.toggle-wrapper {
+.color-theme-switcher-wrapper {
   position: relative;
+  background: var(--linear-gradient-first);
   width: 44px;
   height: 18px;
   background: var(--linear-gradient-first);
@@ -76,13 +79,13 @@ label {
   pointer-events: all;
 }
 
-.selector {
-  width: 13px;
-  height: 13px;
-  top: 3px;
-  left: 2;
+.selector-icon {
+  width: 13.2px;
+  height: 13.5px;
   position: absolute;
-  transform: translateY(-15%);
+  top: 40%;
+  left: 27px;
+  transform: translateY(-45%);
   transition: left 0.25s ease;
 }
 
@@ -156,10 +159,6 @@ label {
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
 
-  .mobile-backdrop {
-    display: none;
-  }
-
   .header {
     min-height: 60px;
 
@@ -167,7 +166,16 @@ label {
     padding-bottom: 12px;
   }
 
-  .header-content-wrap {
+  .mobile-menu-link {
+    display: none;
+  }
+
+  .mobile-backdrop {
+    display: none;
+  }
+
+  .header-logo-wrap {
+    display: flex;
     justify-content: flex-start;
     max-width: 704px;
     max-height: 36px;
@@ -189,6 +197,10 @@ label {
     color: var(--dark-theme-light-text-color);
   }
 
+  body.light .logo-text {
+    color: var(--light-theme-dark-text-color);
+  }
+
   .header-nav {
     display: flex;
     margin-left: 59px;
@@ -207,16 +219,8 @@ label {
     color: var(--dark-theme-dark-text-color);
   }
 
-  .header-nav-link:is(:hover, :focus){
-    color: var(--accent-color);
-  }
-
   body.light .header-nav-item {
     color: var(--light-theme-medium-text-color);
-  }
-
-  .mobile-menu-link {
-    display: none;
   }
 
   .mob-menu-btn {
