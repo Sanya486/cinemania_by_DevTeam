@@ -1,5 +1,3 @@
-// import axios from 'axios';
-
 import starFull from '../../images/icons/stars/star-full.svg';
 import starHalf from '../../images/icons/stars/star-half.svg';
 import starEmpty from '../../images/icons/stars/star-empty.svg';
@@ -27,12 +25,6 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
     
         let array = ['', '', '', '', ''];
     
-        // const valueChoose = {
-        //   full: 'star-full.svg',
-        //   half: 'star-half.svg',
-        //   empty: 'star-empty.svg',
-        // };
-    
         const valueChoose = {
           full: starFull,
           half: starHalf,
@@ -55,17 +47,12 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
           }
         });
     
-        console.log(newArray);
+        // console.log(newArray);
     
     
         const rateMarkup = newArray
           .map(
-            elem =>
-              // `<li class="rating-item">
-              //  <img class="rating-icon" src="./images/icons/stars/${elem}" alt="">
-              //  </li>
-              //  `
-    
+            elem =>   
               `<li class="rating-item">
                <img class="rating-icon" src="${elem}" alt="">
                </li>
@@ -73,7 +60,7 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
           )
           .join('');
     
-        console.log(rateMarkup);
+        // console.log(rateMarkup);
     
         const fullMarkup = 
         `
@@ -100,17 +87,9 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
         return fullMarkup;
     
       }
-      
-    
-    
       )
       .catch(error => console.log(error));
-    
-    
     return details;
     };
-    
-    // cardMarkup(12573);
-    // console.log(cardMarkup(12573))
-    
+
     export {cardMarkup};
