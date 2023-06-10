@@ -1,5 +1,5 @@
 // import { fetchMovieDetails } from './fetches/fetch-movie-details.js';
-import { cardMarkup } from './other/card-markup';
+import { cardMarkup } from './card-markup';
 const testForm = document.querySelector('.test-form');
 const testInput = document.querySelector('.test-input');
 // const testButton = document.querySelector('.test-button');
