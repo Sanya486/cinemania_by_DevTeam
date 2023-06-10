@@ -59,17 +59,16 @@ label {
   pointer-events: none;
 }
 
-.theme-switch-input {
+.input {
   display: none;
 }
 
-:checked + .color-theme-switcher-wrapper > .selector-icon {
-  left: calc(100% - 40px);
+:checked + .toggle-wrapper > .selector {
+  left: calc(90% - 11.5px);
 }
 
-.color-theme-switcher-wrapper {
+.toggle-wrapper {
   position: relative;
-  background: var(--linear-gradient-first);
   width: 44px;
   height: 18px;
   background: var(--linear-gradient-first);
@@ -79,16 +78,20 @@ label {
   pointer-events: all;
 }
 
-.selector-icon {
-  width: 13.2px;
-  height: 13.5px;
+.selector {
+
+  top: 3.5px;
+  left: 2px;
+  right:2px;
   position: absolute;
-  top: 40%;
-  left: 27px;
-  transform: translateY(-45%);
+  transform: translateY(-15%);
   transition: left 0.25s ease;
 }
 
+.handle-icon{
+  width: 13.2px;
+  height: 13.5px;
+}
 /* ------------ Mob Menu ---------------- */
 
 .mobile-backdrop {
@@ -235,10 +238,11 @@ label {
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width: 1280px) {
   /* .container прописувати не потрібно */
-   .header-content-wrap {
+  .header-content-wrap {
     max-width: 1216px;
   }
 
-.header-nav {
-  margin-left: auto;
+  .header-nav {
+    margin-left: auto;
+  }
 }
