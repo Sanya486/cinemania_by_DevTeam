@@ -63,11 +63,9 @@ label {
   display: none;
 }
 
-:checked + .toggle-wrapper > .selector {
-  left: calc(90% - 11.5px);
-}
-
 .toggle-wrapper {
+  display: flex;
+  justify-content: space-between;
   position: relative;
   width: 44px;
   height: 18px;
@@ -79,18 +77,47 @@ label {
 }
 
 .selector {
-
   top: 3.5px;
   left: 2px;
-  right:2px;
+  right: 2px;
   position: absolute;
   transform: translateY(-15%);
   transition: left 0.25s ease;
 }
 
-.handle-icon{
+.handle-icon {
   width: 13.2px;
   height: 13.5px;
+}
+
+.moon-icon {
+  margin-top: 4px;
+  margin-left: 3px;
+
+  width: 9.53px;
+  height: 9.75px;
+  opacity: 1;
+}
+
+.sun-icon {
+  margin-top: 5px;
+  margin-right: 3px;
+
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+}
+
+:checked + .toggle-wrapper > .selector {
+  left: calc(90% - 11.5px);
+}
+
+:checked + .toggle-wrapper > .dark-on {
+  opacity: 1;
+}
+
+:checked + .toggle-wrapper > .day-on {
+  opacity: 1;
 }
 /* ------------ Mob Menu ---------------- */
 
