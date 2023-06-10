@@ -4,7 +4,9 @@
 .search {
     background-color: var(--dark-color);
 }
-
+body.light .search {
+    background-color:var(--light-color);
+}
 .search-container{
     padding-top: 40px;
 padding-bottom: 16px;
@@ -23,12 +25,12 @@ flex-direction: row;
 justify-content: center;
 align-items: center;
 gap: 12px;
-
-
 }
+
 .film-name-search-form {
     position: relative;
 }
+
 .input-film-name-search-form {
     position: relative;
     color: var(--dark-theme-dark-text-color);
@@ -48,17 +50,21 @@ font-size: 14px;
 line-height: 1.14;
 }
 .input-film-name-search-form::placeholder{
-    color: #B7B7B7;
+    color: var(--dark-theme-dark-text-color);
 }
 
+body.light .input-film-name-search-form::placeholder{
+    color: var(--light-theme-medium-text-color);
+}
 body.light .input-film-name-search-form{
     color: var(--light-theme-medium-text-color);
     background-color: #F5F5F5;
-    border: 1px solid var(--light-color);
+    border: 1px solid var(--light-theme-medium-text-color);
 
 }
-/* .modal-span {
-} */
+.film-year-search-form {
+    position: relative;
+}
 .year-of-film-search-form {
     color: var(--dark-theme-dark-text-color);
     background-color: var(--dark-color);
@@ -83,37 +89,79 @@ line-height: 1.14;
     color: #B7B7B7;
     background-color: #111111;
 }
+
+body.light .year-of-film-search-form::placeholder{
+    color: var(--light-theme-medium-text-color);
+    background-color: #F5F5F5;
+}
+
+body.light .year-of-film-search-form {
+    color: var(--light-theme-medium-text-color);
+    background-color: #F5F5F5;
+    border: 1px solid var(--light-theme-medium-text-color);
+}
 .search-form-btn {
     background: var(--linear-gradient-first);
     display: flex;
     justify-content: center;
     align-items: center;
     border-radius: 50%;
+
     border: none;
+    
     width: 40px;
 height: 40px;
 }
+
+.search-form-btn:hover{
+    background: #fff;
+    border: 1px solid #F87719;
+}
 .input-close-svg {
     position: absolute;
-    top: 4px;
+    top: 16px;
+    left: 188px;
 
     stroke: var(--light-color);
     transition: stroke 250ms var(--action-transition);
 }
 
 .input-close-svg:hover {
-
-  color: var(--accent-color);
+    stroke: var(--accent-color);
 }
 
-/* body.light .input-close-svg {
+body.light .input-close-svg {
     stroke: var(--light-theme-dark-text-color)
-} */
-.year-up-arrow-svg {
-
 }
+
+.year-up-arrow-svg {
+    position: absolute;
+    top: 17px;
+    left: 70px;
+    stroke: none;
+    transition: stroke 250ms var(--action-transition);
+}
+
+.year-up-arrow-svg:hover {
+    stroke: var(--accent-color);
+}
+
+body.light .year-up-arrow-svg {
+    stroke: var(--light-theme-dark-text-color)
+}
+
 .search-form-svg {
-   
+    fill: none;
+    stroke: var(--light-color);
+    transition: stroke 250ms var(--action-transition);
+}
+.search-form-svg:hover {
+    fill: var(--light-color);
+    stroke: var(--accent-color);
+    background-color: #fff;
+} 
+body.light .search-form-svg {
+    stroke: var(--light-theme-dark-text-color)
 }
 
 /* ======================== TABLET STYLES ======================== */
