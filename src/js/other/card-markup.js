@@ -5,6 +5,7 @@ import starHalf from '../../images/icons/stars/star-half.svg';
 import starEmpty from '../../images/icons/stars/star-empty.svg';
 
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
+import { fetchMovieDetails } from '../fetches/fetch-movie-details';
 
 /* Function expects film's ID and returns finished markup of film's card */
 
