@@ -61,15 +61,17 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
           </defs>
         </svg>`,
         };
+
+        
     
         console.log(valueChoose.half, valueChoose.empty);
     
         const newArray = array.map(() => {
           if (fetchData.rate !== 0) {
-            if (fetchData.rate > 2) {
+            if (fetchData.rate >= 2) {
               fetchData.rate -= 2;
               return valueChoose.full;
-            } else if (fetchData.rate == 1) {
+            } else if (fetchData.rate === 1) {
               fetchData.rate -= 1;
               return valueChoose.half;
             }
