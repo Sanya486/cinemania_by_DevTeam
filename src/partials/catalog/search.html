@@ -4,28 +4,32 @@
   -->
   <!-- <img src="images/logo.png" alt="" width="320" /> -->
 
-<section class="search">
-    <div class="container">
-      <h2 class="section-search-block" style="display: none;">section search block</h2>
+  <section class="search">
+    <div class="container search-container">
+      <h2 class="hidden" >section search block</h2>
       <form class="search-form" id="search-form">
         <div class="field-wrap-search-form">
           <label class="film-name-search-form">
-            <input class="input-film-name-search-form" type="text" name="searchQuery" placeholder="Search">
-            <span class="modal-span"></span>
+            <input class="input-film-name-search-form" type="text" name="searchQuery" placeholder="Search" autocomplete="off">
+            <svg class="input-close-svg" width="9" height="9">
+              <use href="/src/images/icons/other-icons.svg#closer-icon"></use>
+          </svg>
+          </label>
+          <label class="film-year-search-form" for="yearOfFilm">
+            
+
+            <input class="year-of-film-search-form flatpickr-input" type="text" id="yearOfFilm" name="yearOfFilm" placeholder="Year" autocomplete="off">
+            <svg class="year-up-arrow-svg"  width="10" height="5">
+              <use href="/src/images/icons/other-icons.svg#down-arrow-iicon"></use>
+          </svg>
+          <svg class="year-up-arrow-svg"  width="10" height="5">
+              <use href="/src/images/icons/other-icons.svg#up-arrow-icon"></use>
+          </svg>
           </label>
 
-          <label class="film-name-search-form" for="yearOfFilm">
-            <select class="year-of-film-search-form" id="yearOfFilm" name="yearOfFilm">
-                <option value="2020">2020</option>
-                <option value="2021">2021</option>
-                <option value="2022">2022</option>
-                <option value="2023">2023</option>
-            </select>
-        </label>
-          
-          <button class="search-form-btn" type="submit">Q
-            <svg class="search-form-svg" width="18" height="18">
-              <use href="#"></use>
+          <button class="search-form-btn" type="submit">
+            <svg class="search-form-svg" width="20" height="20">
+              <use href="/src/images/icons/other-icons.svg#icon-search-3"></use>
           </svg>
           </button>
         </div>

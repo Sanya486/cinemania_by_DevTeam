@@ -1,14 +1,137 @@
 /* ======================== MOBILE STYLES ======================== */
 
 
-/* ======================== TABLET STYLES ======================== */
-@media screen and (min-width:768px)  {
-    /* .container прописувати не потрібно */
+.search {
+    background-color: var(--dark-color);
+}
+
+.search-container{
+    padding-top: 40px;
+padding-bottom: 16px;
+}
+
+/* .section-search-block {
+}
+
+.search-form {
+} */
+
+.field-wrap-search-form {
+    display: flex;   
+flex-wrap: wrap;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+gap: 12px;
+
 
 }
+.film-name-search-form {
+    position: relative;
+}
+.input-film-name-search-form {
+    position: relative;
+    color: var(--dark-theme-dark-text-color);
+    background-color: var(--dark-color);
+    border: 1px solid var(--light-color);
+    border-radius: 8px;
+padding-top: 14px;
+padding-bottom: 14px;
+padding-left: 20px;
+
+width: 224px;
+height: 40px;
+
+font-family: inherit;
+font-weight: 500;
+font-size: 14px;
+line-height: 1.14;
+}
+.input-film-name-search-form::placeholder{
+    color: #B7B7B7;
+}
+
+body.light .input-film-name-search-form{
+    color: var(--light-theme-medium-text-color);
+    background-color: #F5F5F5;
+    border: 1px solid var(--light-color);
+
+}
+/* .modal-span {
+} */
+.year-of-film-search-form {
+    color: var(--dark-theme-dark-text-color);
+    background-color: var(--dark-color);
+    width: 95px;
+height: 40px;
+border: 1px solid var(--light-color);
+border-radius: 8px;
+
+padding-top: 14px;
+padding-bottom: 14px;
+padding-left: 20px;
+font-weight: 500;
+font-size: 14px;
+line-height: 1.14;
+}
+.year-of-film-search-form :focus {
+    outline: none;
+    border: none;
+  }
+
+.year-of-film-search-form::placeholder{
+    color: #B7B7B7;
+    background-color: #111111;
+}
+.search-form-btn {
+    background: var(--linear-gradient-first);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    border: none;
+    width: 40px;
+height: 40px;
+}
+.input-close-svg {
+    position: absolute;
+    top: 4px;
+
+    stroke: var(--light-color);
+    transition: stroke 250ms var(--action-transition);
+}
+
+.input-close-svg:hover {
+
+  color: var(--accent-color);
+}
+
+/* body.light .input-close-svg {
+    stroke: var(--light-theme-dark-text-color)
+} */
+.year-up-arrow-svg {
+
+}
+.search-form-svg {
+   
+}
+
+/* ======================== TABLET STYLES ======================== */
+@media screen and (min-width:768px)  {
+    .search-container{
+        padding-top: 60px;
+    padding-bottom: 36px;
+    }
+    
+}
+
 
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width:1280px)  {
-    /* .container прописувати не потрібно */
+    .search-container{
+        padding-top: 80px;
+    padding-bottom: 48px;
+    }
+    
     
 }
