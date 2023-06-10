@@ -207,6 +207,10 @@ label {
     color: var(--dark-theme-dark-text-color);
   }
 
+  .header-nav-link:is(:hover, :focus){
+    color: var(--accent-color);
+  }
+  
   body.light .header-nav-item {
     color: var(--light-theme-medium-text-color);
   }
