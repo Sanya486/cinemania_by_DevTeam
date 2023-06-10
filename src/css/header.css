@@ -20,9 +20,17 @@ body.light .header {
 }
 
 .header-content-wrap {
+  max-width: 280px;
+  max-height: 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  align-content: center;
+}
+
+.logo-pic {
+  width: 32px;
+  height: 32px;
 }
 
 .logo-text {
@@ -64,6 +72,7 @@ label {
   background: var(--linear-gradient-first);
   width: 44px;
   height: 18px;
+  background: var(--linear-gradient-first);
   border-radius: 194px;
   border: none;
   cursor: pointer;
@@ -151,7 +160,7 @@ label {
   /* .container прописувати не потрібно */
 
   .header {
-    height: 60px;
+    min-height: 60px;
 
     padding-top: 12px;
     padding-bottom: 12px;
@@ -168,13 +177,22 @@ label {
   .header-logo-wrap {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    max-width: 704px;
+    max-height: 36px;
+  }
+
+  .logo-pic {
+    width: 48px;
+    height: 48px;
   }
 
   .logo-text {
     margin-left: 8px;
-    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
     font-size: 24px;
+    line-height: calc(28 / 24);
     font-weight: var(--regular);
     color: var(--dark-theme-light-text-color);
   }
@@ -185,14 +203,19 @@ label {
 
   .header-nav {
     display: flex;
+    margin-left: 59px;
+    margin-right: auto;
   }
 
   .header-nav-list {
     display: flex;
-    gap: 40px;
+    gap: 32px;
   }
 
   .header-nav-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
     color: var(--dark-theme-dark-text-color);
   }
 
@@ -212,4 +235,10 @@ label {
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width: 1280px) {
   /* .container прописувати не потрібно */
+   .header-content-wrap {
+    max-width: 1216px;
+  }
+
+.header-nav {
+  margin-left: auto;
 }
