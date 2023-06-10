@@ -1,10 +1,78 @@
 /* ======================== MOBILE STYLES ======================== */
+.modal.is-hidden {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.trailer-modal {
+  position: fixed;
+  z-index: 10;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+
+  box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+}
+
+body.light .trailer-modal {
+  background: var(--light-color);
+}
+
+.body.dark .trailer-modal {
+background: var(--dark-color);
+}
+
+.trailer-modal-content {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+body.light .trailer-modal-content {
+color: var(--dark-color);
+}
+
+body.dark .trailer-modal-content {
+color: var(--dark-color);
+}
+
+.trailer-error-info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 24px;
+  line-height: 1.17;
+  font-weight: 400;
+}
+
+body.light .trailer-error-info {
+color: var(--dark-color);
+}
+
+body.dark .trailer-error-info {
+color: var(--light-color);
+}
+
+.trailer-modal-content img {
+  width: 100%;
+  height: 100%;
+}
 
 
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width:768px)  {
     /* .container прописувати не потрібно */
-
+.modal {
+    width: 700px;
+    height: 400px;
+    border-radius: 20px;
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */
