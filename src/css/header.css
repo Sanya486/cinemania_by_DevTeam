@@ -163,7 +163,7 @@ label {
   }
 
   .header {
-    height: 60px;
+    max-height: 60px;
 
     padding-top: 12px;
     padding-bottom: 12px;
@@ -183,10 +183,6 @@ label {
     color: var(--dark-theme-light-text-color);
   }
 
-  .mobile-home-link {
-    display: none;
-  }
-
   .header-nav {
     display: flex;
   }
@@ -198,6 +194,10 @@ label {
 
   .header-nav-item {
     color: var(--dark-theme-dark-text-color);
+  }
+
+  .mobile-menu-link{
+    display: none;
   }
 
   .mob-menu-btn {
