@@ -210,7 +210,7 @@ label {
   .header-nav-link:is(:hover, :focus){
     color: var(--accent-color);
   }
-  
+
   body.light .header-nav-item {
     color: var(--light-theme-medium-text-color);
   }
@@ -231,4 +231,10 @@ label {
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width: 1280px) {
   /* .container прописувати не потрібно */
+   .header-content-wrap {
+    max-width: 1216px;
+  }
+
+.header-nav {
+  margin-left: auto;
 }
