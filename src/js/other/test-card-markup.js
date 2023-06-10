@@ -2,7 +2,7 @@
 import { cardMarkup } from './card-markup';
 const testForm = document.querySelector('.test-form');
 const testInput = document.querySelector('.test-input');
-const testButton = document.querySelector('.test-button');
+// const testButton = document.querySelector('.test-button');
 const testCard = document.querySelector('.test-card');
 
 testForm.addEventListener('submit', testOnSubmit);
