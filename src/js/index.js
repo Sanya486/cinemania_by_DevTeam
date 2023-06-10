@@ -20,4 +20,9 @@ import "./other/change-theme"
 import "./other/mob-menu"
 import "./other/slide-menu"
 import "./other/current-page-track"
+<<<<<<< Updated upstream
 // import "./other/test-card-markup"
+=======
+import "./other/scroll-up"
+import "./other/weekly-trends.js"
+>>>>>>> Stashed changes
