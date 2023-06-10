@@ -27,12 +27,6 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
     
         let array = ['', '', '', '', ''];
     
-        // const valueChoose = {
-        //   full: 'star-full.svg',
-        //   half: 'star-half.svg',
-        //   empty: 'star-empty.svg',
-        // };
-    
         const valueChoose = {
           full: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" fill="none">
           <path fill="url(#a)" d="M13.852 15.875a.563.563 0 0 1-.33-.106L9 12.491 4.48 15.77a.562.562 0 0 1-.863-.636L5.379 9.91.81 6.776a.562.562 0 0 1 .316-1.026h5.639L8.465.513a.563.563 0 0 1 1.07 0l1.702 5.238h5.638a.563.563 0 0 1 .319 1.027L12.622 9.91l1.762 5.222a.564.564 0 0 1-.532.743Z"/>
@@ -84,7 +78,7 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
           }
         });
     
-        console.log(newArray);
+        // console.log(newArray);
     
     
         const rateMarkup = newArray
@@ -105,7 +99,7 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
           )
           .join('');
     
-        console.log(rateMarkup);
+        // console.log(rateMarkup);
     
         const fullMarkup = 
         `
@@ -132,17 +126,9 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
         return fullMarkup;
     
       }
-      
-    
-    
       )
       .catch(error => console.log(error));
-    
-    
     return details;
     };
-    
-    // cardMarkup(12573);
-    // console.log(cardMarkup(12573))
-    
+
     export {cardMarkup};
