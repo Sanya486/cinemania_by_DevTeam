@@ -11,13 +11,13 @@ import "./fetches/fetch-trendings";
 
 import "./modals/modal-team"
 import "./modals/slider-modal-team"
-import "./modals/modal"
+// import "./modals/modal"
 
 // =============Other-JS =============
 
-import "./other/card-markup"
+// import "./other/card-markup"
 import "./other/change-theme"
 import "./other/mob-menu"
 import "./other/slide-menu"
 import "./other/current-page-track"
-import "./other/test-card-markup"
+// import "./other/test-card-markup"
