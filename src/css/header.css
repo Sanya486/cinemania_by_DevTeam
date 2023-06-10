@@ -3,7 +3,6 @@
 /* body.light .hero-title */
 
 .header {
-
   top: 40px;
   width: 100%;
 
@@ -51,12 +50,11 @@ label {
   left: calc(90% - 11.5px);
 }
 
-
 .toggle-wrapper {
   position: relative;
   width: 44px;
   height: 18px;
-  background-color: var(--accent-color);
+  background: var(--linear-gradient-first);
   border-radius: 194px;
   border: none;
   cursor: pointer;
@@ -66,7 +64,7 @@ label {
 .selector {
   width: 13px;
   height: 13px;
-  top:3px;
+  top: 3px;
   left: 2;
   position: absolute;
   transform: translateY(-15%);
