@@ -15,6 +15,7 @@
 }
 
 .header-content-wrap {
+  max-width: 280px;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -38,21 +39,38 @@
   color: var(--dark-theme-dark-text-color);
 }
 
-.color-switch {
-  background: var(--linear-gradient-first);
-  width: 44px;
-  height: 18px;
-  border-radius: 194px;
-  border: none;
+label {
+  pointer-events: none;
 }
 
-.switcher-icons {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.input {
+  display: none;
+}
 
-  padding-right: 2.2;
-  padding-left: 2.94;
+:checked + .toggle-wrapper > .selector {
+  left: calc(90% - 11.5px);
+}
+
+
+.toggle-wrapper {
+  position: relative;
+  width: 44px;
+  height: 18px;
+  background-color: var(--accent-color);
+  border-radius: 194px;
+  border: none;
+  cursor: pointer;
+  pointer-events: all;
+}
+
+.selector {
+  width: 13px;
+  height: 13px;
+  top:3px;
+  left: 2;
+  position: absolute;
+  transform: translateY(-15%);
+  transition: left 0.25s ease;
 }
 
 /* ------------ Mob Menu ---------------- */
