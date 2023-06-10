@@ -49,7 +49,9 @@ gap: 12px;
     background-color: var(--dark-color);
     border: 1px solid var(--light-color);
     border-radius: 8px;
-padding: 10px 142px 10px 20px;
+padding-top: 14px;
+padding-bottom: 14px;
+padding-left: 20px;
 
 width: 224px;
 height: 40px;
@@ -80,6 +82,9 @@ height: 40px;
 border: 1px solid var(--light-color);
 border-radius: 8px;
 
+padding-top: 14px;
+padding-bottom: 14px;
+padding-left: 20px;
 font-weight: 500;
 font-size: 14px;
 line-height: 1.14;
@@ -87,6 +92,7 @@ line-height: 1.14;
 
 .year-of-film-search-form::placeholder{
     color: #B7B7B7;
+    background-color: black;
 }
 .search-form-btn {
     display: flex;
