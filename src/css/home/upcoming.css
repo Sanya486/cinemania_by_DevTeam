@@ -125,6 +125,17 @@
   margin-bottom: 20px;
 }
 
+.remove-js {
+  font-size: 12px;
+  line-height: 1.17;
+  padding: 10.5px 24px 10px;
+  background: linear-gradient(var(--dark-color), var(--dark-color)) padding-box,
+    var(--linear-gradient-first) border-box;
+  border-radius: 74px;
+  border: 2px solid transparent;
+  color: var(--light-color);
+}
+
 /* light-theme styles */
 
 body.light .home-upcoming {
@@ -219,6 +230,17 @@ body.light .home-upcoming-film-info-rating-number {
     font-size: 14px;
     line-height: 1.14;
   }
+
+  .home-upcoming .rm-dark-bcg-btn {
+    font-size: 14px;
+    line-height: 1.14;
+  }
+
+  .remove-js {
+    font-size: 14px;
+    line-height: 1.14;
+    padding: 10px 24px 11px;
+  }
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
@@ -289,5 +311,9 @@ body.light .home-upcoming-film-info-rating-number {
 
   .home-upcoming-film-info-item:not(:last-of-type) {
     margin-bottom: 12px;
+  }
+
+  .remove-js {
+    padding: 10px 24px 11px;
   }
 }
