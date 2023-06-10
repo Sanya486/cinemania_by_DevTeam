@@ -13,11 +13,24 @@
   padding-bottom: 8px;
 }
 
+body.light .header {
+  background-color: var(--light-color);
+}
+
+
 .header-content-wrap {
   max-width: 280px;
+  max-height: 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  align-content: center;
+}
+
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  max-width: 32px;
 }
 
 .logo-text {
@@ -36,6 +49,10 @@
   font-weight: var(--medium);
   line-height: 14.06px;
   color: var(--dark-theme-dark-text-color);
+}
+
+body.light .mobile-menu-link {
+  color: var(--light-theme-medium-text-color);
 }
 
 label {
