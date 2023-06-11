@@ -21,6 +21,12 @@ import "./other/change-theme"
 import "./other/mob-menu"
 import "./other/slide-menu"
 import "./other/current-page-track"
+
+import "./other/scroll-up"
+import "./other/weekly-trends.js"
+
+
 import "./other/test-card-markup"
 import "./other/switch-theme-btn"
+
 
