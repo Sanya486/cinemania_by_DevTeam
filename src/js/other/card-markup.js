@@ -56,3 +56,6 @@ import {rateArray} from './rate-markup';
     };
 
     export {cardMarkup};
+
+
+    
