@@ -205,11 +205,15 @@ label {
     display: none;
   }
 
+  .header-content-wrap {
+    justify-content: space-between;
+    max-width: 704px;
+    max-height: 48px;
+  }
+
   .header-logo-wrap {
     display: flex;
     justify-content: flex-start;
-    min-width: 704px;
-    max-height: 36px;
   }
 
   .logo-pic {
@@ -256,6 +260,10 @@ label {
 
   .header-nav-link:is(:hover, :focus) {
     color: var(--accent-color);
+  }
+
+  .toggle-wrapper {
+    margin-left: auto;
   }
 
   .mob-menu-btn {
