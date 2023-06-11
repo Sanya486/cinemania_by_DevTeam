@@ -1,14 +1,78 @@
 /* ======================== MOBILE STYLES ======================== */
+.footer {
+  background-color: var(--dark-color);
+  padding-top: 2px;
+  padding-bottom: 28px;
+}
 
+body.light .footer {
+  background-color: var(--light-color);
+}
+
+.footer-content-wrapper {
+  max-width: 236px;
+  max-height: 40px;
+  margin-left: auto;
+  margin-right: auto;
+
+  display: flex;
+
+  text-align: center;
+  align-items: center;
+  align-content: center;
+}
+
+.footer-text {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: var(--regular);
+  color: var(--dark-theme-dark-text-color);
+}
+
+body.light .footer-text {
+  color: var(--light-theme-medium-text-color);
+}
+
+.footer-text.command-link {
+  text-decoration: underline;
+}
+
+.footer-heart-icon {
+  fill: var(--accent-color);
+  margin-left: 8px;
+  margin-right: 4px;
+  margin-top: 9.62;
+  animation: beat 0.55s infinite alternate;
+  transform-origin: center;
+}
+
+@keyframes beat {
+  to {
+    transform: scale(1.2);
+  }
+}
 
 /* ======================== TABLET STYLES ======================== */
-@media screen and (min-width:768px)  {
-    /* .container прописувати не потрібно */
+@media screen and (min-width: 768px) {
+  /* .container прописувати не потрібно */
+  .footer {
+    padding-bottom: 40px;
+  }
+  .footer-content-wrapper {
+    max-width: 482px;
+    flex-wrap: nowrap;
+  }
 
+  .footer-text {
+    font-size: 16px;
+    line-height: 19px;
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */
-@media screen and (min-width:1280px)  {
-    /* .container прописувати не потрібно */
-    
+@media screen and (min-width: 1280px) {
+  /* .container прописувати не потрібно */
+  .footer {
+    padding-bottom: 80px;
+  }
 }

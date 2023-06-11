@@ -4,16 +4,35 @@
     position: relative;
     width: 280px;
     height: 406px;
-    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%), url('/src/images/components/mobile-picture.png');
-    background-size: cover;
-    background-repeat: no-repeat;
     border-radius: 5px;
     margin: 0;
+}
+
+.card-link{
+    width: 100%;
+    height: 100%;
+    outline: transparent;
+}
+
+.img-ovelay{
+    content: '';
+    width: 100%;
+    height: 100%;
+    display: block;
+    position: absolute;
+    z-index: 1;
+    background: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%);
+}
+
+.film-poster{
+    width: 100%;
+    height: 100%;
 }
 
 .film-card-info{
     max-width: 100%;
     position: absolute;
+    z-index: 2;
     right: 12px;
     left: 12px;
     bottom: 12px;
@@ -67,9 +86,7 @@
 
     .film-card{
         width: 224px;
-        height: 325px;   
-        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%), url('/src/images/components/tablet-picture.png');  
-    }
+        height: 325px;       }
     
     .film-card-info{
         line-height: calc(18 / 12);
@@ -92,9 +109,7 @@
     /* .container прописувати не потрібно */
     .film-card{
         width: 395px;
-        height: 574px;
-        background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 63.48%, rgba(0, 0, 0, 0.9) 92.16%), url('/src/images/components/desktop-picture.png');
-    }
+        height: 574px;    }
 
     .film-card-info{
         right: 20px;

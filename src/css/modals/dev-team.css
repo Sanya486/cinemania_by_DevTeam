@@ -1,14 +1,300 @@
 /* ======================== MOBILE STYLES ======================== */
 
+.modal-backdrop {
+    position: fixed;
+    z-index: 5;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    background-color:rgba(0, 0, 0, 0.6);
+    overflow: auto;
+
+    transition: all 250ms var(--action-transition);
+}
+
+
+.backdrop.is-hidden .modal {
+    transform: translate(-50%, -50%) scale(0);
+}
+
+.modal-students-info {
+    position: absolute;
+    top: 96px;
+    left: 50%;
+    
+    max-width: 290px;
+    width: 90vw;
+    padding-left: 21px;
+    padding-right: 21px;
+    padding-top: 21px;
+    padding-bottom: 21px;
+
+    border-radius: 20px;
+    background-color: #111111;
+    box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
+    overflow: auto;
+    
+    transform: translateX(-50%) scale(1);
+    transition: transform 400ms var(--action-transition);
+}
+
+/* LIGTH THEME */
+body.light .modal-students-info {
+    background-color: #ffffff;
+}
+
+.team-list {
+    display: flex;
+    flex-direction: row;
+    gap: 30px;
+
+    margin-top: 25px;
+}
+
+.title-team-name {
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 1.15;
+    text-align: center;
+    color: #FFFFFF;
+
+    margin: 0;
+}
+
+/* LIGTH THEME */
+body.light .title-team-name {
+    color: #111111;
+}
+
+.team-member-photo {
+    display: inline-block;
+}
+
+.rounded-photo {
+    border-radius: 5px;
+}
+
+.team-member-name {
+    font-weight: 500;
+    font-size: 16px;
+    text-transform: uppercase;
+    text-align: center;
+
+    color: #FFFFFF;
+   
+    margin: 0;
+}
+
+/* LIGTH THEME */
+body.light .team-member-name {
+    color:#111111;
+}
+
+.team-member-role {
+    display: block;
+
+    font-weight: 500;
+    font-size: 14px;
+    text-align: center;
+    
+    color: #B7B7B7;
+    
+    margin: 0;
+    margin-top: 9px;
+    margin-left: auto;
+    margin-right: auto;
+    padding: 5px;
+    max-width: 160px;
+
+    border: 1px solid #F84119;
+    border-radius: 15px;
+}
+
+/* LIGTH THEME */
+body.light .team-member-role {
+    color:#111111;
+}
+
+.team-member-info {
+    padding: 15px;
+}
+
+
+.photo-slider-modal-team {
+    position: relative;
+    right: 0;
+
+    display: flex;
+    flex-wrap: nowrap;
+    gap: 30px;
+
+    transition: all 250ms var(--action-transition);
+}
+
+.btn-wrapper-slider-modal-team {
+    display: flex;
+    gap: 200px;
+    justify-content: center;
+    margin-top: 15px;
+    
+}
+
+.btn-close-wrapper {
+    display: flex;
+    justify-content: end;
+}
+
+.btn-close-modal-team,
+.btn-to-left-modal-team,
+.btn-to-right-modal-team  {
+    background-color: transparent;
+    padding: 0;
+    border: 0;
+}
+
+
+.modal-team-icon-close {
+    fill: none;
+    stroke: #ffffff;
+}
+
+.modal-team-icon-close:hover,
+.icon-left:hover,
+.icon-right:hover,
+.modal-team-icon-close:focus,
+.icon-left:focus,
+.icon-right:focus {
+    stroke: #F84119;
+}
+
+
+/* LIGTH THEME */
+body.light .modal-team-icon-close {
+    stroke: #111111;
+}
+
+body.light .modal-team-icon-close:hover,
+.icon-left:hover,
+.icon-right:hover,
+.modal-team-icon-close:focus,
+.icon-left:focus,
+.icon-right:focus {
+    stroke: #F84119;
+}
+
+
+.icon-left,
+.icon-right {
+    fill: none;
+    stroke: #ffffff;
+}
+
+/* LIGTH THEME */
+body.light .icon-left {
+    stroke:#111111;
+}
+
+body.light .icon-right {
+    stroke:#111111;
+}
+
+
+
+
 
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width:768px)  {
     /* .container прописувати не потрібно */
+.modal-students-info {
+        max-width: 500px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+.team-list {
+    flex-direction: row;
+    column-gap: 20px;
+    row-gap: 20px;
+
+    margin-top: 25px;
+}
+
+.swiper-slide {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: calc((100% - 60px) / 4);
+}
+
+.team-member-name {
+    font-weight: 500;
+    font-size: 8px;
+    text-transform: uppercase;
+
+
+    color: #FFFFFF;
+    margin: 0;
+}
+
+.team-member-role {
+    font-size: 8px;
+    max-width: 100px;
+}
+
+.team-member-info {
+    padding: 5px;
+    margin-top: 13px;
+}
+
+.btn-wrapper-slider-modal-team {
+    gap: 100px;
+    margin-top: 25px;
+    
+}
 
 }
 
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width:1280px)  {
     /* .container прописувати не потрібно */
-    
+.modal-students-info {
+        max-width: 765px;
+        padding-left: 25px;
+        padding-right: 25px;
+        padding-top: 30px;
+    }
+
+
+.swiper-slide {
+    width: calc((100% - 90px) / 4);
+}
+
+.team-list {
+    column-gap: 30px;
+}
+
+.team-member-name {
+    font-size: 12px;
+}
+
+.team-member-role {
+    font-size: 11px;
+    max-width: 140px;
+}
+
+.title-team-name {
+    font-size: 30px;
+}
+
+.team-member-info {
+    padding: 0px;
+    margin-top: 13px;
+}
+
+.btn-wrapper-slider-modal-team {
+    margin-top: 40px;
+}
 }

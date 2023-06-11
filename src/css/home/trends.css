@@ -1,5 +1,4 @@
 /* ======================== MOBILE STYLES ======================== */
-@import '../components/container.css';
 :root {
   --main-line-height: 1.19;
   --main-font-size: 16px;
@@ -39,6 +38,24 @@
   cursor: pointer;
 }
 
+.home-trends-card{
+  
+}
+.home-trends-card-poster{
+  position: relative;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-sizing: border-box;
+    transition-property: 0.5 ease;
+    max-width: 395px;
+      max-height: 574px;
+      border-radius: 5px;
+}
+.home-trends-card-poster:hover {
+  transform: scale(1.01);
+  box-shadow: 1px 1px 5px 1px rgba(255, 107, 8, 0.42);
+}
+
 body.light .home-trends{
   background-color: var(--light-color);
 }
@@ -74,7 +91,7 @@ body.light .home-trends-title {
     padding-bottom: 60px;
   }
   .home-trends-title, .home-trends-btn {
-    font-size: 28px;
+    font-size: 20px;
     line-height: 1.18;
   }
   .home-trends-wrap {

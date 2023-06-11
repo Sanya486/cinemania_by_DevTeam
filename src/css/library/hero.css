@@ -1,14 +1,139 @@
 /* ======================== MOBILE STYLES ======================== */
+.library-hero {
+  background-color: #111111;
+}
 
+.library-hero-content {
+  padding-top: 40px;
+  padding-bottom: 144px;
+}
+
+.library-hero-title {
+  margin-top: 0;
+  margin-bottom: 0;
+  width: 235px;
+  font-family: inherit;
+  color: var(--light-color);
+  font-weight: var(--bold);
+  font-size: 32px;
+  line-height: 1.18;
+}
+
+.library-hero-description {
+  width: 249px;
+  margin-top: 8px;
+  color: var(--dark-theme-light-text-color);
+  font-family: inherit;
+  font-weight: var(--regular);
+  font-size: 14px;
+  line-height: 1.14;
+}
+
+.library-hero > .container {
+  /* height: 380px;
+  width: 320px; */
+  background-image: linear-gradient(
+      86.77deg,
+      #111111 10.38%,
+      rgba(17, 17, 17, 0) 65.61%
+    ),
+    url(/src/images/library-hero/mobile/library-hero-1x.jpg);
+  background-color: #111111;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position-x: 30px;
+}
+
+@media (min-device-pixel-ratio: 2),
+  (min-resolution: 192dpi),
+  (min-resolution: 2dppx) {
+  .library-hero .container {
+    background-image: linear-gradient(
+        86.77deg,
+        #111111 10.38%,
+        rgba(17, 17, 17, 0) 65.61%
+      ),
+      url(/src/images/library-hero/mobile/library-hero-2x.jpg);
+  }
+}
 
 /* ======================== TABLET STYLES ======================== */
-@media screen and (min-width:768px)  {
-    /* .container прописувати не потрібно */
+@media screen and (min-width: 768px) {
+  /* .container прописувати не потрібно */
+  .library-hero-content {
+    padding-top: 62px;
+    padding-bottom: 118px;
+  }
 
+  .library-hero-title {
+    width: 332px;
+    font-family: inherit;
+    color: var(--light-color);
+    font-weight: var(--bold);
+    font-size: 44px;
+    line-height: 1.18;
+  }
+
+  .library-hero-description {
+    width: 357px;
+    color: var(--dark-theme-light-text-color);
+    font-family: inherit;
+    font-weight: var(--regular);
+    font-size: 14px;
+    line-height: 1.14;
+  }
+
+  .library-hero > .container {
+    /* height: 380px;
+  width: 320px; */
+    background-image: linear-gradient(
+        86.77deg,
+        #111111 10.38%,
+        rgba(17, 17, 17, 0) 65.61%
+      ),
+      url(/src/images/library-hero/tablet/library-hero-1x.jpg);
+    background-color: #111111;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position-x: 69px;
+  }
+
+  @media (min-device-pixel-ratio: 2),
+    (min-resolution: 192dpi),
+    (min-resolution: 2dppx) {
+    .library-hero .container {
+      background-image: linear-gradient(
+          86.77deg,
+          #111111 10.38%,
+          rgba(17, 17, 17, 0) 65.61%
+        ),
+        url(/src/images/library-hero/tablet/library-hero-2x.jpg);
+    }
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */
-@media screen and (min-width:1280px)  {
-    /* .container прописувати не потрібно */
-    
+@media screen and (min-width: 1280px) {
+  /* .container прописувати не потрібно */
+
+  .library-hero-content {
+    padding-top: 169px;
+    padding-bottom: 249px;
+  }
+
+  .library-hero-title {
+    width: 464px;
+    font-size: 64px;
+    line-height: 1.17;
+  }
+
+  .library-hero-description {
+    width: 464px;
+    color: var(--dark-theme-light-text-color);
+    font-family: inherit;
+    font-weight: var(--regular);
+    font-size: 16px;
+    line-height: 1.18;
+    margin-top: 16px;
+  }
 }
