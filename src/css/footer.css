@@ -39,8 +39,8 @@ body.light .footer-text {
 
 .footer-heart-icon {
   fill: var(--accent-color);
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 8px;
+  margin-right: 4px;
   margin-top: 9.62;
   animation: beat 0.55s infinite alternate;
   transform-origin: center;
@@ -60,6 +60,7 @@ body.light .footer-text {
   }
   .footer-content-wrapper {
     max-width: 482px;
+    flex-wrap: nowrap;
   }
 
   .footer-text {
