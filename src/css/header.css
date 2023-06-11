@@ -55,7 +55,7 @@ body.light .mobile-menu-link {
   color: var(--light-theme-medium-text-color);
 }
 
-label {
+/* label {
   pointer-events: none;
 }
 
@@ -112,6 +112,8 @@ label {
 :checked + .toggle-wrapper > .selector {
   left: calc(90% - 11.5px);
 }
+
+
 
 /* ------------ Mob Menu ---------------- */
 

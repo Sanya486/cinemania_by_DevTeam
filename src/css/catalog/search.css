@@ -30,6 +30,16 @@ gap: 12px;
 .film-name-search-form {
     position: relative;
 }
+.search-name-btn-close-hidden{
+    border: none;
+    background: transparent;
+    position: absolute;
+    top: 13px;
+    right: 25px;
+    width: 10px;
+    height: 14px;
+
+}
 
 .input-film-name-search-form {
     position: relative;
@@ -135,16 +145,12 @@ body.light .search-form-svg {
     stroke: var(--light-color);
     transition: stroke 250ms var(--action-transition);
 }
-.search-form-svg:hover {
-    
-} 
-
 
 
 .input-close-svg {
     position: absolute;
-    top: 16px;
-    left: 188px;
+    top: 14px;
+    right: 20px;
 
     stroke: var(--light-color);
     transition: stroke 250ms var(--action-transition);
@@ -162,7 +168,7 @@ body.light .input-close-svg {
     position: absolute;
     top: 17px;
     left: 70px;
-    stroke: red;
+    stroke: none;
     transition: stroke 250ms var(--action-transition);
 }
 /* 
@@ -187,13 +193,22 @@ body.light .year-up-arrow-svg {
     .year-of-film-search-form{
         height: 44px;
     }
+    .year-up-arrow-svg {
+        
+        top: 20px;
+        }
 
+        .input-close-svg{
+            top: 16px;
+        }
     .input-film-name-search-form {
     width: 224px;
     height: 44px;
-    
     }
-    
+    .search-name-btn-close-hidden{
+        top: 15px;
+        
+    }
 }
 
 
@@ -206,19 +221,19 @@ body.light .year-up-arrow-svg {
     .year-of-film-search-form{
         height: 48px;
     }
-    .year-up-arrow-svg {
+    /* .year-up-arrow-svg {
         
     top: 21px;
+    } */
+    .search-name-btn-close-hidden{
+        top: 17px;
+        
     }
-    
     .input-film-name-search-form {
         width: 315px;
         height: 48px;    
 }
-.input-close-svg {
-    
+.input-close-svg{
     top: 19px;
-    left: 277px;
-
 }
 }

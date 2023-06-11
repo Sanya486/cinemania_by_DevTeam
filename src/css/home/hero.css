@@ -114,6 +114,13 @@ body.light .home-hero {
   line-height: 1.18;
   color: var(--light-color);
   margin: 0;
+  max-width: 232px;
+  max-height: 114px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
 }
 
 .home-hero-api-movie-rating {
@@ -227,6 +234,8 @@ body.light .home-hero {
   /* .container прописувати не потрібно */
   .home-hero-api-movie-name {
     font-size: 44px;
+    max-width: 445px;
+    max-height: 104px;
   }
 
   .home-hero-api-movie-rating {
@@ -245,14 +254,15 @@ body.light .home-hero {
   }
 
   .home-hero-api-movie-con {
-    width: 270px;
+    width: 480px;
     height: 372px;
     top: 0;
-    left: unset;
+    left: 0;
     transform: translate(0, 0);
-    padding-left: 0px;
-    background-color: var(--dark-color);
+    padding-left: 32px;
+    /* background-color: var(--dark-color); */
     padding-top: 36px;
+    background: linear-gradient(86.47deg, #111 65.63%, #1110 1%);
   }
 
   .home-hero-api-movie-description {
@@ -343,6 +353,8 @@ body.light .home-hero {
   }
   .home-hero-api-movie-btns .btn {
     margin-top: 0;
+    margin-left: 1px;
+    margin-top: 1px;
   }
 
   .rating-item-hero {
@@ -385,14 +397,16 @@ body.light .home-hero {
   }
 
   .home-hero-api-movie-con {
-    width: 478px;
+    width: 780px;
     height: 660px;
-    padding-left: 103px;
+    padding-left: 135px;
     padding-top: 118px;
   }
   .home-hero-api-movie-name {
     font-size: 64px;
-    line-height: 1.17;
+    line-height: 1.15;
+    max-width: 670px;
+    max-height: 150px;
   }
 
   .home-hero-api-movie-rating {
@@ -406,12 +420,12 @@ body.light .home-hero {
     font-size: 16px;
     line-height: 1.19;
     width: 367px;
-    height: 40px;
+    height: 59px;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
     -webkit-box-orient: vertical;
-    -webkit-line-clamp: 2;
+    -webkit-line-clamp: 3;
   }
 
   .home-hero-api-movie-btns {

@@ -138,3 +138,6 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
     };
 
     export {cardMarkup};
+
+
+    

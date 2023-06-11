@@ -1,13 +1,17 @@
 const backToTopButton = document.querySelector('#back-to-top');
 
 window.addEventListener('scroll', () => {
-  if (window.pageYOffset > 100) {
+  if (window.scrollY > 100) {
     backToTopButton.style.display = 'block';
-  } else {
+    backToTopButton.addEventListener('click', windowScroll);
+    }
+   else {
     backToTopButton.style.display = 'none';
+    backToTopButton.removeEventListener('click', windowScroll)
   }
 });
 
-backToTopButton.addEventListener('click', () => {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-});
+function windowScroll () {
+ window.scrollTo({ top: 0, behavior: 'smooth' })
+}
+  
