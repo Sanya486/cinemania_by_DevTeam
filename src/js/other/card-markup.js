@@ -1,10 +1,12 @@
 // import axios from 'axios';
 
-import starFull from '../../images/icons/stars/star-full.svg';
-import starHalf from '../../images/icons/stars/star-half.svg';
-import starEmpty from '../../images/icons/stars/star-empty.svg';
+// import starFull from '../../images/icons/stars/star-full.svg';
+// import starHalf from '../../images/icons/stars/star-half.svg';
+// import starEmpty from '../../images/icons/stars/star-empty.svg';
 
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
+
+import {rateArray} from './rate-markup';
 
 /* Function expects film's ID and returns finished markup of film's card */
 
@@ -25,7 +27,7 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
     
         // console.log (fetchData);
     
-        let array = ['', '', '', '', ''];
+        // let array = ['', '', '', '', ''];
     
         // const valueChoose = {
         //   full: `<svg xmlns="http://www.w3.org/2000/svg" width="18" height="16" fill="none">
@@ -62,32 +64,33 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
         // </svg>`,
         // };
 
-        const valueChoose = {
-          full: starFull,
-          half: starHalf,
-          empty: starEmpty,
-        }
+        // const valueChoose = {
+        //   full: starFull,
+        //   half: starHalf,
+        //   empty: starEmpty,
+        // }
     
-        console.log(valueChoose.half, valueChoose.empty);
+        // console.log(valueChoose.half, valueChoose.empty);
     
-        const newArray = array.map(() => {
-          if (fetchData.rate !== 0) {
-            if (fetchData.rate >= 2) {
-              fetchData.rate -= 2;
-              return valueChoose.full;
-            } else if (fetchData.rate === 1) {
-              fetchData.rate -= 1;
-              return valueChoose.half;
-            }
-          } else {
-            return valueChoose.empty;
-          }
-        });
+        // const newArray = array.map(() => {
+        //   if (fetchData.rate !== 0) {
+        //     if (fetchData.rate >= 2) {
+        //       fetchData.rate -= 2;
+        //       return valueChoose.full;
+        //     } else if (fetchData.rate === 1) {
+        //       fetchData.rate -= 1;
+        //       return valueChoose.half;
+        //     }
+        //   } else {
+        //     return valueChoose.empty;
+        //   }
+        // });
     
         // console.log(newArray);
     
-    
-        const rateMarkup = newArray
+        const quaryRate = rateArray(fetchData.rate);
+
+        const rateMarkup = quaryRate
           .map(
             elem =>
               // `<li class="rating-item">

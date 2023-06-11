@@ -10,7 +10,7 @@ function testOnSubmit(event) {
     const typedID = +testInput.value;
     console.log(typedID);
 
-    cardMarkup(typedID)
+    // cardMarkup(typedID);
 
     cardMarkup(typedID).then(response => {
         const newMarkup = response;
