@@ -231,11 +231,6 @@ body.light .home-upcoming-film-info-rating-number {
     line-height: 1.14;
   }
 
-  .home-upcoming .rm-dark-bcg-btn {
-    font-size: 14px;
-    line-height: 1.14;
-  }
-
   .remove-js {
     font-size: 14px;
     line-height: 1.14;
@@ -311,6 +306,16 @@ body.light .home-upcoming-film-info-rating-number {
 
   .home-upcoming-film-info-item:not(:last-of-type) {
     margin-bottom: 12px;
+  }
+
+  .home-upcoming .main-accent-sml-btn,
+  .remove-js {
+    transition: box-shadow 250ms var(--action-transition);
+  }
+
+  .home-upcoming .main-accent-sml-btn:hover,
+  .remove-js:hover {
+    box-shadow: 1px 1px 14px 4px #ff6b086b;
   }
 
   .remove-js {
