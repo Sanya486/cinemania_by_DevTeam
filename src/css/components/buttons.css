@@ -148,3 +148,21 @@
     color: var(--accent-color);
 }
 
+#back-to-top {
+    position: fixed;
+    right: 5px;
+    bottom: 5px;
+    display: none;
+    border: none;
+    background-color: transparent;
+}
+
+.scroll-up_icon {
+    fill: var(--accent-color);
+    transition: fill 0.2s ease-in-out;
+}
+
+.scroll-up_icon:hover {
+    fill: #F84119;
+}
+
