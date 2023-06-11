@@ -354,6 +354,7 @@ body.light .home-hero {
   .home-hero-api-movie-btns .btn {
     margin-top: 0;
     margin-left: 1px;
+    margin-top: 1px;
   }
 
   .rating-item-hero {
