@@ -13,19 +13,14 @@ import "./modals/modal-team"
 import "./modals/slider-modal-team"
 // import "./modals/film-info"
 
-
 // =============Other-JS =============
 
 // import "./other/card-markup"
 import "./other/switch-theme-btn"
+
 import "./other/mob-menu"
 import "./other/slide-menu"
 import "./other/current-page-track"
 import "./other/scroll-up"
-import "./other/weekly-trends.js"
-import "./other/home-upcoming"
 // import "./other/test-card-markup"
 import "./other/switch-theme-btn"
-
-
-
