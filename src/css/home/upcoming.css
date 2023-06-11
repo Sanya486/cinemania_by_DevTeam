@@ -158,6 +158,12 @@ body.light .home-upcoming-film-info-rating-number {
   background-color: var(--dark-theme-light-text-color);
 }
 
+body.light .remove-js {
+  background: linear-gradient(var(--light-color), var(--light-color)) padding-box,
+    var(--linear-gradient-first) border-box;
+  color: var(--dark-color);
+}
+
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
