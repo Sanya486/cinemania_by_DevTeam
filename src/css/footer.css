@@ -1,7 +1,7 @@
 /* ======================== MOBILE STYLES ======================== */
 .footer {
   background-color: var(--dark-color);
-  padding-top: 4px;
+  padding-top: 2px;
   padding-bottom: 28px;
 }
 
@@ -29,8 +29,8 @@ body.light .footer {
   color: var(--dark-theme-dark-text-color);
 }
 
-body.light .footer-text{
-  color: var(--light-theme-medium-text-color)
+body.light .footer-text {
+  color: var(--light-theme-medium-text-color);
 }
 
 .footer-text.command-link {
@@ -39,10 +39,19 @@ body.light .footer-text{
 
 .footer-heart-icon {
   fill: var(--accent-color);
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-left: 8px;
+  margin-right: 4px;
   margin-top: 9.62;
+  animation: beat 0.55s infinite alternate;
+  transform-origin: center;
 }
+
+@keyframes beat {
+  to {
+    transform: scale(1.2);
+  }
+}
+
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
@@ -51,6 +60,7 @@ body.light .footer-text{
   }
   .footer-content-wrapper {
     max-width: 482px;
+    flex-wrap: nowrap;
   }
 
   .footer-text {

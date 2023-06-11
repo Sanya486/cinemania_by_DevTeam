@@ -1,5 +1,6 @@
 /* ======================== MOBILE STYLES ======================== */
 
+
 .header {
   top: 40px;
   width: 100%;
@@ -20,9 +21,17 @@ body.light .header {
 }
 
 .header-content-wrap {
+  max-width: 280px;
+  max-height: 32px;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  align-content: center;
+}
+
+.logo-pic {
+  width: 32px;
+  height: 32px;
 }
 
 .logo-text {
@@ -51,35 +60,66 @@ label {
   pointer-events: none;
 }
 
-.theme-switch-input {
+.input {
   display: none;
 }
 
-:checked + .color-theme-switcher-wrapper > .selector-icon {
-  left: calc(100% - 40px);
-}
-
-.color-theme-switcher-wrapper {
+.toggle-wrapper {
+  display: flex;
+  justify-content: space-between;
   position: relative;
-  background: var(--linear-gradient-first);
   width: 44px;
   height: 18px;
+  background: var(--linear-gradient-first);
   border-radius: 194px;
   border: none;
   cursor: pointer;
   pointer-events: all;
 }
 
-.selector-icon {
-  width: 13.2px;
-  height: 13.5px;
+.selector {
+  top: 3.5px;
+  left: 2px;
+  right: 2px;
   position: absolute;
-  top: 40%;
-  left: 27px;
-  transform: translateY(-45%);
+  transform: translateY(-15%);
   transition: left 0.25s ease;
 }
 
+.handle-icon {
+  width: 13.2px;
+  height: 13.5px;
+}
+
+.moon-icon {
+  margin-top: 4px;
+  margin-left: 3px;
+
+  width: 9.53px;
+  height: 9.75px;
+  opacity: 1;
+}
+
+.sun-icon {
+  margin-top: 5px;
+  margin-right: 3px;
+
+  width: 10px;
+  height: 10px;
+  opacity: 1;
+}
+
+:checked + .toggle-wrapper > .selector {
+  left: calc(90% - 11px);
+}
+
+:checked + .toggle-wrapper > .dark-on {
+  opacity: 1;
+}
+
+:checked + .toggle-wrapper > .day-on {
+  opacity: 1;
+}
 /* ------------ Mob Menu ---------------- */
 
 .mobile-backdrop {
@@ -151,7 +191,7 @@ label {
   /* .container прописувати не потрібно */
 
   .header {
-    height: 60px;
+    min-height: 60px;
 
     padding-top: 12px;
     padding-bottom: 12px;
@@ -168,13 +208,22 @@ label {
   .header-logo-wrap {
     display: flex;
     justify-content: flex-start;
-    align-items: center;
+    max-width: 704px;
+    max-height: 36px;
+  }
+
+  .logo-pic {
+    width: 48px;
+    height: 48px;
   }
 
   .logo-text {
     margin-left: 8px;
-    display: flex;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: block;
     font-size: 24px;
+    line-height: calc(28 / 24);
     font-weight: var(--regular);
     color: var(--dark-theme-light-text-color);
   }
@@ -185,14 +234,19 @@ label {
 
   .header-nav {
     display: flex;
+    margin-left: 59px;
+    margin-right: auto;
   }
 
   .header-nav-list {
     display: flex;
-    gap: 40px;
+    gap: 32px;
   }
 
   .header-nav-item {
+    padding-top: 10px;
+    padding-bottom: 10px;
+    font-size: 14px;
     color: var(--dark-theme-dark-text-color);
   }
 
@@ -212,4 +266,16 @@ label {
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width: 1280px) {
   /* .container прописувати не потрібно */
+  .header-content-wrap {
+    max-width: 1216px;
+  }
+
+  .header-nav {
+    margin-left: auto;
+  }
+}
+
+
+.light {
+  background-color: var(--light-color)
 }
