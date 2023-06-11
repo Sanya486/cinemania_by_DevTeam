@@ -1,6 +1,6 @@
 import { fetchMovieDetails } from '../fetches/fetch-movie-details'
 
-let num = 1195;
+let num = 1375;
 
   const refs = {
     poster : document.querySelector('.poster img'),
