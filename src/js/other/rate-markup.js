@@ -2,15 +2,17 @@ import starFull from '../../images/icons/stars/star-full.svg';
 import starHalf from '../../images/icons/stars/star-half.svg';
 import starEmpty from '../../images/icons/stars/star-empty.svg';
 
-const rateArray = (rate) => {
-
-let array = ['', '', '', '', ''];
+/* Function expects film's rate and returns finished markup of film's star rating */
 
 const valueChoose = {
     full: starFull,
     half: starHalf,
     empty: starEmpty,
   }
+
+const rateArray = (rate) => {
+
+    let array = ['', '', '', '', ''];
 
   const newArray = array.map(() => {
     if (rate !== 0) {
