@@ -15,8 +15,8 @@
     color: var(--light-color);
 
     z-index: 10;
-    margin-bottom: 300px;
-    margin-top: 300px
+    /* margin-bottom: 300px;
+    margin-top: 300px */
 }
 
 body.light .modal-film-info .film-info {
@@ -102,7 +102,9 @@ body.light .modal-film-info .film-info .movie-info .params {
 
 .modal-film-info .film-info .movie-info .params .vote,
 .modal-film-info .film-info .movie-info .params .votes {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center; 
     width: 33px;
     background-color: var(--light-color);
     border-radius: 5px;
@@ -165,15 +167,7 @@ body.light .modal-film-info .main-accent-sml-btn.modal:hover {
     box-shadow: 1px 1px 14px 4px rgba(0, 0, 0, 0.22) 
 }
 
-.modal-film-info .rm-dark-bcg-btn.module {
-    position: absolute;
-
-    z-index: 20;
-}
-
-.modal-film-info .rm-light-bcg-grd-btn.module::before{
-    z-index: 19;
-
+.modal-film-info .rm-dark-bcg-btn.modal {
     transition: box-shadow 250ms var(--action-transition);
 }
 
@@ -182,12 +176,13 @@ body.light .modal-film-info .rm-dark-bcg-btn.modal {
     color: var(--dark-color)
 }
 
-/* .modal-film-info .rm-light-bcg-grd-btn.module::before:hover {
-    
+.modal-film-info .rm-dark-bcg-btn.modal:hover {
     box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);   
-} */
+}
 
-
+body.light .modal-film-info .rm-dark-bcg-btn.modal:hover {
+    box-shadow: 1px 1px 14px 4px rgba(0, 0, 0, 0.22)   
+}
 
 /* ======================== TABLET STYLES ======================== */
 
@@ -276,7 +271,7 @@ body.light .modal-film-info .rm-dark-bcg-btn.modal {
         }   
 
         .modal-film-info .film-info .movie-info .params .vote,
-        .modal-film-info .film-info .movie-info .params .votes {
+        .modal-film-info .film-info .movie-info .params .votes { 
           width: 36px;
           height: 18px;
           font-size: 14px;
