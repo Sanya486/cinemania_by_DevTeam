@@ -117,6 +117,30 @@ height: 40px;
     background: #fff;
     border: 1px solid #F87719;
 }
+
+.search-form-btn:hover .search-form-svg {
+    fill: var(--light-color);
+    stroke: var(--accent-color);
+}
+body.light .search-form-svg {
+    stroke: var(--light-theme-dark-text-color)
+}
+  body.light .search-form-btn:hover .search-form-svg{
+    fill: var(--light-color);
+    stroke: var(--accent-color);
+  }
+  
+  .search-form-svg {
+    fill: none;
+    stroke: var(--light-color);
+    transition: stroke 250ms var(--action-transition);
+}
+.search-form-svg:hover {
+    
+} 
+
+
+
 .input-close-svg {
     position: absolute;
     top: 16px;
@@ -150,19 +174,6 @@ body.light .year-up-arrow-svg {
     stroke: var(--light-theme-dark-text-color)
 }
 
-.search-form-svg {
-    fill: none;
-    stroke: var(--light-color);
-    transition: stroke 250ms var(--action-transition);
-}
-.search-form-svg:hover {
-    fill: var(--light-color);
-    stroke: var(--accent-color);
-    background-color: #fff;
-} 
-body.light .search-form-svg {
-    stroke: var(--light-theme-dark-text-color)
-}
 
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width:768px)  {
