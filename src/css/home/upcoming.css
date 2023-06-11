@@ -158,6 +158,12 @@ body.light .home-upcoming-film-info-rating-number {
   background-color: var(--dark-theme-light-text-color);
 }
 
+body.light .remove-js {
+  background: linear-gradient(var(--light-color), var(--light-color)) padding-box,
+    var(--linear-gradient-first) border-box;
+  color: var(--dark-color);
+}
+
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
@@ -227,11 +233,6 @@ body.light .home-upcoming-film-info-rating-number {
   }
 
   .home-upcoming .main-accent-sml-btn {
-    font-size: 14px;
-    line-height: 1.14;
-  }
-
-  .home-upcoming .rm-dark-bcg-btn {
     font-size: 14px;
     line-height: 1.14;
   }
@@ -311,6 +312,16 @@ body.light .home-upcoming-film-info-rating-number {
 
   .home-upcoming-film-info-item:not(:last-of-type) {
     margin-bottom: 12px;
+  }
+
+  .home-upcoming .main-accent-sml-btn,
+  .remove-js {
+    transition: box-shadow 250ms var(--action-transition);
+  }
+
+  .home-upcoming .main-accent-sml-btn:hover,
+  .remove-js:hover {
+    box-shadow: 1px 1px 14px 4px #ff6b086b;
   }
 
   .remove-js {

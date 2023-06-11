@@ -1,14 +1,224 @@
 /* ======================== MOBILE STYLES ======================== */
 
 
-/* ======================== TABLET STYLES ======================== */
-@media screen and (min-width:768px)  {
-    /* .container прописувати не потрібно */
+.search {
+    background-color: var(--dark-color);
+}
+body.light .search {
+    background-color:var(--light-color);
+}
+.search-container{
+    padding-top: 40px;
+padding-bottom: 16px;
+}
+
+/* .section-search-block {
+}
+
+.search-form {
+} */
+
+.field-wrap-search-form {
+    display: flex;   
+flex-wrap: wrap;
+flex-direction: row;
+justify-content: center;
+align-items: center;
+gap: 12px;
+}
+
+.film-name-search-form {
+    position: relative;
+}
+
+.input-film-name-search-form {
+    position: relative;
+    color: var(--dark-theme-dark-text-color);
+    background-color: var(--dark-color);
+    border: 1px solid var(--light-color);
+    border-radius: 8px;
+padding-top: 14px;
+padding-bottom: 14px;
+padding-left: 20px;
+
+width: 224px;
+height: 40px;
+
+font-family: inherit;
+font-weight: 500;
+font-size: 14px;
+line-height: 1.14;
+}
+.input-film-name-search-form::placeholder{
+    color: var(--dark-theme-dark-text-color);
+}
+
+body.light .input-film-name-search-form::placeholder{
+    color: var(--light-theme-medium-text-color);
+}
+body.light .input-film-name-search-form{
+    color: var(--light-theme-medium-text-color);
+    background-color: #F5F5F5;
+    border: 1px solid var(--light-theme-medium-text-color);
 
 }
+.film-year-search-form {
+    position: relative;
+}
+.year-of-film-search-form {
+    color: var(--dark-theme-dark-text-color);
+    background-color: var(--dark-color);
+    width: 95px;
+height: 40px;
+border: 1px solid var(--light-color);
+border-radius: 8px;
+
+padding-top: 14px;
+padding-bottom: 14px;
+padding-left: 20px;
+font-weight: 500;
+font-size: 14px;
+line-height: 1.14;
+}
+.year-of-film-search-form :focus {
+    outline: none;
+    border: none;
+  }
+
+.year-of-film-search-form::placeholder{
+    color: #B7B7B7;
+    background-color: #111111;
+}
+
+body.light .year-of-film-search-form::placeholder{
+    color: var(--light-theme-medium-text-color);
+    background-color: #F5F5F5;
+}
+
+body.light .year-of-film-search-form {
+    color: var(--light-theme-medium-text-color);
+    background-color: #F5F5F5;
+    border: 1px solid var(--light-theme-medium-text-color);
+}
+.search-form-btn {
+    background: var(--linear-gradient-first);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+
+    border: none;
+    
+    width: 40px;
+height: 40px;
+}
+
+.search-form-btn:hover{
+    background: #fff;
+    border: 1px solid #F87719;
+}
+
+.search-form-btn:hover .search-form-svg {
+    fill: var(--light-color);
+    stroke: var(--accent-color);
+}
+body.light .search-form-svg {
+    stroke: var(--light-theme-dark-text-color)
+}
+  body.light .search-form-btn:hover .search-form-svg{
+    fill: var(--light-color);
+    stroke: var(--accent-color);
+  }
+
+  .search-form-svg {
+    fill: none;
+    stroke: var(--light-color);
+    transition: stroke 250ms var(--action-transition);
+}
+.search-form-svg:hover {
+    
+} 
+
+
+
+.input-close-svg {
+    position: absolute;
+    top: 16px;
+    left: 188px;
+
+    stroke: var(--light-color);
+    transition: stroke 250ms var(--action-transition);
+}
+
+.input-close-svg:hover {
+    stroke: var(--accent-color);
+}
+
+body.light .input-close-svg {
+    stroke: var(--light-theme-dark-text-color)
+}
+
+.year-up-arrow-svg {
+    position: absolute;
+    top: 17px;
+    left: 70px;
+    stroke: red;
+    transition: stroke 250ms var(--action-transition);
+}
+/* 
+.year-up-arrow-svg:hover {
+    stroke: var(--accent-color);
+}
+.film-year-search-form:hover .year-up-arrow-svg {
+ stroke: #F87719;
+}
+body.light .year-up-arrow-svg {
+    stroke: var(--light-theme-dark-text-color)
+} */
+
+
+/* ======================== TABLET STYLES ======================== */
+@media screen and (min-width:768px)  {
+    .search-container{
+        padding-top: 60px;
+    padding-bottom: 36px;
+    }
+
+    .year-of-film-search-form{
+        height: 44px;
+    }
+
+    .input-film-name-search-form {
+    width: 224px;
+    height: 44px;
+    
+    }
+    
+}
+
 
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width:1280px)  {
-    /* .container прописувати не потрібно */
+    .search-container{
+        padding-top: 80px;
+    padding-bottom: 48px;
+    }
+    .year-of-film-search-form{
+        height: 48px;
+    }
+    .year-up-arrow-svg {
+        
+    top: 21px;
+    }
     
+    .input-film-name-search-form {
+        width: 315px;
+        height: 48px;    
+}
+.input-close-svg {
+    
+    top: 19px;
+    left: 277px;
+
+}
 }

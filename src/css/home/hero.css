@@ -1,6 +1,10 @@
 /* ======================== MOBILE STYLES ======================== */
 .home-hero {
-  background-color: #111111;
+  background-color: var(--dark-color);
+}
+
+body.light .home-hero {
+  background-color: var(--light-color);
 }
 
 .home-hero-content {
@@ -145,6 +149,25 @@
   font-size: 12px;
   font-weight: var(--medium);
   line-height: 1.16;
+  position: relative;
+  /* margin: 1px; */
+}
+
+.home-hero-api-movie-btns .main-accent-sml-btn::before {
+  content: '';
+  z-index: -1;
+  background: var(--linear-gradient-first);
+  border-radius: 74px;
+  margin: -1px;
+  position: absolute;
+  inset: 0;
+}
+
+.home-hero-api-movie-btns .main-accent-sml-btn:hover {
+  color: var(--accent-color);
+  background: var(--dark-color);
+  border: none;
+  display: inline-block;
 }
 
 .home-hero-api-movie-btns .rm-light-bcg-btn {
@@ -153,6 +176,12 @@
   font-size: 12px;
   font-weight: var(--medium);
   line-height: 1.16;
+}
+
+.home-hero-api-movie-btns .rm-light-bcg-btn:hover {
+  color: var(--accent-color);
+  background: black;
+  border: 1px solid #111;
 }
 
 .film-rating-hero {
@@ -168,6 +197,29 @@
 .rating-icon-hero {
   width: 15px;
   height: 14px;
+}
+
+.home-hero-content .main-accent-sml-btn {
+  font-size: 12px;
+  font-weight: var(--medium);
+  line-height: 1.16;
+  position: relative;
+}
+.home-hero-content .main-accent-sml-btn::before {
+  content: '';
+  z-index: -1;
+  background: var(--linear-gradient-first);
+  border-radius: 74px;
+  margin: -1px;
+  position: absolute;
+  inset: 0;
+}
+
+.home-hero-content .main-accent-sml-btn:hover {
+  color: var(--accent-color);
+  background: var(--dark-color);
+  border: none;
+  display: inline-block;
 }
 
 /* ======================== TABLET STYLES ======================== */
@@ -284,7 +336,7 @@
     display: block;
   }
 
-  .home-hero .btn {
+  .home-hero-content .btn {
     margin-top: 32px;
     font-size: 14px;
     line-height: 1.42;
@@ -371,10 +423,6 @@
     padding-bottom: 12px;
     font-size: 16px;
   }
-
-  /* .home-hero-api-movie-btns .btn {
-    margin-top: 0;
-  } */
 
   .home-hero-content {
     padding-top: 169px;
