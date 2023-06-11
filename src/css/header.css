@@ -1,5 +1,6 @@
 /* ======================== MOBILE STYLES ======================== */
 
+
 .header {
   top: 40px;
   width: 100%;
@@ -109,7 +110,7 @@ label {
 }
 
 :checked + .toggle-wrapper > .selector {
-  left: calc(90% - 11.5px);
+  left: calc(90% - 11px);
 }
 
 :checked + .toggle-wrapper > .dark-on {
@@ -272,4 +273,9 @@ label {
   .header-nav {
     margin-left: auto;
   }
+}
+
+
+.light {
+  background-color: var(--light-color)
 }
