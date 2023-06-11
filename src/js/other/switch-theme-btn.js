@@ -6,8 +6,8 @@ function onThemeToggleChange() {
   const body = document.body;
 
   if (toggle.checked) {
-    body.classList.remove('light');
-  } else {
     body.classList.add('light');
+  } else {
+    body.classList.remove('light');
   }
 }
