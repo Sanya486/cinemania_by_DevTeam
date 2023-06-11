@@ -17,12 +17,84 @@
 //       console.log("Обраний рік:", dateStr);
 //     }
 //   });
+// import { cardMarkup } from './card-markup';
+// import { fetchMovieDetails } from '../fetches/fetch-movie-details';
+// import { fetchSearch } from '../fetch/fetch-search';
+// import Notiflix from 'notiflix';
 
+// const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
+
+// const container = document.querySelector('.card-list-search-result');
+// const searchForm = document.querySelector('#search-form');
+
+// // Function to load search results
+// const loadMovies = async (inputYear) => {
+//   try {
+//     const response = await fetch(`https://api.themoviedb.org/3/trending/all/week?api_key=${API_KEY}`);
+//     const data = await response.json();
+//     const { results } = data;
+
+//     // Step 2: Destructure the response information
+//     const filteredResults = results.filter(result => {
+//       const releaseYear = Number(result.release_date.slice(0, 4));
+//       return releaseYear === inputYear;
+//     });
+
+//     // Step 4: Map to an array
+//     const movieIds = filteredResults.map(result => result.id);
+
+//     // Step 5: Generate markup for each ID
+//     const movieMarkup = await Promise.all(movieIds.map(async id => {
+//       const movieDetails = await fetchMovieDetails(id);
+//       return cardMarkup(movieDetails.id);
+//     }));
+
+//     // Step 6: Insert markup into the DOM
+//     container.innerHTML = '';
+//     movieMarkup.forEach(card => {
+//       const liElement = document.createElement('li');
+//       liElement.className = 'card-item-search-result';
+//       liElement.innerHTML = card;
+//       container.appendChild(liElement);
+//     });
+//   } catch (error) {
+//     console.log('Error:', error);
+//     Notiflix.Notify.Failure('An error occurred. Please try again.');
+//   }
+// };
+
+// // Event handler for search form submission
+// searchForm.addEventListener('submit', async (event) => {
+//   event.preventDefault();
+//   const inputYear = Number(document.querySelector('.year-of-film-search-form').value);
+
+//   try {
+//     const searchResults = await fetchSearch(inputYear);
+//     const movieIds = searchResults.map(result => result.id);
+//     const movieMarkup = await Promise.all(movieIds.map(async id => {
+//       const movieDetails = await fetchMovieDetails(id);
+//       return cardMarkup(movieDetails.id);
+//     }));
+//     container.innerHTML = '';
+//     movieMarkup.forEach(card => {
+//       const liElement = document.createElement('li');
+//       liElement.className = 'card-item-search-result';
+//       liElement.innerHTML = card;
+//       container.appendChild(liElement);
+//     });
+//   } catch (error) {
+//     console.log('Error:', error);
+//     Notiflix.Notify.Failure('An error occurred. Please try again.');
+//   }
+// });
+
+
+  
 // const inputFilmName = document.querySelector('.input-film-name-search-form');
 // const inputCloseSvg = document.querySelector('.input-close-svg');
 // const searchForm = document.querySelector('.film-name-search-form');
 
-// // При натисканні на інпут
+// // 
 // inputFilmName.addEventListener('input', () => {
 //   const inputValue = inputFilmName.value.trim();
 
@@ -33,17 +105,17 @@
 //   }
 // });
 
-// // При натисканні на кнопку з SVG
+// // 
 // inputCloseSvg.addEventListener('click', () => {
 //   inputFilmName.value = '';
 //   inputCloseSvg.classList.add('hidden');
 // });
 
-// // При натисканні на баттон форми
+// 
 // searchForm.addEventListener('submit', (event) => {
 //   event.preventDefault();
 
-//   // Отримати значення з інпута
+//  
 //   const searchQuery = inputFilmName.value.trim();
 
 //   // Виконати необхідні дії зі значенням пошукового запиту, наприклад, відправити на сервер або виконати пошук
@@ -53,3 +125,43 @@
 //   inputFilmName.value = '';
 //   inputCloseSvg.classList.add('hidden');
 // });
+
+// import axios from 'axios';
+
+// const API_KEY = 'YOUR_API_KEY'; // Встановіть свій API ключ TMDb
+
+// const getMovieTrailer = async (movieId) => {
+//   try {
+//     const response = await axios.get(`https://api.themoviedb.org/3/movie/${movieId}/videos`, {
+//       params: {
+//         api_key: API_KEY,
+//       },
+//     });
+
+//     const videos = response.data.results;
+
+//     // Знайдено відео трейлерів
+//     if (videos.length > 0) {
+//       // Виберіть перший трейлер
+//       const trailer = videos.find((video) => video.type === 'Trailer');
+
+//       if (trailer) {
+//         const trailerKey = trailer.key;
+//         const trailerUrl = `https://www.youtube.com/watch?v=${trailerKey}`;
+
+//         // Виконайте необхідні дії з посиланням на трейлер
+//         console.log(trailerUrl);
+//       } else {
+//         // Не знайдено відео трейлерів
+//         console.log('No trailer found');
+//       }
+//     } else {
+//       // Не знайдено відео трейлерів
+//       console.log('No trailer found');
+//     }
+//   } catch (error) {
+//     console.log('Error:', error);
+//   }
+// };
+
+// getMovieTrailer(cardId);

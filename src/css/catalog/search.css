@@ -149,8 +149,8 @@ body.light .search-form-svg {
 
 .input-close-svg {
     position: absolute;
-   top: 2px;
-   left: 2px;
+    top: 14px;
+    right: 20px;
 
     stroke: var(--light-color);
     transition: stroke 250ms var(--action-transition);
@@ -197,6 +197,10 @@ body.light .year-up-arrow-svg {
         
         top: 20px;
         }
+
+        .input-close-svg{
+            top: 16px;
+        }
     .input-film-name-search-form {
     width: 224px;
     height: 44px;
@@ -229,10 +233,7 @@ body.light .year-up-arrow-svg {
         width: 315px;
         height: 48px;    
 }
-/* .input-close-svg {
-    
+.input-close-svg{
     top: 19px;
-    left: 277px;
-
-} */
+}
 }
