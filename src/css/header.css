@@ -208,7 +208,7 @@ label {
   .header-logo-wrap {
     display: flex;
     justify-content: flex-start;
-    max-width: 704px;
+    min-width: 704px;
     max-height: 36px;
   }
 
@@ -252,6 +252,10 @@ label {
 
   body.light .header-nav-item {
     color: var(--light-theme-medium-text-color);
+  }
+
+  .header-nav-link:is(:hover, :focus) {
+    color: var(--accent-color);
   }
 
   .mob-menu-btn {
