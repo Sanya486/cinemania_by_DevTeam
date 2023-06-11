@@ -56,7 +56,7 @@ body.light .mobile-menu-link {
   color: var(--light-theme-medium-text-color);
 }
 
-label {
+/* label {
   pointer-events: none;
 }
 
@@ -119,7 +119,8 @@ label {
 
 :checked + .toggle-wrapper > .day-on {
   opacity: 1;
-}
+} */
+
 /* ------------ Mob Menu ---------------- */
 
 .mobile-backdrop {
