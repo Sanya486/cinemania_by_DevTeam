@@ -6,7 +6,7 @@
 
 <section class="header">
 
-  <div class="container header-container">
+  <div class="container">
     <div class="header-content-wrap">
 
 
@@ -34,21 +34,29 @@
         </ul>
       </nav>
 
-      <label for="theme-switcher"><input class="theme-switch-input" id="theme-switch" type="checkbox" />
-        <div class="color-theme-switcher-wrapper">
-          <span class="selector-icon"> 
-            <svg class="handle-icon" width="13.2" height="13.5">
+ 
+      <label for="toggle"
+        ><input class="input" id="toggle" type="checkbox" />
+        <div class="toggle-wrapper">
+          <span class="selector">
+            <svg class="handle-icon">
               <use
-              href="images/icons/theme-switcher/dark-theme-icons.svg#small-switch-handle"
+                href="images/icons/theme-switcher/dark-theme-icons.svg#small-switch-handle"
               ></use>
-          </svg>
-        </span>
-       </div>
+            </svg>
+          </span>
+           <svg class="moon-icon dark-on">
+      <use href="images/icons/theme-switcher/dark-theme-icons.svg#small-moon-icon"></use>
+    </svg>
+    <svg class="sun-icon light-on">
+      <use href="images/icons/theme-switcher/light-theme-icons.svg#small-sun-icon"></use>
+    </svg>
+        </div>
       </label>
-     
     </div>
   </div>
 </section>
+
 
 <!----------------- mobile-version ---------------->
 
