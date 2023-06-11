@@ -1,35 +1,32 @@
 import { fetchTrendingMovies } from '../fetches/fetch-trending-movies';
 import { cardMarkup } from './card-markup';
 
-// Getting Markup for film-cards
 const populateTrendingMovies = async () => {
   try {
     const trendingMovies = await fetchTrendingMovies();
     const cardList = document.querySelector('.card-list-search-result');
-    let allCardsMarkup = '';
+    let allFilmCards = '';
 
     for (const movie of trendingMovies) {
       try {
-        const CardMarkup = await cardMarkup(movie);
-        allCardsMarkup += CardMarkup;
+        const filmCard = await cardMarkup(movie.id);
+        allFilmCards += `<li>${filmCard}</li>`;
       } catch (error) {
         console.log(error);
       }
     }
 
-    cardList.insertAdjacentHTML('beforeend', allCardsMarkup);
+    cardList.insertAdjacentHTML('beforeend', allFilmCards);
   } catch (error) {
     console.log(error);
   }
 };
 
-// Attaching Listener to Catalog link in Header
 const catalogLink = document.querySelector('.header-catalog');
 catalogLink.addEventListener('click', async () => {
   await populateTrendingMovies();
 });
 
-// Saving of clicked Card ID for other functions
 let cardId;
 
 document.addEventListener('click', event => {
