@@ -14,7 +14,7 @@
     font-weight: 500;
     color: var(--light-color);
 
-    z-index: 10;
+    /* z-index: 10; */
     /* margin-bottom: 300px;
     margin-top: 300px */
 }
@@ -51,13 +51,14 @@ body.light .modal-film-info .film-info .close-modal svg {
     margin-top: 8px;
     border-radius: 5px;
 
-    width: 248px;
-    height: 315px;
+    /* width: 248px;
+    height: 315px; */
   }
 
 .modal-film-info .film-info img {
-    width: 248px;
-    height: 315px;
+    object-fit: cover;
+    width: 248px; 
+    height: 315px;  
 }
 
 .modal-film-info .film-info .movie-title {
