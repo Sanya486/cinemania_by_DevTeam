@@ -112,7 +112,6 @@ label {
 :checked + .toggle-wrapper > .selector {
   left: calc(90% - 11.5px);
 }
-
 /* ------------ Mob Menu ---------------- */
 
 .mobile-backdrop {
