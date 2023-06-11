@@ -1,6 +1,10 @@
 /* ======================== MOBILE STYLES ======================== */
 .home-hero {
-  background-color: #111111;
+  background-color: var(--dark-color);
+}
+
+body.light .home-hero {
+  background-color: var(--light-color);
 }
 
 .home-hero-content {
