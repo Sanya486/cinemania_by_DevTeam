@@ -1,11 +1,13 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { fetchTrendingMovies } from '../fetches/fetch-trendings';
+import { fetchTrailers } from '../fetches/fetch-trailer';
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
 import { cardMarkup } from './card-markup';
 
 const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
   trailerModal: document.querySelector('.trailer-modal'),
+  trailerModalContent: document.querySelector('.trailer-modal-content'),
   moreDetail: document.querySelector('.modal-film-info'),
   poster: document.querySelector('.poster-img'),
   title: document.querySelector('.movie-title'),
@@ -17,6 +19,7 @@ const refs = {
   // footer: document.querySelector('.footer'),
   wrap: document.querySelector('.flex'),
   closeModalBtn: document.querySelector('.modal-film-info .close-modal'),
+  closeTrailerBtn: document.querySelector('.close-trailer-btn')
 };
 
 const homeTrendsList = document.querySelector('.home-trends-list');
@@ -121,14 +124,99 @@ async function markupMoreDetails(currentId) {
             <h2>ABOUT</h2>
             <p>${movieDetails.overview}</p>
           </div><div class="btn-list">
-            <button class="main-accent-sml-btn btn modal" id="btn-watch-treiller">Watch trailer</button>
+            <button class="main-accent-sml-btn btn modal" id="btn-watch-treiller" data-id="${currentId}">Watch trailer</button>
             <button class="rm-dark-bcg-btn btn modal" id="btn-add-to-my-library">Add to my library</button>
           </div>
         </div>`;
     refs.wrap.innerHTML = markup;
+
+    const btnatreiller = document.querySelector('#btn-watch-treiller');
+    const btnatlibrary = document.querySelector('#btn-add-to-my-library');
+
+    btnatreiller.addEventListener('click', OnWatchTrailerBtn);
+    btnatlibrary.addEventListener('click', action);
   } catch (error) {
     console.log(error);
   }
 }
 
+
+function OnWatchTrailerBtn(event) {
+  const cardId = +event.target.dataset.id;
+  console.log(cardId)
+  openModal(cardId);
+}
 /* додати клік по бекдропу і закриття*/
+
+function openModal(cardId) {
+  refs.trailerModal.classList.remove('is-hidden');
+
+  // const progress = restoreWatchProgress(cardId);
+  watchTrailer(cardId);
+
+  document.addEventListener('keydown', onEscape);
+  refs.closeTrailerBtn.addEventListener('click', closeModal);
+}
+
+async function watchTrailer(cardId) {
+  try {
+    const trailers = await fetchTrailers(cardId);
+
+    if (trailers.length > 0) {
+      const trailerKey = trailers[0].key;
+
+      const trailerContent = showTrailer(trailerKey);
+      refs.trailerModalContent.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
+      // if (progress) {
+      //   // saveWatchProgress(cardId, progress);
+      // }
+    } else {
+      const errorContent = showError();
+      refs.trailerModal.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
+    }
+  } catch (error) {
+    console.error('Error fetching trailer:', error);
+  }
+}
+function showTrailer(trailerKey) {
+  return `
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  `;
+}
+
+function showError() {
+  return `
+    <div class="trailer-error-info">
+      <p>OOPS...</p>
+      <p>We are very sorry!</p>
+      <p>But we couldn't find the trailer.</p>
+    </div>
+    <picture>
+      <source srcset="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png, 1x, 
+                    ../../images/trailer-placeholder/mobile/trailer-placeholder-2x.png, 2x" 
+              media="(max-width: 320px)">
+      <source srcset="../../images/trailer-placeholder/tablet/trailer-placeholder-1x.png, 1x, 
+                    ../../images/trailer-placeholder/tablet/trailer-placeholder-2x.png, 2x" 
+              media="(max-width: 768px)">
+      <source srcset="../../images/trailer-placeholder/desktop/trailer-placeholder-1x.png, 1x, 
+                    ../../images/trailer-placeholder/desktop/trailer-placeholder-2x.png, 2x" 
+              media="(min-width: 769px)">
+      <img src="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png" alt="Traier is not found">
+    </picture>
+    </div>
+  `;
+}
+
+function onEscape(event) {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+}
+
+function closeModal() {
+  refs.trailerModal.classList.add('is-hidden');
+
+  refs.trailerModalContent.innerHTML = '';
+  document.removeEventListener('keydown', onEscape);
+  refs.closeModalBtn.removeEventListener('click', closeModal);
+}
