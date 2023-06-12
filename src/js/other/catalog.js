@@ -1,4 +1,4 @@
-import { fetchTrendingMovies } from '../fetches/fetch-trending-movies';
+import { fetchTrendingMovies } from '../fetches/fetch-trendings';
 import { cardMarkup } from './card-markup';
 
 const populateTrendingMovies = async () => {
