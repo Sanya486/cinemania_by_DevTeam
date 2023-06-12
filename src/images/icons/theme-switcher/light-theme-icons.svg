@@ -6,7 +6,7 @@
     </symbol>
     <symbol id="big-switch-handle" viewBox="0 0 32 32">
       <path fill="#fff" style="fill:var(--color1, #fff)" d="M27.292 4.708c-6.26-6.26-16.391-6.28-22.627-.043s-6.217 16.367.043 22.627c6.26 6.26 16.391 6.28 22.627.043s6.217-16.367-.043-22.627z"/>
-      <path fill="none" stroke="#000" style="stroke:var(--color2, #000)" stroke-linecap="round" stroke-width="2.133" d="M6.797 6.354c-5.118 5.47-5.099 14.358.043 19.853"/>
+      <path fill="none" stroke="#000" style="stroke:var(--color2, var(--accent-color))" stroke-linecap="round" stroke-width="2.133" d="M6.797 6.354c-5.118 5.47-5.099 14.358.043 19.853"/>
     </symbol>
     <symbol id="small-sun-icon" viewBox="0 0 32 32">
       <path fill="none" stroke="#fff" style="stroke:var(--color1, #fff)" stroke-linejoin="round" stroke-linecap="round" stroke-width="2.327" d="M16.688 22.873c4.735 0 8.574-3.73 8.574-8.331s-3.839-8.331-8.574-8.331c-4.735 0-8.574 3.73-8.574 8.331s3.839 8.331 8.574 8.331z"/>

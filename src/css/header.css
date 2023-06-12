@@ -87,6 +87,12 @@ label {
   transition: all 250ms ease-out;
 }
 
+
+body.light .toggle-wrapper:not(:checked) .handle-icon {
+  transform: rotate(180deg);
+}
+
+
 .handle-icon {
   width: 13.2px;
   height: 13.5px;
