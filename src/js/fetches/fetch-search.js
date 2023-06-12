@@ -30,4 +30,4 @@ const fetchSearch = async (keyword, year) => {
   return response.data.results;
 };
 
-export { fetchSearch };
+export { fetchSearch }; 
