@@ -168,7 +168,7 @@
 
 
 
-// ------------------------------------------------------------------------ //
+// ------------------------- Working code !!! ----------------------------- //
 
 import { cardMarkup } from './card-markup';
 // import { fetchMovieDetails } from '../fetches/fetch-movie-details';
@@ -178,41 +178,60 @@ import {fetchTrendingWeekMovies} from '../fetches/fetch-trendings-week';
 const catalogContainer = document.querySelector('.card-list-search-result');
 
 
-// ------------------ Start catalog cards markup --------------------
+// ------------------ Onload window catalog cards markup ------------------ //
 
 const onLoadCatalog = () => {
-
     const displayWeeklyTrendsCatalog = async () => {
         const trendData = await fetchTrendingWeekMovies();
-
-      console.log(trendData);
-
+      // console.log(trendData);
         const trendFilmList = trendData.weeklyTrendsList;
-
-        console.log(trendFilmList);
-      
+        // console.log(trendFilmList);
         const catalogMovies = await Promise.all(
           trendFilmList.map(async (movie) => {
             const card = await cardMarkup(movie.id);
             return card;
           })
-        );
-      
-        // const catalogTrendsList = document.querySelector('.home-trends-list');
-    
+        );    
         if (catalogContainer) {
           catalogContainer.innerHTML = catalogMovies.join('');
         }
-
-        console.log(catalogContainer);
+        // console.log(catalogContainer);
       };
-      
       displayWeeklyTrendsCatalog();
-
 }
 
 window.addEventListener('load', onLoadCatalog);
 
+// ------------------ Query catalog cards markup by keyword ------------------ //
+import {fetchSearch} from '../fetches/fetch-search';
 
-// ------------------ Query catalog cards markup --------------------
+const searchForm = document.querySelector('.search-form');
+const searchNameInput = document.querySelector('.input-film-name-search-form')
+
+const onSubmit = (event) => {
+  event.preventDefault();
+  const value = searchNameInput.value.trim();
+  console.log(value);
+
+  if (value !== '') {
+
+    const displayQueryFilmCatalog  = async () => {
+      const queryData = await fetchSearch(value);
+      const catalogMovies = await Promise.all(
+        queryData.map(async (movie) => {
+          const card = await cardMarkup(movie.id);
+          return card;
+        })
+      ); 
+      if (catalogContainer) {
+        catalogContainer.innerHTML = catalogMovies.join('');
+      }
+    }
+    displayQueryFilmCatalog(value);
+      };
+     
+}
+searchForm.addEventListener('submit', onSubmit);
+
+// ------------------ Query catalog cards markup by keyword ------------------ //
 
