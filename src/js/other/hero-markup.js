@@ -44,7 +44,7 @@ async function makeMarkUpRandomFilm(films) {
 }
 
 function markUpApiHero(filmInfo) {
-    const { title, overview, smallPoster, poster, voteAverage } = filmInfo;
+    const { title, overview, smallPoster, poster, voteAverage, id } = filmInfo;
     const roundedRating = Math.round(voteAverage);
 
     const quaryRate = rateArray(roundedRating);
@@ -68,8 +68,8 @@ function markUpApiHero(filmInfo) {
       ${overview}
     </p>
     <div class="home-hero-api-movie-btns">
-      <button class="main-accent-sml-btn btn">Watch trailer</button>
-      <button class="rm-light-bcg-btn btn">More details</button>
+    <button class="main-accent-sml-btn btn" id='btn-watch-trailer' data-id="${id}">Watch trailer</button>
+    <button class="rm-light-bcg-btn btn btn-call-film-info" data-id="${id}">More details </button>
     </div>
   </div>
   <div class="home-hero-api-movie-bg">
