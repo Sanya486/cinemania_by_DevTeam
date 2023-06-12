@@ -1,0 +1,106 @@
+/* ================== Pagination ================== */
+.btn + .btn{
+    margin-left: 10px;
+}
+
+
+.tui-pagination .tui-last, .tui-pagination .tui-first{
+    display: none;
+}
+
+.tui-pagination .tui-page-btn{
+    padding: 13px 12px;
+    text-align: center;
+
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--dark-theme-light-text-color);
+    border-radius: 50%;
+
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 14px;
+
+    color: var(--dark-theme-light-text-color);
+}
+
+.tui-pagination .tui-next, .tui-pagination .tui-prev {
+    border: none;
+}
+
+.tui-pagination .tui-prev-is-ellip, .tui-pagination .tui-next-is-ellip {
+    border:none;
+    padding: 9px 13px 15px 13px;
+}
+.tui-pagination .tui-ico-ellip{
+    background: url(../../images/icons/pagination/dots.svg) no-repeat 0 0;
+    background-size: cover; /* Растягивает изображение, чтобы оно покрывало весь фон */
+    background-position: center center; /* Выравнивает изображение по центру горизонтально и вертикально */
+    background-repeat: no-repeat;
+}
+
+
+
+.tui-pagination .tui-is-selected{
+    background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%) !important;
+    border: none;
+}
+
+
+/* ====================== Prev-button ======================*/
+
+.tui-pagination .tui-page-btn.tui-is-disabled.tui-prev {
+    padding: 6px;
+}
+
+.tui-pagination .tui-page-btn.tui-prev {
+    padding: 6px;
+}
+
+.tui-pagination .tui-page-btn.tui-is-disabled.tui-prev div{
+    background: url(../../images/icons/pagination/prev-arrow-disable.svg) no-repeat 0 0;
+    background-size: cover; /* Растягивает изображение, чтобы оно покрывало весь фон */
+    background-position: center center; /* Выравнивает изображение по центру горизонтально и вертикально */
+    background-repeat: no-repeat;
+    width: 28px;
+    height: 28px;
+}
+
+.tui-pagination .tui-page-btn.tui-prev span {
+    background: url(../../images/icons/pagination/prev-arrow-enable.svg) no-repeat 0 0;
+    background-size: cover; /* Растягивает изображение, чтобы оно покрывало весь фон */
+    background-position: center center; /* Выравнивает изображение по центру горизонтально и вертикально */
+    background-repeat: no-repeat;
+    width: 28px;
+    height: 28px;
+}
+
+/* ====================== Next-button ======================*/
+
+.tui-pagination .tui-page-btn.tui-is-disabled.tui-next {
+    padding: 6px;
+}
+
+.tui-pagination .tui-page-btn.tui-next {
+    padding: 6px;
+}
+
+.tui-pagination .tui-page-btn.tui-is-disabled.tui-next div{
+    background: url(../../images/icons/pagination/next-arrow-disable.svg) no-repeat 0 0;
+    background-size: cover; /* Растягивает изображение, чтобы оно покрывало весь фон */
+    background-position: center center; /* Выравнивает изображение по центру горизонтально и вертикально */
+    background-repeat: no-repeat;
+    width: 28px;
+    height: 28px;
+}
+
+.tui-pagination .tui-page-btn.tui-next span {
+    background: url(../../images/icons/pagination/next-arrow-enable.svg) no-repeat 0 0;
+    background-size: cover; /* Растягивает изображение, чтобы оно покрывало весь фон */
+    background-position: center center; /* Выравнивает изображение по центру горизонтально и вертикально */
+    background-repeat: no-repeat;
+    width: 28px;
+    height: 28px;
+}
+
+

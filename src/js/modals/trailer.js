@@ -1,14 +1,13 @@
 import { fetchTrailers } from '../fetches/fetch-trailer';
 
-const modal = document.querySelector('.trailer-modal');
-const closeModalBtn = document.querySelector('.close-modal-btn');
+const modal = document.querySelector('.trailer-modal')
 const watchTrailerBtn = document.getElementById('btn-watch-trailer');
 
-// ЗАКРИТТЯ (ВІДКРИТТЯ) МОДАЛЬНОГО ВІКНА + ВІДНОВЛЕННЯ ПЕРЕГЛЯДУ З МІСЦЯ ЗУПИНКИ
+
 
 let isModalOpen = false;
 
-const openModal = cardId => {                         // --- Наразі не зрозуміло звідки імпортувати cardId --- 
+const openModal = cardId => {                         
   modal.classList.remove('is-hidden');
   isModalOpen = true;
   const progress = restoreWatchProgress(cardId);
@@ -21,18 +20,20 @@ const closeModal = () => {
   modal.innerHTML = '';
 };
 
-// А) через Click поза межами модального вікна
-watchTrailerBtn.addEventListener('click', event => {
+
+watchTrailerBtn.addEventListener('click', OnWatchTrailerBtn);
+
+
+function OnWatchTrailerBtn  (event) {
   event.preventDefault();
   event.stopPropagation();
   const cardId = event.target.dataset.cardId;
   openModal(cardId);
-});
+  const closeModalBtn = document.querySelector('.close-trailer-btn');
+  closeModalBtn.addEventListener('click', closeModal);
+}
 
-// Б) через натискання на кнопку Close
-closeModalBtn.addEventListener('click', closeModal);
 
-// В) через натискання на Escape
 document.addEventListener('keydown', event => {
   if (event.key === 'Escape') {
     closeModal();

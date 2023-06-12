@@ -25,4 +25,5 @@ import "./other/search-block"
 import "./other/scroll-up"
 import './other/catalog'
 // import "./other/test-card-markup"
+import "./other/pagination"
 
