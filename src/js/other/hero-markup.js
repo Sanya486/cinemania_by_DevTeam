@@ -227,16 +227,45 @@ function showError () {
   `;
 };
 
-async function markupMoreDetails (currentId) {
+async function markupMoreDetails(currentId) {
   try {
-  const movieDetails = await fetchMovieDetails(currentId)  
-  refs.poster.src = `https://image.tmdb.org/t/p/original/${movieDetails.smallPoster}`;
-  refs.title.innerHTML = `${movieDetails.title}`; 
-  refs.vote.innerHTML = `${movieDetails.voteAverage}`;
-  refs.votes.innerHTML = `${movieDetails.voteCount}`;
-  refs.popularity.innerHTML = `${movieDetails.popularity}`;
-  refs.genre.innerHTML = `${movieDetails.genres}`;
-  refs.description.innerHTML = `${movieDetails.overview}`;
+    const movieDetails = await fetchMovieDetails(currentId);
+    const markup = `<div class="poster"> 
+          <img src="https://image.tmdb.org/t/p/original/${
+            movieDetails.smallPoster
+          }" class="poster-img" alt="the poster of the movie you have chosen"/>
+        </div><div>
+          <h1 class="movie-title">${
+            movieDetails.title
+          }</h1><div class="movie-info">
+            <div class="info">
+              <ul>
+                <li>Vote / Votes</li>
+                <li>Popularity</li>
+                <li>Genre</li>
+              </ul>
+            </div><div class="params">
+              <ul>
+                <li>
+                  <div class="vote">${movieDetails.voteAverage}</div>
+                  /
+                  <div class="votes">${movieDetails.voteCount}</div>
+                </li>
+                <li><span class="popularity">${movieDetails.popularity.toFixed(
+                  1
+                )}</span></li>
+                <li><span class="genre">${movieDetails.genres}</span></li>  
+              </ul>  
+            </div>
+          </div><div class="about">
+            <h2>ABOUT</h2>
+            <p>${movieDetails.overview}</p>
+          </div><div class="btn-list">
+            <button class="main-accent-sml-btn btn modal" id="btn-watch-treiller">Watch trailer</button>
+            <button class="rm-dark-bcg-btn btn modal" id="btn-add-to-my-library">Add to my library</button>
+          </div>
+        </div>`;
+    refs.wrap.innerHTML = markup;
 
   const btnatreiller = document.querySelector ('#btn-watch-treiller');
   const btnatlibrary = document.querySelector ('#btn-add-to-my-library')
@@ -245,7 +274,7 @@ async function markupMoreDetails (currentId) {
   btnatreiller.addEventListener('click', OnWatchTrailerBtn);
   btnatlibrary .addEventListener('click', action);
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 
