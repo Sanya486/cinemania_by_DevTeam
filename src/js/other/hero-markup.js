@@ -261,7 +261,8 @@ async function markupMoreDetails(currentId) {
             <h2>ABOUT</h2>
             <p>${movieDetails.overview}</p>
           </div><div class="btn-list">
-            <button class="main-accent-sml-btn btn modal" id="btn-watch-treiller">Watch trailer</button>
+            <button class="main-accent-sml-btn btn modal" id="btn-watch-treiller"
+            data-id="${currentId}">Watch trailer</button>
             <button class="rm-dark-bcg-btn btn modal" id="btn-add-to-my-library">Add to my library</button>
           </div>
         </div>`;
