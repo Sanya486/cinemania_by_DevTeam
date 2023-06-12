@@ -25,8 +25,6 @@ watchTrailerBtn.addEventListener('click', OnWatchTrailerBtn);
 
 
 function OnWatchTrailerBtn  (event) {
-  event.preventDefault();
-  event.stopPropagation();
   const cardId = event.target.dataset.cardId;
   openModal(cardId);
   const closeModalBtn = document.querySelector('.close-trailer-btn');
@@ -116,3 +114,5 @@ const restoreWatchProgress = cardId => {
   const progressKey = `watchProgress_${cardId}`;
   return localStorage.getItem(progressKey);
 };
+
+

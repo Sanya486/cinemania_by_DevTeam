@@ -2,9 +2,12 @@ import axios from 'axios';
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
 import {rateArray} from './rate-markup';
 
+import { fetchTrailers } from '../fetches/fetch-trailer';
+
 const refs = {
     heroContainer: document.querySelector('.home-hero > .container'),
 }
+const modal = document.querySelector('.trailer-modal')
 
 const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
 const timeWindow = 'day';
@@ -25,8 +28,11 @@ window.addEventListener('load', onLoadHero);
 async function onLoadHero() {
     try {
         const films = await fetchTrendingDayMovies();
-        makeMarkUpRandomFilm(films);
-        
+        const makeMarkUP = await makeMarkUpRandomFilm(films);
+
+        const watchTrailerBtn = document.getElementById('btn-watch-trailer');
+        watchTrailerBtn.addEventListener('click', OnWatchTrailerBtn);
+
     } catch(error) {
         throw new Error(error.message);
     }
@@ -38,9 +44,11 @@ async function makeMarkUpRandomFilm(films) {
         const randomId = films[randomIndex];
         const filmInfo = await fetchMovieDetails(randomId);
         markUpApiHero(filmInfo);
+        
     } catch(error) {
         throw new Error(error.message);
     }
+
 }
 
 function markUpApiHero(filmInfo) {
@@ -91,3 +99,109 @@ function markUpApiHero(filmInfo) {
     refs.heroContainer.innerHTML = markUp;
     
 }
+
+function OnWatchTrailerBtn  (event) {
+  const cardId = +event.target.dataset.id;
+
+  console.log(cardId)
+
+  openModal(cardId);
+
+  const closeModalBtn = document.querySelector('.close-trailer-btn');
+  closeModalBtn.addEventListener('click', closeModal);
+}
+
+function openModal (cardId) {                         
+  modal.classList.remove('is-hidden');
+  isModalOpen = true;
+  // const progress = restoreWatchProgress(cardId);
+  watchTrailer(cardId);
+
+  document.addEventListener('keydown', onEscape);
+};
+
+function closeModal  () {
+  modal.classList.add('is-hidden');
+  isModalOpen = false;
+  modal.innerHTML = '';
+  document.removeEventListener('keydown', onEscape);
+};
+
+function onEscape (event) {
+  if (event.key === 'Escape') {
+    closeModal();
+  }
+}
+
+async function watchTrailer (cardId) {
+  try {
+    const trailers = await fetchTrailers(cardId);
+
+    if (trailers.length > 0) {
+      const trailerKey = trailers[0].key;
+
+      console.log(trailerKey)
+
+      const trailerContent = showTrailer(trailerKey);
+      modal.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
+      // if (progress) {
+      //   // saveWatchProgress(cardId, progress);
+      // }
+    } else {
+      const errorContent = showError();
+      modal.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
+    }
+  } catch (error) {
+    console.error('Error fetching trailer:', error);
+  }
+};
+function showTrailer (trailerKey){
+  return `
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  `;
+};
+
+function showError () {
+  return `
+    <div class="trailer-error-info">
+      <p>OOPS...</p>
+      <p>We are very sorry!</p>
+      <p>But we couldn't find the trailer.</p>
+    </div>
+    <picture>
+      <source srcset="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png, 1x, 
+                    ../../images/trailer-placeholder/mobile/trailer-placeholder-2x.png, 2x" 
+              media="(max-width: 320px)">
+      <source srcset="../../images/trailer-placeholder/tablet/trailer-placeholder-1x.png, 1x, 
+                    ../../images/trailer-placeholder/tablet/trailer-placeholder-2x.png, 2x" 
+              media="(max-width: 768px)">
+      <source srcset="../../images/trailer-placeholder/desktop/trailer-placeholder-1x.png, 1x, 
+                    ../../images/trailer-placeholder/desktop/trailer-placeholder-2x.png, 2x" 
+              media="(min-width: 769px)">
+      <img src="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png" alt="Traier is not found">
+    </picture>
+    </div>
+  `;
+};
+
+
+// // Функція для збереження місця зупинки в Трейлері
+// function saveWatchProgress (cardId, progress) {
+//   const progressKey = `watchProgress_${cardId}`;
+//   localStorage.setItem(progressKey, progress);
+// };
+
+// // Функція для відновлення перегляду з місця зупинки
+// function restoreWatchProgress (cardId) {
+//   const progressKey = `watchProgress_${cardId}`;
+//   return localStorage.getItem(progressKey);
+// };
+
+
+
+
+
+
+
+
+
