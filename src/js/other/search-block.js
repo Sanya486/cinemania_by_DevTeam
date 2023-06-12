@@ -165,3 +165,54 @@
 // };
 
 // getMovieTrailer(cardId);
+
+
+
+// ------------------------------------------------------------------------ //
+
+import { cardMarkup } from './card-markup';
+// import { fetchMovieDetails } from '../fetches/fetch-movie-details';
+
+import {fetchTrendingWeekMovies} from '../fetches/fetch-trendings-week';
+
+const catalogContainer = document.querySelector('.card-list-search-result');
+
+
+// ------------------ Start catalog cards markup --------------------
+
+const onLoadCatalog = () => {
+
+    const displayWeeklyTrendsCatalog = async () => {
+        const trendData = await fetchTrendingWeekMovies();
+
+      console.log(trendData);
+
+        const trendFilmList = trendData.weeklyTrendsList;
+
+        console.log(trendFilmList);
+      
+        const catalogMovies = await Promise.all(
+          trendFilmList.map(async (movie) => {
+            const card = await cardMarkup(movie.id);
+            return card;
+          })
+        );
+      
+        // const catalogTrendsList = document.querySelector('.home-trends-list');
+    
+        if (catalogContainer) {
+          catalogContainer.innerHTML = catalogMovies.join('');
+        }
+
+        console.log(catalogContainer);
+      };
+      
+      displayWeeklyTrendsCatalog();
+
+}
+
+window.addEventListener('load', onLoadCatalog);
+
+
+// ------------------ Query catalog cards markup --------------------
+

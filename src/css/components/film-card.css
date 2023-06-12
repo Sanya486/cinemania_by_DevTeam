@@ -50,6 +50,7 @@
 .film-wrap{
     display: flex;
     justify-content: space-between;
+    align-items: end;
     margin: 0 auto;
     margin: 0;
 }
