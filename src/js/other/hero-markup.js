@@ -8,6 +8,7 @@ import { fetchTrailers } from '../fetches/fetch-trailer';
 const refs = {
     heroContainer: document.querySelector('.home-hero > .container'),
     trailerModal: document.querySelector('.trailer-modal'),
+    trailerModalContent: document.querySelector('.trailer-modal-content'),
     moreDetail: document.querySelector('.modal-film-info'),
     poster : document.querySelector('.poster-img'),
     title : document.querySelector('.movie-title'),
@@ -16,7 +17,7 @@ const refs = {
     popularity : document.querySelector('.popularity'),
     genre : document.querySelector('.genre'),
     description : document.querySelector('.about p'),
-    footer: document.querySelector('.footer'),
+    closeModalBtn:document.querySelector('.close-trailer-btn'),
 }
 
 const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
@@ -34,6 +35,8 @@ const fetchTrendingDayMovies = async () => {
 };
 
 window.addEventListener('load', onLoadHero);
+
+
 
 async function onLoadHero() {
     try {
@@ -118,19 +121,14 @@ function markUpApiHero(filmInfo) {
 function OnWatchTrailerBtn  (event) {
   const cardId = +event.target.dataset.id;
 
-  console.log(cardId)
-
   openModal(cardId);
-
-  const closeModalBtn = document.querySelector('.close-trailer-btn');
-  closeModalBtn.addEventListener('click', closeModal);
 
 }
 
 function onMoreDetialClick (event) {
 
   const cardId = +event.target.dataset.id;
-  console.log(cardId)
+ 
   openModalDetails(cardId);
 
   const closeModalBtn = document.querySelector('.modal-film-info .close-modal');
@@ -140,30 +138,32 @@ function onMoreDetialClick (event) {
 function openModalDetails (cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
-  
+
   document.addEventListener('keydown', onEscapeMoreDetails);
 }
 
 function openModal (cardId) {                         
   refs.trailerModal.classList.remove('is-hidden');
-  isModalOpen = true;
+
   // const progress = restoreWatchProgress(cardId);
   watchTrailer(cardId);
 
   document.addEventListener('keydown', onEscape);
+  refs.closeModalBtn.addEventListener('click', closeModal);
 };
 
 function closeMoreDetails () {
   refs.moreDetail.classList.add('is-hidden');
-  isModalOpen = false;
+
   document.removeEventListener('keydown', onEscapeMoreDetails);
 }
 
 function closeModal  () {
   refs.trailerModal.classList.add('is-hidden');
-  isModalOpen = false;
-  refs.trailerModal.innerHTML = '';
+
+  refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
+  refs.closeModalBtn.removeEventListener('click', closeModal);
 };
 
 function onEscapeMoreDetails(event){
@@ -185,10 +185,8 @@ async function watchTrailer (cardId) {
     if (trailers.length > 0) {
       const trailerKey = trailers[0].key;
 
-      console.log(trailerKey)
-
       const trailerContent = showTrailer(trailerKey);
-      refs.trailerModal.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
+      refs.trailerModalContent.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
       // if (progress) {
       //   // saveWatchProgress(cardId, progress);
       // }
@@ -231,11 +229,7 @@ function showError () {
 
 async function markupMoreDetails (currentId) {
   try {
-
-  const movieDetails = await fetchMovieDetails(currentId)
-  console.log(movieDetails)
-  console.log(refs.poster)
-  console.log(refs.footer)    
+  const movieDetails = await fetchMovieDetails(currentId)  
   refs.poster.src = `https://image.tmdb.org/t/p/original/${movieDetails.smallPoster}`;
   refs.title.innerHTML = `${movieDetails.title}`; 
   refs.vote.innerHTML = `${movieDetails.voteAverage}`;
@@ -244,10 +238,11 @@ async function markupMoreDetails (currentId) {
   refs.genre.innerHTML = `${movieDetails.genres}`;
   refs.description.innerHTML = `${movieDetails.overview}`;
 
-  const btnwtreiller = document.querySelector ('#btn-watch-treiller');
+  const btnatreiller = document.querySelector ('#btn-watch-treiller');
   const btnatlibrary = document.querySelector ('#btn-add-to-my-library')
 
-  btnwtreiller.addEventListener('click', action);
+
+  btnatreiller.addEventListener('click', OnWatchTrailerBtn);
   btnatlibrary .addEventListener('click', action);
   } catch (error) {
     console.log(error)
