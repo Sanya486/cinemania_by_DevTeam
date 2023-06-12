@@ -20,6 +20,7 @@ import "./modals/slider-modal-team"
 import "./other/rate-markup"
 import "./other/card-markup"
 import "./other/switch-theme-btn"
+import "./other/hero-markup"
 
 import "./other/mob-menu"
 import "./other/slide-menu"
