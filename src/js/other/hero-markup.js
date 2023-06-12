@@ -6,18 +6,19 @@ import { fetchTrailers } from '../fetches/fetch-trailer';
 
 
 const refs = {
-    heroContainer: document.querySelector('.home-hero > .container'),
-    trailerModal: document.querySelector('.trailer-modal'),
-    moreDetail: document.querySelector('.modal-film-info'),
-    poster : document.querySelector('.poster-img'),
-    title : document.querySelector('.movie-title'),
-    vote : document.querySelector('.vote'),
-    votes : document.querySelector('.votes'),
-    popularity : document.querySelector('.popularity'),
-    genre : document.querySelector('.genre'),
-    description : document.querySelector('.about p'),
-    footer: document.querySelector('.footer'),
-}
+  heroContainer: document.querySelector('.home-hero > .container'),
+  trailerModal: document.querySelector('.trailer-modal'),
+  moreDetail: document.querySelector('.modal-film-info'),
+  poster: document.querySelector('.poster-img'),
+  title: document.querySelector('.movie-title'),
+  vote: document.querySelector('.vote'),
+  votes: document.querySelector('.votes'),
+  popularity: document.querySelector('.popularity'),
+  genre: document.querySelector('.genre'),
+  description: document.querySelector('.about p'),
+  footer: document.querySelector('.footer'),
+  wrap: document.querySelector('.flex'),
+};
 
 const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
 const timeWindow = 'day';
@@ -229,28 +230,47 @@ function showError () {
   `;
 };
 
-async function markupMoreDetails (currentId) {
+async function markupMoreDetails(currentId) {
   try {
-
-  const movieDetails = await fetchMovieDetails(currentId)
-  console.log(movieDetails)
-  console.log(refs.poster)
-  console.log(refs.footer)    
-  refs.poster.src = `https://image.tmdb.org/t/p/original/${movieDetails.smallPoster}`;
-  refs.title.innerHTML = `${movieDetails.title}`; 
-  refs.vote.innerHTML = `${movieDetails.voteAverage}`;
-  refs.votes.innerHTML = `${movieDetails.voteCount}`;
-  refs.popularity.innerHTML = `${movieDetails.popularity}`;
-  refs.genre.innerHTML = `${movieDetails.genres}`;
-  refs.description.innerHTML = `${movieDetails.overview}`;
-
-  const btnwtreiller = document.querySelector ('#btn-watch-treiller');
-  const btnatlibrary = document.querySelector ('#btn-add-to-my-library')
-
-  btnwtreiller.addEventListener('click', action);
-  btnatlibrary .addEventListener('click', action);
+    const movieDetails = await fetchMovieDetails(currentId);
+    const markup = `<div class="poster"> 
+          <img src="https://image.tmdb.org/t/p/original/${
+            movieDetails.smallPoster
+          }" class="poster-img" alt="the poster of the movie you have chosen"/>
+        </div><div>
+          <h1 class="movie-title">${
+            movieDetails.title
+          }</h1><div class="movie-info">
+            <div class="info">
+              <ul>
+                <li>Vote / Votes</li>
+                <li>Popularity</li>
+                <li>Genre</li>
+              </ul>
+            </div><div class="params">
+              <ul>
+                <li>
+                  <div class="vote">${movieDetails.voteAverage}</div>
+                  /
+                  <div class="votes">${movieDetails.voteCount}</div>
+                </li>
+                <li><span class="popularity">${movieDetails.popularity.toFixed(
+                  1
+                )}</span></li>
+                <li><span class="genre">${movieDetails.genres}</span></li>  
+              </ul>  
+            </div>
+          </div><div class="about">
+            <h2>ABOUT</h2>
+            <p>${movieDetails.overview}</p>
+          </div><div class="btn-list">
+            <button class="main-accent-sml-btn btn modal" id="btn-watch-treiller">Watch trailer</button>
+            <button class="rm-dark-bcg-btn btn modal" id="btn-add-to-my-library">Add to my library</button>
+          </div>
+        </div>`;
+    refs.wrap.innerHTML = markup;
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
 }
 
