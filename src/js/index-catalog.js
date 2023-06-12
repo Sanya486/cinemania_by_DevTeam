@@ -21,6 +21,8 @@ import "./modals/slider-modal-team"
 import "./other/mob-menu"
 import "./other/slide-menu"
 import "./other/current-page-track"
-// import "./other/scroll-up"
-// import "./other/test-card-markup"
 import "./other/search-block"
+import "./other/scroll-up"
+import './other/catalog'
+// import "./other/test-card-markup"
+
