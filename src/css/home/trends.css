@@ -63,6 +63,21 @@ body.light .home-trends{
 body.light .home-trends-title {
   color: var(--dark-color);
 }
+.home-trends-card-poster{
+  position: relative;
+    justify-content: flex-start;
+    align-items: flex-start;
+    box-sizing: border-box;
+    transition-property: 0.5 ease;
+    max-width: 395px;
+      max-height: 574px;
+      border-radius: 5px;
+}
+
+.home-trends-card-poster:hover {
+  transform: scale(1.01);
+  box-shadow: 1px 1px 5px 1px rgba(255, 107, 8, 0.42);
+  }
 
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
