@@ -12,7 +12,7 @@ import "./fetches/fetch-trendings";
 import "./modals/modal-team"
 import "./modals/slider-modal-team"
 // import "./modals/film-info"
-import "./modals/trailer"
+// import "./modals/trailer"
 
 // =============Other-JS =============
 
