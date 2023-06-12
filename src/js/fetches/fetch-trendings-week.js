@@ -12,6 +12,7 @@ const fetchTrendingWeekMovies = async () => {
    const weeklyTrendsData = {
     weeklyPage: response.data.page,
     weeklyTrendsList: response.data.results,
+    // weeklyTrendsListYears: response.data.results.release_date,
     weeklyTrendsPages: response.data.total_pages,
     weeklyTrendsTotal: response.data.total_results,    
    };

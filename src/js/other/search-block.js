@@ -173,9 +173,13 @@
 import { cardMarkup } from './card-markup';
 // import { fetchMovieDetails } from '../fetches/fetch-movie-details';
 
+import { addYears } from './sort-films-years';
+
 import {fetchTrendingWeekMovies} from '../fetches/fetch-trendings-week';
 
 const catalogContainer = document.querySelector('.card-list-search-result');
+
+const yearCatalog = document.querySelector('.year-of-film-search-form');
 
 
 // ------------------ Onload window catalog cards markup ------------------ //
@@ -188,6 +192,8 @@ const onLoadCatalog = () => {
         // console.log(trendFilmList);
         const catalogMovies = await Promise.all(
           trendFilmList.map(async (movie) => {
+            // addYears();
+            // console.log(addYears);
             const card = await cardMarkup(movie.id);
             return card;
           })
@@ -195,6 +201,10 @@ const onLoadCatalog = () => {
         if (catalogContainer) {
           catalogContainer.innerHTML = catalogMovies.join('');
         }
+        if (yearCatalog) {
+          yearCatalog.innerHTML = addYears();
+        }
+
         // console.log(catalogContainer);
       };
       displayWeeklyTrendsCatalog();
@@ -204,21 +214,28 @@ window.addEventListener('load', onLoadCatalog);
 
 // ------------------ Query catalog cards markup by keyword ------------------ //
 import {fetchSearch} from '../fetches/fetch-search';
+// import flatpickr from 'flatpickr';
+// import 'flatpickr/dist/flatpickr.min.css';
 
 const searchForm = document.querySelector('.search-form');
 const searchNameInput = document.querySelector('.input-film-name-search-form')
 
 const onSubmit = (event) => {
   event.preventDefault();
-  const value = searchNameInput.value.trim();
-  console.log(value);
+  const inputValue = searchNameInput.value.trim();
+  console.log(inputValue);
 
-  if (value !== '') {
+  if (inputValue !== '') {
 
     const displayQueryFilmCatalog  = async () => {
-      const queryData = await fetchSearch(value);
+      const queryData = await fetchSearch(inputValue, );
+      console.log(queryData);
       const catalogMovies = await Promise.all(
         queryData.map(async (movie) => {
+
+          const year = new Date().getFullYear();
+          console.log(year);
+
           const card = await cardMarkup(movie.id);
           return card;
         })
@@ -227,11 +244,12 @@ const onSubmit = (event) => {
         catalogContainer.innerHTML = catalogMovies.join('');
       }
     }
-    displayQueryFilmCatalog(value);
+    displayQueryFilmCatalog(inputValue);
       };
      
 }
 searchForm.addEventListener('submit', onSubmit);
 
 // ------------------ Query catalog cards markup by keyword ------------------ //
+
 
