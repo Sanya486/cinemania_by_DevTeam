@@ -1,43 +1,22 @@
 import { fetchTrendingMovies } from '../fetches/fetch-trendings';
+import { cardMarkup } from './card-markup';
 
-const trendsList = document.querySelector('.home-trends-list');
+const displayWeeklyTrends = async () => {
+  const movies = await fetchTrendingMovies();
 
-function createMovieCard(movie) {
-  const card = document.createElement('li');
-  card.classList.add('home-trends-item');
-  
-  const poster = movie.poster_path;
-  const title = movie.title;
+  const firstThreeMovies = movies.slice(0, 3);
 
-  const markup = `
-    <div class="home-trends-card">
-      <img class="home-trends-card-poster" loading="lazy" src="https://image.tmdb.org/t/p/original/${poster}" alt="${title}">
-      <h3 class="home-trends-title">${title}</h3>
-      
-      
+  const movieCards = await Promise.all(
+    firstThreeMovies.map(async (movie) => {
+      const card = await cardMarkup(movie.id);
+      return card;
+    })
+  );
 
-    </div>
-
-     `;
-
-  
-  
-  card.innerHTML = markup;
-  return card;
-}
-
-function renderMovieCards(movies) {
-  const movieCards = movies.slice(0, 3).map(createMovieCard);
-  movieCards.forEach(card => trendsList.appendChild(card));
-}
-
-async function fetchAndRenderTrendingMovies() {
-  try {
-    const trendingMovies = await fetchTrendingMovies();
-    renderMovieCards(trendingMovies);
-  } catch (error) {
-    console.log(error.message);
+  const homeTrendsList = document.querySelector('.home-trends-list');
+  if (homeTrendsList) {
+    homeTrendsList.innerHTML = movieCards.join('');
   }
-}
+};
 
-fetchAndRenderTrendingMovies();
+displayWeeklyTrends();
