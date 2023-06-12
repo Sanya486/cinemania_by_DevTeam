@@ -4,10 +4,20 @@ import {rateArray} from './rate-markup';
 
 import { fetchTrailers } from '../fetches/fetch-trailer';
 
+
 const refs = {
     heroContainer: document.querySelector('.home-hero > .container'),
+    trailerModal: document.querySelector('.trailer-modal'),
+    moreDetail: document.querySelector('.modal-film-info'),
+    poster : document.querySelector('.poster-img'),
+    title : document.querySelector('.movie-title'),
+    vote : document.querySelector('.vote'),
+    votes : document.querySelector('.votes'),
+    popularity : document.querySelector('.popularity'),
+    genre : document.querySelector('.genre'),
+    description : document.querySelector('.about p'),
+    footer: document.querySelector('.footer'),
 }
-const modal = document.querySelector('.trailer-modal')
 
 const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
 const timeWindow = 'day';
@@ -33,10 +43,15 @@ async function onLoadHero() {
         const watchTrailerBtn = document.getElementById('btn-watch-trailer');
         watchTrailerBtn.addEventListener('click', OnWatchTrailerBtn);
 
+        const moreDetailBtn = document.querySelector('.btn-call-film-info');
+        moreDetailBtn.addEventListener('click', onMoreDetialClick);
+
     } catch(error) {
         throw new Error(error.message);
     }
 }
+
+
 
 async function makeMarkUpRandomFilm(films) {
     try {
@@ -109,10 +124,28 @@ function OnWatchTrailerBtn  (event) {
 
   const closeModalBtn = document.querySelector('.close-trailer-btn');
   closeModalBtn.addEventListener('click', closeModal);
+
+}
+
+function onMoreDetialClick (event) {
+
+  const cardId = +event.target.dataset.id;
+  console.log(cardId)
+  openModalDetails(cardId);
+
+  const closeModalBtn = document.querySelector('.modal-film-info .close-modal');
+  closeModalBtn.addEventListener('click', closeMoreDetails);
+}
+
+function openModalDetails (cardId) {
+  refs.moreDetail.classList.remove('is-hidden');
+  markupMoreDetails(cardId);
+  
+  document.addEventListener('keydown', onEscapeMoreDetails);
 }
 
 function openModal (cardId) {                         
-  modal.classList.remove('is-hidden');
+  refs.trailerModal.classList.remove('is-hidden');
   isModalOpen = true;
   // const progress = restoreWatchProgress(cardId);
   watchTrailer(cardId);
@@ -120,12 +153,24 @@ function openModal (cardId) {
   document.addEventListener('keydown', onEscape);
 };
 
-function closeModal  () {
-  modal.classList.add('is-hidden');
+function closeMoreDetails () {
+  refs.moreDetail.classList.add('is-hidden');
   isModalOpen = false;
-  modal.innerHTML = '';
+  document.removeEventListener('keydown', onEscapeMoreDetails);
+}
+
+function closeModal  () {
+  refs.trailerModal.classList.add('is-hidden');
+  isModalOpen = false;
+  refs.trailerModal.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
 };
+
+function onEscapeMoreDetails(event){
+  if (event.key === 'Escape') {
+    closeMoreDetails();
+  }
+}
 
 function onEscape (event) {
   if (event.key === 'Escape') {
@@ -143,13 +188,13 @@ async function watchTrailer (cardId) {
       console.log(trailerKey)
 
       const trailerContent = showTrailer(trailerKey);
-      modal.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
+      refs.trailerModal.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
       // if (progress) {
       //   // saveWatchProgress(cardId, progress);
       // }
     } else {
       const errorContent = showError();
-      modal.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
+      refs.trailerModal.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
     }
   } catch (error) {
     console.error('Error fetching trailer:', error);
@@ -184,18 +229,31 @@ function showError () {
   `;
 };
 
+async function markupMoreDetails (currentId) {
+  try {
 
-// // Функція для збереження місця зупинки в Трейлері
-// function saveWatchProgress (cardId, progress) {
-//   const progressKey = `watchProgress_${cardId}`;
-//   localStorage.setItem(progressKey, progress);
-// };
+  const movieDetails = await fetchMovieDetails(currentId)
+  console.log(movieDetails)
+  console.log(refs.poster)
+  console.log(refs.footer)    
+  refs.poster.src = `https://image.tmdb.org/t/p/original/${movieDetails.smallPoster}`;
+  refs.title.innerHTML = `${movieDetails.title}`; 
+  refs.vote.innerHTML = `${movieDetails.voteAverage}`;
+  refs.votes.innerHTML = `${movieDetails.voteCount}`;
+  refs.popularity.innerHTML = `${movieDetails.popularity}`;
+  refs.genre.innerHTML = `${movieDetails.genres}`;
+  refs.description.innerHTML = `${movieDetails.overview}`;
 
-// // Функція для відновлення перегляду з місця зупинки
-// function restoreWatchProgress (cardId) {
-//   const progressKey = `watchProgress_${cardId}`;
-//   return localStorage.getItem(progressKey);
-// };
+  const btnwtreiller = document.querySelector ('#btn-watch-treiller');
+  const btnatlibrary = document.querySelector ('#btn-add-to-my-library')
+
+  btnwtreiller.addEventListener('click', action);
+  btnatlibrary .addEventListener('click', action);
+  } catch (error) {
+    console.log(error)
+  }
+}
+
 
 
 
