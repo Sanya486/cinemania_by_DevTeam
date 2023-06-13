@@ -1,5 +1,9 @@
 /* ======================== MOBILE STYLES ======================== */
 
+body.light .container-library {
+  color: var(--dark-color);
+}
+
 .container-library {
   padding-top: 44px;
   padding-right: 20px;
@@ -8,9 +12,14 @@
 
   text-align: center;
   font-size: 20px;
+  color: var(--light-color);
 
-  background-color: #fff;
   line-height: 1.4;
+}
+
+.container.library {
+  padding-top: 140px;
+  padding-bottom: 60px;
 }
 
 .library-empty__mistake {
