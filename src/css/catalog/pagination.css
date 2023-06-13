@@ -1,4 +1,29 @@
 /* ================== Pagination ================== */
+
+
+
+.tui-pagination {
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+@media screen and (min-width:768px)  {
+    .tui-pagination {
+        margin-top: 44px;
+        margin-bottom: 60px;
+    }
+    
+}
+
+
+@media screen and (min-width:1280px)  {
+    .tui-pagination {
+        margin-top: 60;
+        margin-bottom: 100px;
+    }
+    
+}
+
 .btn + .btn{
     margin-left: 10px;
 }
@@ -34,8 +59,8 @@
 }
 .tui-pagination .tui-ico-ellip{
     background: url(../../images/icons/pagination/dots.svg) no-repeat 0 0;
-    background-size: cover; /* Растягивает изображение, чтобы оно покрывало весь фон */
-    background-position: center center; /* Выравнивает изображение по центру горизонтально и вертикально */
+    background-size: cover; 
+    background-position: center center; 
     background-repeat: no-repeat;
 }
 
@@ -59,8 +84,8 @@
 
 .tui-pagination .tui-page-btn.tui-is-disabled.tui-prev div{
     background: url(../../images/icons/pagination/prev-arrow-disable.svg) no-repeat 0 0;
-    background-size: cover; /* Растягивает изображение, чтобы оно покрывало весь фон */
-    background-position: center center; /* Выравнивает изображение по центру горизонтально и вертикально */
+    background-size: cover; 
+    background-position: center center; 
     background-repeat: no-repeat;
     width: 28px;
     height: 28px;
@@ -68,8 +93,8 @@
 
 .tui-pagination .tui-page-btn.tui-prev span {
     background: url(../../images/icons/pagination/prev-arrow-enable.svg) no-repeat 0 0;
-    background-size: cover; /* Растягивает изображение, чтобы оно покрывало весь фон */
-    background-position: center center; /* Выравнивает изображение по центру горизонтально и вертикально */
+    background-size: cover; 
+    background-position: center center; 
     background-repeat: no-repeat;
     width: 28px;
     height: 28px;
@@ -87,8 +112,8 @@
 
 .tui-pagination .tui-page-btn.tui-is-disabled.tui-next div{
     background: url(../../images/icons/pagination/next-arrow-disable.svg) no-repeat 0 0;
-    background-size: cover; /* Растягивает изображение, чтобы оно покрывало весь фон */
-    background-position: center center; /* Выравнивает изображение по центру горизонтально и вертикально */
+    background-size: cover; 
+    background-position: center center; 
     background-repeat: no-repeat;
     width: 28px;
     height: 28px;
@@ -96,8 +121,8 @@
 
 .tui-pagination .tui-page-btn.tui-next span {
     background: url(../../images/icons/pagination/next-arrow-enable.svg) no-repeat 0 0;
-    background-size: cover; /* Растягивает изображение, чтобы оно покрывало весь фон */
-    background-position: center center; /* Выравнивает изображение по центру горизонтально и вертикально */
+    background-size: cover; 
+    background-position: center center; 
     background-repeat: no-repeat;
     width: 28px;
     height: 28px;

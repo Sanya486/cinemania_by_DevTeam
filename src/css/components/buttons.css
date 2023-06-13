@@ -150,6 +150,7 @@
 
 #back-to-top {
     position: fixed;
+    z-index: 999;
     right: 30px;
     bottom: 10px;
     width: 50px;

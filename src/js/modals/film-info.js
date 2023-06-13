@@ -52,9 +52,6 @@ const refs = {
 async function markupMoreDetails(currentId) {
   try {
     const movieDetails = await fetchMovieDetails(currentId);
-    console.log(movieDetails);
-    console.log(refs.poster);
-    console.log(refs.footer);
     refs.poster.src = `https://image.tmdb.org/t/p/original/${movieDetails.smallPoster}`;
     refs.title.innerHTML = `${movieDetails.title}`;
     refs.vote.innerHTML = `${movieDetails.voteAverage}`;
