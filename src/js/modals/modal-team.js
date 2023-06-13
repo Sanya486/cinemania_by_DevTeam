@@ -51,6 +51,7 @@
       refs.modal.classList.toggle('is-hidden');
       if (refs.modal.classList.contains('is-hidden')) {
         enableBodyScroll();
+        refs.scrollUpBtn.style.display = 'block';
       } else {
         disableBodyScroll();
       }
