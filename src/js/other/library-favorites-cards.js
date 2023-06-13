@@ -6,7 +6,7 @@ const loadMoreBtn = document.querySelector('#loadMore');
 const librariesKey = 'films-id-array';
 const moviesLocalId = JSON.parse(localStorage.getItem(librariesKey)) || [];
 
-localStorage.clear();
+// localStorage.clear();
 
 renderCards();
 
