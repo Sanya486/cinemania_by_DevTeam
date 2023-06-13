@@ -16,10 +16,10 @@ const refs = {
   wrap: document.querySelector('.flex'),
 };
 
-const libraryCardList = document.querySelector('.card-list-search-result');
 const sectionLibrary = document.querySelector('.library-film-list');
+const libraryCardList = document.querySelector('.card-list-search-result');
+const loadMoreBtn = document.querySelector('#js-loadmore');
 const librariesKey = 'films-id-array';
-// const moviesLocalId = JSON.parse(localStorage.getItem(librariesKey)) || [];
 
 let arr = [];
 let cardId;
@@ -29,6 +29,18 @@ let localArr = localStorage.getItem(librariesKey);
 refs.closeModalBtn.addEventListener('click', closeMoreDetails);
 window.addEventListener('load', renderCards);
 
+const perPage = 9;
+let page = 1;
+
+function showMoreCards() {
+  return JSON.parse(localArr).length > perPage * page;
+}
+
+loadMoreBtn.addEventListener('click', () => {
+  page += 1;
+  renderCards();
+});
+
 function renderCards() {
   if (localArr === null || JSON.parse(localArr).length === 0) {
     const emptyLibrary = `<div class="container-library container">
@@ -37,12 +49,19 @@ function renderCards() {
     </div>`;
     sectionLibrary.innerHTML = emptyLibrary;
   } else {
-    const renderPromises = JSON.parse(localArr).map(id => renderFilmCard(id));
+    const renderPromises = JSON.parse(localArr)
+      .slice((page - 1) * perPage, page * perPage)
+      .map(id => cardMarkup(id));
 
     Promise.all(renderPromises)
       .then(filmCards => {
         const filmCardsHTML = filmCards.join('');
-        libraryCardList.innerHTML = filmCardsHTML;
+        libraryCardList.innerHTML += filmCardsHTML;
+        if (showMoreCards()) {
+          loadMoreBtn.style.display = 'block';
+        } else {
+          loadMoreBtn.style.display = 'none';
+        }
         onAddEventListener();
       })
       .catch(error => {
@@ -226,12 +245,12 @@ function onCheckLocalStorage() {
 
 function action() {
   closeMoreDetails();
-  localArr = localStorage.getItem('films-id-array');
+  localArr = localStorage.getItem(librariesKey);
   try {
     if (localArr === null) {
       arr.push(cardId);
-      localStorage.setItem('films-id-array', JSON.stringify(arr));
-      localArr = localStorage.getItem('films-id-array');
+      localStorage.setItem(librariesKey, JSON.stringify(arr));
+      localArr = localStorage.getItem(librariesKey);
       toggleBtnStyles('Remove from my library');
       renderCards();
       return;
@@ -240,8 +259,8 @@ function action() {
 
     if (!parseLocalStorage.includes(cardId)) {
       parseLocalStorage.push(cardId);
-      localStorage.setItem('films-id-array', JSON.stringify(parseLocalStorage));
-      localArr = localStorage.getItem('films-id-array');
+      localStorage.setItem(librariesKey, JSON.stringify(parseLocalStorage));
+      localArr = localStorage.getItem(librariesKey);
       toggleBtnStyles('Remove from my library');
       renderCards();
       return;
@@ -249,8 +268,8 @@ function action() {
     if (parseLocalStorage.includes(cardId)) {
       const idx = parseLocalStorage.indexOf(cardId);
       parseLocalStorage.splice(idx, 1);
-      localStorage.setItem('films-id-array', JSON.stringify(parseLocalStorage));
-      localArr = localStorage.getItem('films-id-array');
+      localStorage.setItem(librariesKey, JSON.stringify(parseLocalStorage));
+      localArr = localStorage.getItem(librariesKey);
       toggleBtnStyles('Add to my library');
       renderCards();
     }
