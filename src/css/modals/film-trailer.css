@@ -62,11 +62,11 @@ body.light .trailer-modal {
 }
 
 body.light .close-trailer-btn {
-  color: var(--dark-color);
+  stroke: var(--dark-color);
 }
 
 .close-trailer-btn:is(:hover, :focus) {
-  color: var(--accent-color);
+  stroke: var(--accent-color);
 }
 
 /* ERROR MODE */
