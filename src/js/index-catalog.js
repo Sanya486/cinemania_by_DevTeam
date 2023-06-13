@@ -12,11 +12,15 @@ import "./fetches/fetch-trendings-week";
 
 import "./modals/modal-team"
 import "./modals/slider-modal-team"
-// import "./modals/film-info"
+
 
 // =============Other-JS =============
 
 // import "./other/card-markup"
+// import "./other/test-card-markup"
+
+
+import "./other/hero-markup"
 import "./other/switch-theme-btn"
 import "./other/mob-menu"
 import "./other/slide-menu"
@@ -24,6 +28,5 @@ import "./other/current-page-track"
 import "./other/search-block"
 import "./other/scroll-up"
 import './other/catalog'
-// import "./other/test-card-markup"
 import "./other/pagination"
 

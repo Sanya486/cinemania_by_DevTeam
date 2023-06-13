@@ -81,7 +81,6 @@
         rgba(0, 0, 0, 0) 63.48%,
         rgba(0, 0, 0, 0.9) 92.16%
       ),
-      url('../../images/library-hero/desktop/library-hero-1x.jpg');
   }
 
   @media (min-device-pixel-ratio: 2),
@@ -93,7 +92,6 @@
           rgba(0, 0, 0, 0) 63.48%,
           rgba(0, 0, 0, 0.9) 92.16%
         ),
-        url('../../images/library-hero/desktop/library-hero-2x.jpg');
     }
   }
 

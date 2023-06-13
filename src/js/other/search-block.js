@@ -177,6 +177,10 @@ import { addYears } from './sort-films-years';
 
 import {fetchTrendingWeekMovies} from '../fetches/fetch-trendings-week';
 
+import Pagination from 'tui-pagination';
+
+
+
 const catalogContainer = document.querySelector('.card-list-search-result');
 
 const yearCatalog = document.querySelector('.year-of-film-search-form');
@@ -184,33 +188,37 @@ const yearCatalog = document.querySelector('.year-of-film-search-form');
 
 // ------------------ Onload window catalog cards markup ------------------ //
 
-const onLoadCatalog = () => {
-    const displayWeeklyTrendsCatalog = async () => {
-        const trendData = await fetchTrendingWeekMovies();
-      // console.log(trendData);
-        const trendFilmList = trendData.weeklyTrendsList;
-        // console.log(trendFilmList);
-        const catalogMovies = await Promise.all(
-          trendFilmList.map(async (movie) => {
-            // addYears();
-            // console.log(addYears);
-            const card = await cardMarkup(movie.id);
-            return card;
-          })
-        );    
-        if (catalogContainer) {
-          catalogContainer.innerHTML = catalogMovies.join('');
-        }
-        if (yearCatalog) {
-          yearCatalog.innerHTML = addYears();
-        }
+const displayWeeklyTrendsCatalog = async (page) => {
+  const trendData = await fetchTrendingWeekMovies();
+console.log(trendData);
+  const trendFilmList = trendData.weeklyTrendsList;
+  // console.log(trendFilmList);
+  const catalogMovies = await Promise.all(
+    trendFilmList.map(async (movie) => {
+      // addYears();
+      // console.log(addYears);
+      const card = await cardMarkup(movie.id);
+      return card;
+    })
+  );    
+  if (catalogContainer) {
+    catalogContainer.innerHTML = catalogMovies.join('');
+  }
+  if (yearCatalog) {
+    yearCatalog.innerHTML = addYears();
+  }
+  pagination(
+    {totalItems: trendData.weeklyTrendsTotal,
+      itemsPerPage: trendData.weeklyTrendsList.length
+    })
 
-        // console.log(catalogContainer);
-      };
-      displayWeeklyTrendsCatalog();
-}
 
-window.addEventListener('load', onLoadCatalog);
+  // console.log(catalogContainer);
+};
+
+window.addEventListener('load', displayWeeklyTrendsCatalog);
+
+
 
 // ------------------ Query catalog cards markup by keyword ------------------ //
 import {fetchSearch} from '../fetches/fetch-search';
@@ -226,30 +234,100 @@ const onSubmit = (event) => {
   console.log(inputValue);
 
   if (inputValue !== '') {
-
-    const displayQueryFilmCatalog  = async () => {
-      const queryData = await fetchSearch(inputValue, );
-      console.log(queryData);
-      const catalogMovies = await Promise.all(
-        queryData.map(async (movie) => {
-
-          const year = new Date().getFullYear();
-          console.log(year);
-
-          const card = await cardMarkup(movie.id);
-          return card;
-        })
-      ); 
-      if (catalogContainer) {
-        catalogContainer.innerHTML = catalogMovies.join('');
-      }
-    }
     displayQueryFilmCatalog(inputValue);
       };
      
 }
 searchForm.addEventListener('submit', onSubmit);
 
-// ------------------ Query catalog cards markup by keyword ------------------ //
+const displayQueryFilmCatalog  = async () => {
+  const queryData = await fetchSearch(inputValue, );
+  console.log(queryData);
+  const catalogMovies = await Promise.all(
+    queryData.map(async (movie) => {
 
+      const year = new Date().getFullYear();
+      console.log(year);
+
+      const card = await cardMarkup(movie.id);
+      return card;
+    })
+  ); 
+  if (catalogContainer) {
+    catalogContainer.innerHTML = catalogMovies.join('');
+  }
+}
+
+function pagination ({totalItems, itemsPerPage}) {
+  const refs = {
+    tuiPaginationEl: document.querySelector('#pagination')
+}
+
+function formatPageNumber(pageNumber) {
+    return pageNumber.toString().padStart(2, '0');
+  }  
+
+
+const options = {
+    totalItems,
+    itemsPerPage,
+    visiblePages: 3,
+    page: 1,
+    centerAlign: false,
+    firstItemClassName: 'tui-first-child',
+    lastItemClassName: 'tui-last-child',
+    template: {
+        page: function (data) {
+            const currentPage = data.page; 
+            const pageNumber = formatPageNumber(currentPage); 
+            return `<span class="tui-page-btn btn">${pageNumber}</span>`;
+          },
+      currentPage: function (data) {
+        const cuurentPage = data.page;
+        const pageNumber = formatPageNumber(cuurentPage); 
+        return `<strong class="tui-page-btn tui-is-selected btn">${pageNumber}</strong>`;
+      },    
+
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}">' +
+          '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<div class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+          '<div class="tui-ico-{{type}}">{{type}}</div>' +
+        '</div>',
+      moreButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip btn">' +
+          '<span class="tui-ico-ellip">...</span>' +
+        '</a>'
+    },
+    
+  };
+  
+  const pagination = new Pagination('pagination', options);
+
+  pagination.on('afterMove', async function(eventData) {
+      const trendData = await fetchTrendingWeekMovies(eventData.page);
+      const trendFilmList = trendData.weeklyTrendsList;
+   
+      const catalogMovies = await Promise.all(
+        trendFilmList.map(async (movie) => {
+          // addYears();
+          // console.log(addYears);
+          const card = await cardMarkup(movie.id);
+          return card;
+        })
+      );    
+      if (catalogContainer) {
+        catalogContainer.innerHTML = catalogMovies.join('');
+      }
+      if (yearCatalog) {
+        yearCatalog.innerHTML = addYears();
+      }
+
+      scroll({top: 880, behavior: 'smooth'})
+});
+}
+
+// ------------------ Query catalog cards markup by keyword ------------------ //
 
