@@ -175,6 +175,8 @@ body.light .home-hero {
   background: var(--dark-color);
   border: none;
   display: inline-block;
+  box-shadow: 1px 1px 14px 4px #ff6b086b;
+  transition: box-shadow 250ms var(--action-transition);
 }
 
 .home-hero-api-movie-btns .rm-light-bcg-btn {
@@ -189,6 +191,8 @@ body.light .home-hero {
   color: var(--accent-color);
   background: black;
   border: 1px solid #111;
+  box-shadow: 1px 1px 14px 4px #ff6b086b;
+  transition: box-shadow 250ms var(--action-transition);
 }
 
 .film-rating-hero {
@@ -227,6 +231,8 @@ body.light .home-hero {
   background: var(--dark-color);
   border: none;
   display: inline-block;
+  box-shadow: 1px 1px 14px 4px #ff6b086b;
+  transition: box-shadow 250ms var(--action-transition);
 }
 
 /* ======================== TABLET STYLES ======================== */

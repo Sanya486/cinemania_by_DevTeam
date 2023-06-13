@@ -35,38 +35,48 @@ import { fetchMovieDetails } from '../fetches/fetch-movie-details';
 //     };
 // };
 
-  let currentId = 2023;
+  // let currentId = 2023;
 
   const refs = {
-    poster : document.querySelector('.poster img'),
+    poster : document.querySelector('.poster-img'),
     title : document.querySelector('.movie-title'),
     vote : document.querySelector('.vote'),
     votes : document.querySelector('.votes'),
     popularity : document.querySelector('.popularity'),
     genre : document.querySelector('.genre'),
     description : document.querySelector('.about p'),
-    btnwtreiller : document.querySelector ('#btn-watch-treiller'),
-    btnatlibrary : document.querySelector ('#btn-add-to-my-library'),
+    footer: document.querySelector('.footer')
   };
 
-  refs.btnwtreiller.addEventListener('click', action);
-  refs.btnatlibrary .addEventListener('click', action);
+  
 
-  fetchMovieDetails(currentId)
-  .then(response => {
-    refs.poster.src = `https://image.tmdb.org/t/p/original/${response.smallPoster}`;
-    refs.title.innerHTML = `${response.title}`; 
-    refs.vote.innerHTML = `${response.voteAverage}`;
-    refs.votes.innerHTML = `${response.voteCount}`;
-    refs.popularity.innerHTML = `${response.popularity}`;
-    refs.genre.innerHTML = `${response.genres}`;
-    refs.description.innerHTML = `${response.overview}`;
-  })
-  .catch(error => console.log(error));
 
-  function action() {
-    return currentId
-  };
+async function markupMoreDetails (currentId) {
+    try {
 
-  export { action }
+    const movieDetails = await fetchMovieDetails(currentId)
+    console.log(movieDetails)
+    console.log(refs.poster)
+    console.log(refs.footer)    
+    refs.poster.src = `https://image.tmdb.org/t/p/original/${movieDetails.smallPoster}`;
+    refs.title.innerHTML = `${movieDetails.title}`; 
+    refs.vote.innerHTML = `${movieDetails.voteAverage}`;
+    refs.votes.innerHTML = `${movieDetails.voteCount}`;
+    refs.popularity.innerHTML = `${movieDetails.popularity}`;
+    refs.genre.innerHTML = `${movieDetails.genres}`;
+    refs.description.innerHTML = `${movieDetails.overview}`;
+
+    const btnwtreiller = document.querySelector ('#btn-watch-treiller');
+    const btnatlibrary = document.querySelector ('#btn-add-to-my-library')
+
+    btnwtreiller.addEventListener('click', action);
+    btnatlibrary .addEventListener('click', action);
+    } catch (error) {
+      console.log(error)
+    }
+}
+
+
+
+  export { markupMoreDetails }
 

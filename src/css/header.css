@@ -87,11 +87,9 @@ label {
   transition: all 250ms ease-out;
 }
 
-
 body.light .toggle-wrapper:not(:checked) .handle-icon {
   transform: rotate(180deg);
 }
-
 
 .handle-icon {
   width: 13.2px;
@@ -125,7 +123,7 @@ body.light .toggle-wrapper:not(:checked) .handle-icon {
   top: 0;
   left: 0;
   overflow-y: auto;
-  z-index: 1;
+  z-index: 3;
 
   width: 100%;
   height: 100%;
@@ -267,17 +265,16 @@ body.light .toggle-wrapper:not(:checked) .handle-icon {
   }
 
   .selector {
-  top: 3px;
-  left:3.5px;
-  right: 3.5px;
+    top: 3px;
+    left: 3.5px;
+    right: 3.5px;
 
-  transform: translateY(-2.5%);
+    transform: translateY(-2.5%);
+  }
 
-}
-
-:checked + .toggle-wrapper > .selector {
-  left: calc(90% - 16px);
-}
+  :checked + .toggle-wrapper > .selector {
+    left: calc(90% - 16px);
+  }
 
   .handle-icon {
     width: 18px;
@@ -285,20 +282,20 @@ body.light .toggle-wrapper:not(:checked) .handle-icon {
   }
 
   .moon-icon {
-  margin-top: 5px;
-  margin-left: 4px;
+    margin-top: 5px;
+    margin-left: 4px;
 
-  width: 13px;
-  height: 13px;
-}
+    width: 13px;
+    height: 13px;
+  }
 
-.sun-icon {
-  margin-top: 5px;
-  margin-right: 5px;
+  .sun-icon {
+    margin-top: 5px;
+    margin-right: 5px;
 
-  width: 14px;
-  height: 14px;
-}
+    width: 14px;
+    height: 14px;
+  }
   .mob-menu-btn {
     display: none;
   }

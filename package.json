@@ -4,7 +4,7 @@
   "description": "",
   "homepage": "https://github.com/Sanya486/cinemania_by_DevTeam",
   "scripts": {
-    "start": "parcel src/*.html",
+    "start": "parcel src/*.html --port 9999",
     "build": "parcel build src/*.html --public-url /cinemania_by_DevTeam/"
   },
   "repository": {
@@ -24,10 +24,12 @@
     "@parcel/transformer-sass": "^2.6.0",
     "axios": "^1.4.0",
     "buffer": "^6.0.3",
+    "flatpickr": "^4.6.13",
     "notiflix": "^3.2.6",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
-    "posthtml-include": "^1.7.4"
+    "posthtml-include": "^1.7.4",
+    "tui-pagination": "^3.4.1"
   },
   "browserslist": "> 0.5%, last 2 versions, not dead"
 }

@@ -11,8 +11,8 @@ import "./fetches/fetch-trendings";
 
 import "./modals/modal-team"
 import "./modals/slider-modal-team"
-// import "./modals/film-info"
-
+import "./modals/film-info"
+// import "./modals/trailer"
 
 // =============Other-JS =============
 
@@ -20,6 +20,7 @@ import "./modals/slider-modal-team"
 import "./other/rate-markup"
 import "./other/card-markup"
 import "./other/switch-theme-btn"
+import "./other/hero-markup"
 
 import "./other/mob-menu"
 import "./other/slide-menu"

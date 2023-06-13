@@ -3,7 +3,10 @@
       openModalBtns: document.querySelectorAll('[data-modal-team-open]'),
       closeModalBtn: document.querySelector('[data-modal-team-close]'),
       modal: document.querySelector('[data-modal-team]'),
+      modalBackdrop: document.querySelector('[data-modal-team]'),
     };
+
+
   
     const disableBodyScroll = () => {
       document.body.style.overflow = 'hidden';
@@ -16,12 +19,27 @@
     refs.openModalBtns.forEach(btn => {
       btn.addEventListener('click', modalInteraction);
     });
+
     refs.closeModalBtn.addEventListener('click', modalInteraction);
+    window.addEventListener('keydown', handleKeyDown);
+    refs.modalBackdrop.addEventListener('click', handleClickOutside);
+
 
     function modalInteraction(event) {
         event.preventDefault();
-
         toggleModal();
+      }
+
+    function handleKeyDown(event) {
+      if (event.key === 'Escape' && !refs.modal.classList.contains('is-hidden')) {
+        toggleModal();
+      }
+    }
+
+    function handleClickOutside(event) {
+      if (event.target === refs.modalBackdrop) {
+        toggleModal();
+      }
     }
   
     function toggleModal() {

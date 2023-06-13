@@ -1,10 +1,23 @@
 /* ======================== MOBILE STYLES ======================== */
 
+.modal-film-info{
+    z-index: 5;
+    width: 100%;
+    height: 100%;
+    opacity: 1;
+    transition: all 250ms var(--action-transition);
+    background-color: #0009;
+    position: fixed;
+    top: 0;
+    left: 0;
+    overflow: auto;
+}
+
 .modal-film-info .film-info {
     position: relative;
     padding: 20px 16px 52px 16px;
 
-    background-color: inherit;
+    background-color: #111;
     border-radius: 16px;
     box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
 
