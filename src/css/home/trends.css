@@ -75,9 +75,17 @@ body.light .home-trends-title {
   box-shadow: 1px 1px 5px 1px rgba(255, 107, 8, 0.42);
   }
 
+  .home-trends .film-card + .film-card {
+    margin-top: 16px;
+  }
+
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
+  .home-trends .film-card + .film-card {
+    margin-top: 0;
+  }
+  
   .home-trends {
     padding-top: 52px;
     padding-bottom: 44px;
