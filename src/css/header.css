@@ -72,7 +72,7 @@ label {
   background: var(--linear-gradient-first);
   border-radius: 194px;
   border: none;
-  cursor: pointer;
+  cursor: url('../images/cursors/cursor-pointer.svg'), pointer;
   pointer-events: all;
 }
 
