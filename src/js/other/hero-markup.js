@@ -46,6 +46,27 @@ const fetchTrendingDayMovies = async () => {
 
 window.addEventListener('load', onLoadHero);
 
+//////---------------------------
+function createPreloader() {
+  const preloader = document.createElement('div');
+  preloader.classList.add('preloader');
+  return preloader;
+}
+
+function showPreloader() {
+  const preloader = createPreloader();
+  refs.heroContainer.prepend(preloader);
+}
+
+function hidePreloader() {
+  const preloader = document.querySelector('.preloader');
+  if (preloader) {
+    preloader.remove();
+  }
+}
+
+//////---------------------------
+
 async function onLoadHero() {
   try {
     const films = await fetchTrendingDayMovies();
@@ -117,7 +138,9 @@ function markUpApiHero(filmInfo) {
     </div>
     </div>`;
 
-  refs.heroContainer.innerHTML = markUp;
+  // refs.heroContainer.innerHTML = markUp;
+  refs.heroContainer.insertAdjacentHTML('beforeend', markUp);
+  hidePreloader();
 }
 
 function OnWatchTrailerBtn(event) {
@@ -142,7 +165,6 @@ function openModalDetails(cardId) {
   markupMoreDetails(cardId);
 
   document.addEventListener('keydown', onEscapeMoreDetails);
-
 }
 
 function openModal(cardId) {
@@ -227,9 +249,7 @@ function showErrorModal() {
   `;
   trailerErrorImage.classList.remove('is-hidden');
   refs.trailerModalContent.innerHTML = errorContent;
-
 }
-
 
 async function markupMoreDetails(currentId) {
   try {
