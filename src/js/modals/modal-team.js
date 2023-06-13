@@ -4,6 +4,7 @@
       closeModalBtn: document.querySelector('[data-modal-team-close]'),
       modal: document.querySelector('[data-modal-team]'),
       modalBackdrop: document.querySelector('[data-modal-team]'),
+      scrollUpBtn: document.querySelector('#back-to-top'),
     };
 
 
@@ -28,6 +29,10 @@
     function modalInteraction(event) {
         event.preventDefault();
         toggleModal();
+
+        if(!refs.modal.classList.contains('is-hidden')) {
+          refs.scrollUpBtn.style.display = 'none';
+        }
       }
 
     function handleKeyDown(event) {
