@@ -93,6 +93,19 @@ function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
+  refs.moreDetail.addEventListener('click', function(e) {
+    closeOnBackdropClick(e, closeMoreDetails)
+  })
+
+}
+
+function closeOnBackdropClick (e, callback){
+  if (e.target !== e.currentTarget){
+    return 
+  }
+  else {
+    callback();
+  }
 }
 
 function closeMoreDetails() {
