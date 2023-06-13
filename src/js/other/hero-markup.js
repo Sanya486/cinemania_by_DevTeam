@@ -165,9 +165,11 @@ function openModalDetails(cardId) {
   markupMoreDetails(cardId);
 
   document.addEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.addEventListener('click', function(e) {
-    closeOnBackdropClick(e, closeMoreDetails)
-  })
+  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails)
+}
+
+function closeOnBacdropMoreDetails (e) {
+  closeOnBackdropClick(e, closeMoreDetails)
 }
 
 function openModal(cardId) {
@@ -179,9 +181,11 @@ function openModal(cardId) {
 
   document.addEventListener('keydown', onEscape);
   refs.closeModalBtn.addEventListener('click', closeModal);
-  refs.trailerModal.addEventListener('click', function(e) {
-    closeOnBackdropClick(e, closeModal)
-  })
+  refs.trailerModal.addEventListener('click', closeBackdropOnwWatchTrailer)
+}
+
+function closeBackdropOnwWatchTrailer  (e) {
+  closeOnBackdropClick(e, closeModal)
 }
 
 function closeOnBackdropClick (e, callback){
@@ -197,6 +201,7 @@ function closeMoreDetails() {
   refs.moreDetail.classList.add('is-hidden');
 
   document.removeEventListener('keydown', onEscapeMoreDetails);
+  refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails)
 }
 
 function closeModal() {
@@ -206,6 +211,7 @@ function closeModal() {
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeModal);
+  refs.trailerModal.removeEventListener('click', closeBackdropOnwWatchTrailer)
 }
 
 function onEscapeMoreDetails(event) {

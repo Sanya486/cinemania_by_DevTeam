@@ -17,8 +17,6 @@ const refs = {
   scrollUpBtn: document.querySelector('#back-to-top'),
 };
 
-console.log(refs.closeModalBtn);
-
 let arr = [];
 let cardId;
 let btnatlibrary;
@@ -80,10 +78,13 @@ function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.addEventListener('click', function(e) {
-    closeOnBackdropClick(e, closeMoreDetails)
-  })
+  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails)
 }
+
+function closeOnBacdropMoreDetails (e) {
+  closeOnBackdropClick(e, closeMoreDetails)
+}
+
 
 function closeOnBackdropClick (e, callback){
   if (e.target !== e.currentTarget){
@@ -97,6 +98,7 @@ function closeOnBackdropClick (e, callback){
 function closeMoreDetails() {
   refs.moreDetail.classList.add('is-hidden');
   document.removeEventListener('keydown', onEscapeMoreDetails);
+  refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails)
   refs.body.style.overflow = 'auto';
 }
 
@@ -189,11 +191,16 @@ async function watchTrailer(cardId) {
     console.error('Error fetching trailer:', error);
   }
 }
-
 function showTrailer(trailerKey) {
-  return `
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-  `;
+  if (viewportWidth <= 767) {
+    return `
+      <iframe width="250" height="160" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    `;
+  } else {
+    return `
+      <iframe width="600" height="300" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    `;
+  }
 }
 
 function showError() {
@@ -231,6 +238,7 @@ function closeModal() {
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeModal);
+  refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails)
 }
 
 function onCheckLocalStorage() {

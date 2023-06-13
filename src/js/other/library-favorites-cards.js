@@ -120,11 +120,26 @@ function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
+  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails)
+}
+
+function closeOnBacdropMoreDetails (e) {
+  closeOnBackdropClick(e, closeMoreDetails)
+}
+
+function closeOnBackdropClick (e, callback){
+  if (e.target !== e.currentTarget){
+    return 
+  }
+  else {
+    callback();
+  }
 }
 
 function closeMoreDetails() {
   refs.moreDetail.classList.add('is-hidden');
   document.removeEventListener('keydown', onEscapeMoreDetails);
+  refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails);
   refs.body.style.overflow = 'auto';
 }
 
@@ -198,7 +213,10 @@ function openModal(cardId) {
 
   document.addEventListener('keydown', onEscape);
   refs.closeTrailerBtn.addEventListener('click', closeModal);
+
 }
+
+
 
 async function watchTrailer(cardId) {
   try {
@@ -259,6 +277,7 @@ function closeModal() {
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeModal);
+
 }
 
 function onCheckLocalStorage() {
