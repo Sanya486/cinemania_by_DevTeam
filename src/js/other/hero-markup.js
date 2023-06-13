@@ -165,6 +165,9 @@ function openModalDetails(cardId) {
   markupMoreDetails(cardId);
 
   document.addEventListener('keydown', onEscapeMoreDetails);
+  refs.moreDetail.addEventListener('click', function(e) {
+    closeOnBackdropClick(e, closeMoreDetails)
+  })
 }
 
 function openModal(cardId) {
@@ -176,6 +179,18 @@ function openModal(cardId) {
 
   document.addEventListener('keydown', onEscape);
   refs.closeModalBtn.addEventListener('click', closeModal);
+  refs.trailerModal.addEventListener('click', function(e) {
+    closeOnBackdropClick(e, closeModal)
+  })
+}
+
+function closeOnBackdropClick (e, callback){
+  if (e.target !== e.currentTarget){
+    return 
+  }
+  else {
+    callback();
+  }
 }
 
 function closeMoreDetails() {
