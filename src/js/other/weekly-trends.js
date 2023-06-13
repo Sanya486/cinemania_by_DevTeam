@@ -9,23 +9,19 @@ const refs = {
   trailerModal: document.querySelector('.trailer-modal'),
   trailerModalContent: document.querySelector('.trailer-modal-content'),
   moreDetail: document.querySelector('.modal-film-info'),
-  poster: document.querySelector('.poster-img'),
-  title: document.querySelector('.movie-title'),
-  vote: document.querySelector('.vote'),
-  votes: document.querySelector('.votes'),
-  popularity: document.querySelector('.popularity'),
-  genre: document.querySelector('.genre'),
-  // description: document.querySelector('.about p'),
-  // footer: document.querySelector('.footer'),
   wrap: document.querySelector('.flex'),
   closeModalBtn: document.querySelector('.modal-film-info .close-modal'),
-  closeTrailerBtn: document.querySelector('.close-trailer-btn')
+  closeTrailerBtn: document.querySelector('.close-trailer-btn'),
+  homeTrendsList: document.querySelector('.home-trends-list'),
 };
 
-const homeTrendsList = document.querySelector('.home-trends-list');
+let arr = [];
+let cardId;
+let btnatlibrary;
+let localArr = localStorage.getItem('films-id-array');
+
 window.addEventListener('load', onLoad);
 refs.closeModalBtn.addEventListener('click', closeMoreDetails);
-
 
 async function onLoad() {
   try {
@@ -49,7 +45,7 @@ async function onRenderMarkup(randomFilmsArr) {
         return card;
       })
     );
-    homeTrendsList.innerHTML = movieCards.join('');
+    refs.homeTrendsList.innerHTML = movieCards.join('');
     onAddEventListener();
   } catch (error) {
     console.log(error.message);
@@ -67,24 +63,22 @@ function onAddEventListener() {
   for (const card of cardsArrRef) {
     card.addEventListener('click', onClick);
   }
-  console.log(cardsArrRef);
 }
 
 function onClick(e) {
   e.preventDefault();
-  const cardId = +e.currentTarget.id;
+  cardId = +e.currentTarget.id;
   openModalDetails(cardId);
-
 }
 
 function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
-
+console.log(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
 }
 
-function closeMoreDetails () {
+function closeMoreDetails() {
   refs.moreDetail.classList.add('is-hidden');
   isModalOpen = false;
   document.removeEventListener('keydown', onEscapeMoreDetails);
@@ -100,9 +94,13 @@ async function markupMoreDetails(currentId) {
   try {
     const movieDetails = await fetchMovieDetails(currentId);
     const markup = `<div class="poster"> 
-          <img src="https://image.tmdb.org/t/p/original/${movieDetails.smallPoster}" class="poster-img" alt="the poster of the movie you have chosen"/>
+          <img src="https://image.tmdb.org/t/p/original/${
+            movieDetails.smallPoster
+          }" class="poster-img" alt="the poster of the movie you have chosen"/>
         </div><div>
-          <h1 class="movie-title">${movieDetails.title}</h1><div class="movie-info">
+          <h1 class="movie-title">${
+            movieDetails.title
+          }</h1><div class="movie-info">
             <div class="info">
               <ul>
                 <li>Vote / Votes</li>
@@ -116,7 +114,9 @@ async function markupMoreDetails(currentId) {
                   /
                   <div class="votes">${movieDetails.voteCount}</div>
                 </li>
-                <li><span class="popularity">${movieDetails.popularity}</span></li>
+                <li><span class="popularity">${movieDetails.popularity.toFixed(
+                  1
+                )}</span></li>
                 <li><span class="genre">${movieDetails.genres}</span></li>  
               </ul>  
             </div>
@@ -131,27 +131,25 @@ async function markupMoreDetails(currentId) {
     refs.wrap.innerHTML = markup;
 
     const btnatreiller = document.querySelector('#btn-watch-treiller');
-    const btnatlibrary = document.querySelector('#btn-add-to-my-library');
+    btnatlibrary = document.querySelector('#btn-add-to-my-library');
 
     btnatreiller.addEventListener('click', OnWatchTrailerBtn);
     btnatlibrary.addEventListener('click', action);
+
+    onCheckLocalStorage();
   } catch (error) {
     console.log(error);
   }
 }
 
-
 function OnWatchTrailerBtn(event) {
   const cardId = +event.target.dataset.id;
-  console.log(cardId)
+  console.log(cardId);
   openModal(cardId);
 }
-/* додати клік по бекдропу і закриття*/
 
 function openModal(cardId) {
   refs.trailerModal.classList.remove('is-hidden');
-
-  // const progress = restoreWatchProgress(cardId);
   watchTrailer(cardId);
 
   document.addEventListener('keydown', onEscape);
@@ -167,9 +165,6 @@ async function watchTrailer(cardId) {
 
       const trailerContent = showTrailer(trailerKey);
       refs.trailerModalContent.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
-      // if (progress) {
-      //   // saveWatchProgress(cardId, progress);
-      // }
     } else {
       const errorContent = showError();
       refs.trailerModal.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
@@ -178,6 +173,7 @@ async function watchTrailer(cardId) {
     console.error('Error fetching trailer:', error);
   }
 }
+
 function showTrailer(trailerKey) {
   return `
     <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
@@ -219,4 +215,47 @@ function closeModal() {
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeModal);
+}
+
+function onCheckLocalStorage() {
+  if (JSON.parse(localArr).includes(cardId)) {
+    toggleBtnStyles('Remove from my library');
+  }
+  if (localArr === null) {
+    toggleBtnStyles('Add to my library');
+  }
+}
+
+function action() {
+  try {
+    if (localArr === null) {
+      arr.push(cardId);
+      localStorage.setItem('films-id-array', JSON.stringify(arr));
+      localArr = localStorage.getItem('films-id-array');
+      toggleBtnStyles('Remove from my library');
+      return;
+    }
+    let parseLocalStorage = JSON.parse(localArr);
+
+    if (!parseLocalStorage.includes(cardId)) {
+      parseLocalStorage.push(cardId);
+      localStorage.setItem('films-id-array', JSON.stringify(parseLocalStorage));
+      localArr = localStorage.getItem('films-id-array');
+      toggleBtnStyles('Remove from my library');
+      return;
+    }
+    if (parseLocalStorage.includes(cardId)) {
+      const idx = parseLocalStorage.indexOf(cardId);
+      parseLocalStorage.splice(idx, 1);
+      localStorage.setItem('films-id-array', JSON.stringify(parseLocalStorage));
+      localArr = localStorage.getItem('films-id-array');
+      toggleBtnStyles('Add to my library');
+    }
+  } catch (error) {
+    Notify.failure('Please, try one more time');
+  }
+}
+
+function toggleBtnStyles(text) {
+  btnatlibrary.textContent = text;
 }
