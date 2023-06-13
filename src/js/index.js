@@ -23,7 +23,6 @@ import "./other/switch-theme-btn"
 import "./other/hero-markup"
 
 import "./other/mob-menu"
-import "./other/slide-menu"
 import "./other/current-page-track"
 import "./other/scroll-up"
 import "./other/weekly-trends.js"
