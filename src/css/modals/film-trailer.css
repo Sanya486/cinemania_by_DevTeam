@@ -37,31 +37,13 @@
   width: 280px;
   height: 289px;
   background: var(--dark-color);
-  border-radius: 20px;
+  border-radius: 16px;
   box-shadow: 1px 1px 14px 4px rgba(255, 107, 8, 0.42);
   transition: var(--action-transition);
 }
 
 body.light .trailer-modal {
   background: var(--light-color);
-}
-
-.trailer-modal-content {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 24px;
-}
-
-.trailer-error-info {
-  font-size: 16px;
-  line-height: 1.19;
-  font-weight: var(--medium);
-  color: var(--light-color);
-}
-
-body.light .trailer-error-info {
-  color: var(--dark-color);
 }
 
 .close-trailer-btn {
@@ -83,27 +65,66 @@ body.light .close-trailer-btn {
   color: var(--dark-color);
 }
 
+.close-trailer-btn:is(:hover, :focus) {
+  color: var(--accent-color);
+}
+
+/* ERROR MODE */
+
+.trailer-error-mode-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap:24px;
+}
+
+.trailer-error-info {
+  font-size: 16px;
+  line-height: calc(18.75 / 16);
+  font-weight: var(--regular);
+  color: var(--light-color);
+}
+
+body.light .trailer-error-info {
+  color: var(--dark-color);
+}
+
+.trailer-placeholder-default{
+  width:159px;
+
+}
+
+
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
   .trailer-modal {
     width: 700px;
     height: 400px;
-   
+    padding: 28px;
   }
 
-  .trailer-modal-content {
-    height: 100%;
+  .trailer-error-mode-content {
     display: flex;
-    justify-content: center;
+    flex-direction: row;
+    align-items: center;
+    gap:0px;
   }
 
+  .trailer-error-info{
+    margin-left: 32px;
+    min-width: 321px;
+    font-size: 24px;
+    line-height: calc(28.13 / 24);
+  }
 
+.error-img-placeholder{
+margin-top: 100px;
+}
 
-  .trailer-modal-content img {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
+  .trailer-placeholder-default{
+    width:363px;
+  
   }
 }
 
@@ -113,11 +134,8 @@ body.light .close-trailer-btn {
   .trailer-modal {
     width: 700px;
     height: 400px;
+    border-radius: 20px;
   
   }
-
-  .close-trailer-btn {
-    margin-right: 0;
-    margin-left: auto;
-  }
+ 
 }
