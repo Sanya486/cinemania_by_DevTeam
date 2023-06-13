@@ -8,8 +8,8 @@ const refs = {
 };
 let filmInfo;
 let arr = [];
-let localArr = localStorage.getItem('films-id-array');
 let btnRef;
+let localArr = localStorage.getItem('films-id-array');
 
 window.addEventListener('load', onLoadPage);
 let portrait = window.matchMedia('(orientation: portrait)');
@@ -149,6 +149,7 @@ function onCheckLocalStorage() {
 }
 
 function onAddIdFilmInLocaleStorage() {
+  localArr = localStorage.getItem('films-id-array');
   try {
     if (localArr === null) {
       arr.push(filmInfo.id);

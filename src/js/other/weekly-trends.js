@@ -13,6 +13,8 @@ const refs = {
   closeModalBtn: document.querySelector('.modal-film-info .close-modal'),
   closeTrailerBtn: document.querySelector('.close-trailer-btn'),
   homeTrendsList: document.querySelector('.home-trends-list'),
+  body: document.querySelector('body'),
+  scrollUpBtn: document.querySelector('#back-to-top'),
 };
 
 let arr = [];
@@ -69,12 +71,12 @@ function onClick(e) {
   e.preventDefault();
   cardId = +e.currentTarget.id;
   openModalDetails(cardId);
+  refs.body.style.overflow = 'hidden';
+  refs.scrollUpBtn.style.display = 'none';
 }
-
 function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
-console.log(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
 }
 
@@ -82,6 +84,7 @@ function closeMoreDetails() {
   refs.moreDetail.classList.add('is-hidden');
   isModalOpen = false;
   document.removeEventListener('keydown', onEscapeMoreDetails);
+  refs.body.style.overflow = 'auto';
 }
 
 function onEscapeMoreDetails(e) {
@@ -98,34 +101,35 @@ async function markupMoreDetails(currentId) {
             movieDetails.smallPoster
           }" class="poster-img" alt="the poster of the movie you have chosen"/>
         </div><div>
-          <h1 class="movie-title">${
+          <h3 class="movie-title">${
             movieDetails.title
-          }</h1><div class="movie-info">
+          }</h3><div class="movie-info">
             <div class="info">
-              <ul>
-                <li>Vote / Votes</li>
-                <li>Popularity</li>
-                <li>Genre</li>
+              <ul class="film-info-list">
+                <li><p class="film-info-item-text">Vote / Votes</p></li>
+                <li><p class="film-info-item-text">Popularity</p></li>
+                <li><p class="film-info-item-text">Genre</p></li>
               </ul>
             </div><div class="params">
-              <ul>
-                <li>
-                  <div class="vote">${movieDetails.voteAverage}</div>
-                  /
-                  <div class="votes">${movieDetails.voteCount}</div>
+              <ul class="film=info-params-list">
+                <li><p class="film-info-params-vote"><span class="film-info-params-vote-number">${
+                  movieDetails.voteAverage.toFixed(1)
+                }</span> / <span class="film-info-params-vote-number">${
+      movieDetails.voteCount
+    }</span></p>
                 </li>
-                <li><span class="popularity">${movieDetails.popularity.toFixed(
+                <li><p class="popularity">${movieDetails.popularity.toFixed(
                   1
-                )}</span></li>
-                <li><span class="genre">${movieDetails.genres}</span></li>  
+                )}</p></li>
+                <li><p class="genre">${movieDetails.genres}</p></li>  
               </ul>  
             </div>
           </div><div class="about">
-            <h2>ABOUT</h2>
+            <p>About</p>
             <p>${movieDetails.overview}</p>
           </div><div class="btn-list">
             <button class="main-accent-sml-btn btn modal" id="btn-watch-treiller" data-id="${currentId}">Watch trailer</button>
-            <button class="rm-dark-bcg-btn btn modal" id="btn-add-to-my-library">Add to my library</button>
+            <button class="add-to-my-library-btn btn modal" id="btn-add-to-my-library">Add to my library</button>
           </div>
         </div>`;
     refs.wrap.innerHTML = markup;
@@ -144,7 +148,6 @@ async function markupMoreDetails(currentId) {
 
 function OnWatchTrailerBtn(event) {
   const cardId = +event.target.dataset.id;
-  console.log(cardId);
   openModal(cardId);
 }
 
@@ -227,6 +230,7 @@ function onCheckLocalStorage() {
 }
 
 function action() {
+  localArr = localStorage.getItem('films-id-array');
   try {
     if (localArr === null) {
       arr.push(cardId);

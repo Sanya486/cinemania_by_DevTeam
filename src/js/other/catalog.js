@@ -1,11 +1,22 @@
 import { fetchTrendingMovies } from '../fetches/fetch-trendings';
 import { cardMarkup } from './card-markup';
+import { fetchTrailers } from '../fetches/fetch-trailer';
+import { fetchMovieDetails } from '../fetches/fetch-movie-details';
+import { cardMarkup } from './card-markup';
 
-const populateTrendingMovies = async () => {
+let arr = [];
+let cardId;
+let btnatlibrary;
+let localArr = localStorage.getItem('films-id-array');
+
+window.addEventListener('load', populateTrendingMovies);
+
+async function populateTrendingMovies ()  {
   try {
     const trendingMovies = await fetchTrendingMovies();
     const cardList = document.querySelector('.card-list-search-result');
     let allFilmCards = '';
+    console.log(trendingMovies);
 
     for (const movie of trendingMovies) {
       try {
@@ -17,23 +28,9 @@ const populateTrendingMovies = async () => {
     }
 
     cardList.insertAdjacentHTML('beforeend', allFilmCards);
+    onAddEventListener();
   } catch (error) {
-    console.log(error);
   }
 };
-
-const catalogLink = document.querySelector('.header-catalog');
-catalogLink.addEventListener('click', async () => {
-  await populateTrendingMovies();
-});
-
-let cardId;
-
-document.addEventListener('click', event => {
-  const clickedMovieCard = event.target.closest('.film-card');
-  if (clickedMovieCard) {
-    cardId = clickedMovieCard.getAttribute('id');
-  }
-});
 
 export { cardId };
