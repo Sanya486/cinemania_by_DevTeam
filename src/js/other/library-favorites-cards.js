@@ -6,7 +6,7 @@ const loadMoreBtn = document.querySelector('#loadMore');
 const librariesKey = 'films-id-array';
 const moviesLocalId = JSON.parse(localStorage.getItem(librariesKey)) || [];
 
-// localStorage.clear();
+localStorage.clear();
 
 renderCards();
 
@@ -14,9 +14,9 @@ function renderCards() {
   console.log('moviesLocalId ', moviesLocalId);
 
   if (moviesLocalId.length === 0) {
-    const emptyLibrary = `<div class="container">
+    const emptyLibrary = `<div class="container-library container">
       <p class="library-empty__mistake">OOPS... <br> We are very sorry! <br> You don't have any movies at your library.</p>
-      <a class="btn-library__link" onclick="window.location.href='catalog.html'">Search movie</a>
+      <button class="main-accent-sml-btn btn library" onclick="window.location.href='catalog.html'">Search movie</button>
     </div>`;
     sectionLibrary.innerHTML = emptyLibrary;
   } else {
