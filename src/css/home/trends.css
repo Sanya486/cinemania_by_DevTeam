@@ -108,4 +108,12 @@ body.light .home-trends-title {
   .home-trends-wrap {
     margin-bottom: 28px;
   }
+
+  .film-card {
+    transition: box-shadow 250ms var(--action-transition);
+  }
+
+  .film-card:hover {
+    box-shadow: 1px 1px 14px 4px #ff6b086b;
+  }
 }

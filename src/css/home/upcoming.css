@@ -159,7 +159,8 @@ body.light .home-upcoming-film-info-rating-number {
 }
 
 body.light .remove-js {
-  background: linear-gradient(var(--light-color), var(--light-color)) padding-box,
+  background: linear-gradient(var(--light-color), var(--light-color))
+      padding-box,
     var(--linear-gradient-first) border-box;
   color: var(--dark-color);
 }

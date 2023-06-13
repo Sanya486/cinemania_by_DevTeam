@@ -39,4 +39,11 @@ body.light .container-library {
 /* ======================== DESKTOP STYLES ======================== */
 @media screen and (min-width: 1280px) {
   /* .container прописувати не потрібно */
+  .main-accent-sml-btn.library {
+    transition: box-shadow 250ms var(--action-transition);
+  }
+
+  .main-accent-sml-btn.library:hover {
+    box-shadow: 1px 1px 14px 4px #ff6b086b;
+  }
 }
