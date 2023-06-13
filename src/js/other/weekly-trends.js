@@ -24,6 +24,7 @@ let localArr = localStorage.getItem('films-id-array');
 
 window.addEventListener('load', onLoad);
 refs.closeModalBtn.addEventListener('click', closeMoreDetails);
+const viewportWidth = document.body.clientWidth;
 
 async function onLoad() {
   try {

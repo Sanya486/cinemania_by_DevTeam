@@ -4,16 +4,16 @@ import { rateArray } from './rate-markup';
 /* Function expects film's ID and returns finished markup of film's card */
 
 const cardMarkup = async movieId => {
+  try {
   const details = await fetchMovieDetails(movieId)
-    .then(response => {
-      const fetchData = {
-        id: response.id,
-        smallPoster: response.smallPoster,
-        title: response.title,
-        genres: response.genres,
-        year: response.date.slice(0, 4),
-        rate: Math.round(response.voteAverage),
-      };
+  const fetchData = {
+    id: details.id,
+    smallPoster: details.smallPoster,
+    title: details.title,
+    genres: details.genres,
+    year: details.date.slice(0, 4),
+    rate: Math.round(details.voteAverage),
+  };
 
       const quaryRate = rateArray(fetchData.rate);
 
@@ -46,9 +46,10 @@ const cardMarkup = async movieId => {
         `;
 
       return fullMarkup;
-    })
-    .catch(error => console.log(error));
-  return details;
+  } catch (error) {
+    console.log(error)
+  }
+  
 };
 
 export { cardMarkup };

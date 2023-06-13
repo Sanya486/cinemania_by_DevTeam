@@ -52,16 +52,22 @@
     cursor: url('../../images/cursors/cursor-pointer.svg'), pointer;
 }
 
+body.light .tui-pagination .tui-page-btn{
+    color: var(--light-theme-medium-text-color);
+    border: 1px solid var(--light-theme-medium-text-color);
+}
+
 .tui-pagination .tui-ico-prev{
     cursor: url('../../images/cursors/cursor-pointer.svg'), pointer;
 }
 
 .tui-pagination .tui-next, .tui-pagination .tui-prev {
-    border: none;
+    border: none !important;
 }
 
+
 .tui-pagination .tui-prev-is-ellip, .tui-pagination .tui-next-is-ellip {
-    border:none;
+    border:none !important;
     padding: 9px 13px 15px 13px;
 }
 .tui-pagination .tui-ico-ellip{
@@ -71,11 +77,16 @@
     background-repeat: no-repeat;
 }
 
+body.light .tui-pagination .tui-ico-ellip{
+    background: url(../../images/icons/pagination/dots-light.svg) no-repeat 0 0;
+
+}
+
 
 
 .tui-pagination .tui-is-selected{
     background: linear-gradient(141.22deg, #FFC226 9.4%, #F84119 91.91%) !important;
-    border: none;
+    border: none !important;
 }
 
 
@@ -98,6 +109,11 @@
     height: 28px;
 }
 
+body.light .tui-pagination .tui-page-btn.tui-is-disabled.tui-prev div{
+    background: url(../../images/icons/pagination/prev-arrow-light.svg) no-repeat 0 0;
+}
+
+
 .tui-pagination .tui-page-btn.tui-prev span {
     background: url(../../images/icons/pagination/prev-arrow-enable.svg) no-repeat 0 0;
     background-size: cover; 
@@ -105,6 +121,10 @@
     background-repeat: no-repeat;
     width: 28px;
     height: 28px;
+}
+
+body.light .tui-pagination .tui-page-btn.tui-prev span {
+    background: url(../../images/icons/pagination/prev-arrow-light.svg) no-repeat 0 0;
 }
 
 /* ====================== Next-button ======================*/
@@ -126,6 +146,11 @@
     height: 28px;
 }
 
+body.light .tui-pagination .tui-page-btn.tui-is-disabled.tui-next div{
+    background: url(../../images/icons/pagination/next-arrow-light.svg) no-repeat 0 0;
+   
+}
+
 .tui-pagination .tui-page-btn.tui-next span {
     background: url(../../images/icons/pagination/next-arrow-enable.svg) no-repeat 0 0;
     background-size: cover; 
@@ -135,4 +160,6 @@
     height: 28px;
 }
 
-
+body.light .tui-pagination .tui-page-btn.tui-next span {
+    background: url(../../images/icons/pagination/next-arrow-light.svg) no-repeat 0 0;
+}
