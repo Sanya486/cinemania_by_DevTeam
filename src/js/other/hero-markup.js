@@ -170,12 +170,11 @@ function openModalDetails(cardId) {
 function openModal(cardId) {
   refs.trailerModal.classList.remove('is-hidden');
   refs.body.style.overflow = 'hidden';
-
-  // const progress = restoreWatchProgress(cardId);
   watchTrailer(cardId);
 
   document.addEventListener('keydown', onEscape);
   refs.closeModalBtn.addEventListener('click', closeModal);
+  refs.trailerModal.addEventListener('click', onBackdropClick);
 }
 
 function closeMoreDetails() {
@@ -191,6 +190,7 @@ function closeModal() {
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeModal);
+  refs.trailerModal.removeEventListener('click', onBackdropClick);
 }
 
 function onEscapeMoreDetails(event) {
@@ -205,6 +205,14 @@ function onEscape(event) {
   }
 }
 
+function onBackdropClick(event) {
+  if (event.target === refs.trailerModal) {
+    closeModal();
+  }
+}
+
+
+
 async function watchTrailer(cardId) {
   try {
     const trailers = await fetchTrailers(cardId);
@@ -214,9 +222,7 @@ async function watchTrailer(cardId) {
 
       const trailerContent = showTrailer(trailerKey);
       refs.trailerModalContent.innerHTML = trailerContent;
-      // if (progress) {
-      //   // saveWatchProgress(cardId, progress);
-      // }
+
     } else {
       showErrorModal();
     }

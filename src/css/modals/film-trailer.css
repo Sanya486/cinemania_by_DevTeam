@@ -51,7 +51,6 @@ body.light .trailer-modal {
   position: absolute;
   top: 20;
   right: 20;
-  color: #ffffff;
   width: 24px;
   height: 24px;
   cursor: pointer;
@@ -62,11 +61,11 @@ body.light .trailer-modal {
 }
 
 body.light .close-trailer-btn {
-  color: var(--dark-color);
+  stroke: var(--dark-color);
 }
 
 .close-trailer-btn:is(:hover, :focus) {
-  color: var(--accent-color);
+  stroke: var(--accent-color);
 }
 
 /* ERROR MODE */
