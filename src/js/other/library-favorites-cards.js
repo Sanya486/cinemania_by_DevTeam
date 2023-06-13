@@ -43,11 +43,7 @@ loadMoreBtn.addEventListener('click', () => {
 
 function renderCards() {
   if (localArr === null || JSON.parse(localArr).length === 0) {
-    const emptyLibrary = `<div class="container-library container">
-      <p class="library-empty__mistake">OOPS... <br> We are very sorry! <br> You don't have any movies at your library.</p>
-      <button class="main-accent-sml-btn btn library" onclick="window.location.href='catalog.html'">Search movie</button>
-    </div>`;
-    sectionLibrary.innerHTML = emptyLibrary;
+    onNotMarkup();
   } else {
     const renderPromises = JSON.parse(localArr)
       .slice((page - 1) * perPage, page * perPage)
@@ -57,11 +53,7 @@ function renderCards() {
       .then(filmCards => {
         const filmCardsHTML = filmCards.join('');
         libraryCardList.innerHTML += filmCardsHTML;
-        if (showMoreCards()) {
-          loadMoreBtn.style.display = 'block';
-        } else {
-          loadMoreBtn.style.display = 'none';
-        }
+        toggleLoadMore();
         onAddEventListener();
       })
       .catch(error => {
@@ -70,9 +62,43 @@ function renderCards() {
   }
 }
 
-async function renderFilmCard(id) {
-  const movieMarkup = await cardMarkup(id);
-  return movieMarkup;
+function updateMarkup() {
+  page = 1;
+  localArr = localStorage.getItem(librariesKey);
+  if (localArr === null || JSON.parse(localArr).length === 0) {
+    onNotMarkup();
+  } else {
+    const renderPromises = JSON.parse(localArr)
+      .map(id => cardMarkup(id))
+      .slice((page - 1) * perPage, page * perPage);
+
+    Promise.all(renderPromises)
+      .then(filmCards => {
+        const filmCardsHTML = filmCards.join('');
+        libraryCardList.innerHTML = filmCardsHTML;
+        toggleLoadMore();
+      })
+      .catch(error => {
+        console.error('Error rendering film cards:', error);
+      });
+  }
+}
+
+function onNotMarkup() {
+  const emptyLibrary = `<div class="container-library container">
+      <p class="library-empty__mistake">OOPS... <br> We are very sorry! <br> You don't have any movies at your library.</p>
+      <button class="main-accent-sml-btn btn library" onclick="window.location.href='catalog.html'">Search movie</button>
+    </div>`;
+  sectionLibrary.innerHTML = emptyLibrary;
+}
+
+function toggleLoadMore() {
+  if (showMoreCards()) {
+    loadMoreBtn.style.display = 'block';
+  } else {
+    loadMoreBtn.style.display = 'none';
+  }
+  onAddEventListener();
 }
 
 function onAddEventListener() {
@@ -89,23 +115,11 @@ function onClick(e) {
   refs.body.style.overflow = 'hidden';
   refs.scrollUpBtn.style.display = 'none';
 }
+
 function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.addEventListener('click', function(e) {
-    closeOnBackdropClick(e, closeMoreDetails)
-  })
-
-}
-
-function closeOnBackdropClick (e, callback){
-  if (e.target !== e.currentTarget){
-    return 
-  }
-  else {
-    callback();
-  }
 }
 
 function closeMoreDetails() {
@@ -265,7 +279,7 @@ function action() {
       localStorage.setItem(librariesKey, JSON.stringify(arr));
       localArr = localStorage.getItem(librariesKey);
       toggleBtnStyles('Remove from my library');
-      renderCards();
+      updateMarkup();
       return;
     }
     let parseLocalStorage = JSON.parse(localArr);
@@ -275,7 +289,7 @@ function action() {
       localStorage.setItem(librariesKey, JSON.stringify(parseLocalStorage));
       localArr = localStorage.getItem(librariesKey);
       toggleBtnStyles('Remove from my library');
-      renderCards();
+      updateMarkup();
       return;
     }
     if (parseLocalStorage.includes(cardId)) {
@@ -284,7 +298,7 @@ function action() {
       localStorage.setItem(librariesKey, JSON.stringify(parseLocalStorage));
       localArr = localStorage.getItem(librariesKey);
       toggleBtnStyles('Add to my library');
-      renderCards();
+      updateMarkup();
     }
   } catch (error) {
     Notify.failure('Please, try one more time');
