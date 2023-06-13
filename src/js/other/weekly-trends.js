@@ -82,7 +82,6 @@ function openModalDetails(cardId) {
 
 function closeMoreDetails() {
   refs.moreDetail.classList.add('is-hidden');
-  isModalOpen = false;
   document.removeEventListener('keydown', onEscapeMoreDetails);
   refs.body.style.overflow = 'auto';
 }
