@@ -15,7 +15,7 @@ import "./modals/slider-modal-team"
 // =============Other-JS =============
 
 // import "./other/card-markup"
-// import "./other/switch-theme-btn"
+import "./other/switch-theme-btn"
 import "./other/mob-menu"
 import "./other/slide-menu"
 import "./other/current-page-track"

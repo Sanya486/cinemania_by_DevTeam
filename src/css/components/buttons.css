@@ -150,8 +150,10 @@
 
 #back-to-top {
     position: fixed;
-    right: 5px;
-    bottom: 5px;
+    z-index: 999;
+    right: 30px;
+    bottom: 10px;
+    width: 50px;
     display: none;
     border: none;
     background-color: transparent;
