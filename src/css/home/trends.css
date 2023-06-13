@@ -35,12 +35,8 @@
   line-height: var(--main-line-height);
   margin: 0;
   padding: 0;
-  cursor: pointer;
 }
 
-.home-trends-card{
-  
-}
 .home-trends-card-poster{
   position: relative;
     justify-content: flex-start;

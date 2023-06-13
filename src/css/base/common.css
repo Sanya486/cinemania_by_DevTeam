@@ -9,10 +9,11 @@ body, button, link, textarea, input {
 
 body {
     background-color: var(--dark-color);
+    cursor: url('../../images//cursors/cursor.svg'), default;
 }
 
-button{
-    cursor: pointer;
+button, a, input, select{
+    cursor: url('../../images/cursors/cursor-pointer.svg'), pointer;
 }
 
 .btn {

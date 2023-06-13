@@ -8,6 +8,7 @@ const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
   trailerModal: document.querySelector('.trailer-modal-backdrop'),
   trailerModalContent: document.querySelector('.trailer-modal-content'),
+  trailerErrorImage: document.querySelector('.trailer-placeholder-default'),
   moreDetail: document.querySelector('.modal-film-info'),
   poster: document.querySelector('.poster-img'),
   title: document.querySelector('.movie-title'),
@@ -18,6 +19,7 @@ const refs = {
   description: document.querySelector('.about p'),
   closeModalBtn: document.querySelector('.close-trailer-btn'),
   wrap: document.querySelector('.flex'),
+  body: document.querySelector('body'),
 };
 
 let arr = [];
@@ -43,6 +45,27 @@ const fetchTrendingDayMovies = async () => {
 };
 
 window.addEventListener('load', onLoadHero);
+
+//////---------------------------
+function createPreloader() {
+  const preloader = document.createElement('div');
+  preloader.classList.add('preloader');
+  return preloader;
+}
+
+function showPreloader() {
+  const preloader = createPreloader();
+  refs.heroContainer.prepend(preloader);
+}
+
+function hidePreloader() {
+  const preloader = document.querySelector('.preloader');
+  if (preloader) {
+    preloader.remove();
+  }
+}
+
+//////---------------------------
 
 async function onLoadHero() {
   try {
@@ -115,7 +138,9 @@ function markUpApiHero(filmInfo) {
     </div>
     </div>`;
 
-  refs.heroContainer.innerHTML = markUp;
+  // refs.heroContainer.innerHTML = markUp;
+  refs.heroContainer.insertAdjacentHTML('beforeend', markUp);
+  hidePreloader();
 }
 
 function OnWatchTrailerBtn(event) {
@@ -135,6 +160,8 @@ function onMoreDetialClick(event) {
 
 function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
+  refs.body.style.overflow = 'hidden';
+
   markupMoreDetails(cardId);
 
   document.addEventListener('keydown', onEscapeMoreDetails);
@@ -142,6 +169,7 @@ function openModalDetails(cardId) {
 
 function openModal(cardId) {
   refs.trailerModal.classList.remove('is-hidden');
+  refs.body.style.overflow = 'hidden';
 
   // const progress = restoreWatchProgress(cardId);
   watchTrailer(cardId);
@@ -158,6 +186,7 @@ function closeMoreDetails() {
 
 function closeModal() {
   refs.trailerModal.classList.add('is-hidden');
+  refs.body.style.overflow = 'auto';
 
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
@@ -189,48 +218,37 @@ async function watchTrailer(cardId) {
       //   // saveWatchProgress(cardId, progress);
       // }
     } else {
-      const errorContent = showError();
-      refs.trailerModal.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
+      showErrorModal();
     }
   } catch (error) {
     console.error('Error fetching trailer:', error);
+    showErrorModal();
   }
-}
-function showTrailer(trailerKey) {
-  if(viewportWidth <= 767){
-    return `
-    <iframe width="250" height="160" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-  `;
-  }
-  else{
-    return `
-    <iframe width="600" height="300" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-  `;
-  }
-  
 }
 
-function showError() {
-  return `
-    <div class="trailer-error-info">
-      <p>OOPS...</p>
-      <p>We are very sorry!</p>
-      <p>But we couldn't find the trailer.</p>
-    </div>
-    <picture>
-      <source srcset="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/mobile/trailer-placeholder-2x.png, 2x" 
-              media="(max-width: 320px)">
-      <source srcset="../../images/trailer-placeholder/tablet/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/tablet/trailer-placeholder-2x.png, 2x" 
-              media="(max-width: 768px)">
-      <source srcset="../../images/trailer-placeholder/desktop/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/desktop/trailer-placeholder-2x.png, 2x" 
-              media="(min-width: 769px)">
-      <img src="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png" alt="Traier is not found">
-    </picture>
-    </div>
+function showTrailer(trailerKey) {
+  if (viewportWidth <= 767) {
+    return `
+      <iframe width="250" height="160" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    `;
+  } else {
+    return `
+      <iframe width="600" height="300" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    `;
+  }
+}
+
+function showErrorModal() {
+  const errorContent = `
+    <div class="error-mode-content">
+      <div class="trailer-error-info">
+        <p>OOPS...</p>
+        <p>We are very sorry!</p>
+        <p>But we couldn't find the trailer.</p>
+      </div>
   `;
+  trailerErrorImage.classList.remove('is-hidden');
+  refs.trailerModalContent.innerHTML = errorContent;
 }
 
 async function markupMoreDetails(currentId) {
@@ -241,35 +259,37 @@ async function markupMoreDetails(currentId) {
             movieDetails.smallPoster
           }" class="poster-img" alt="the poster of the movie you have chosen"/>
         </div><div>
-          <h1 class="movie-title">${
+          <h3 class="movie-title">${
             movieDetails.title
-          }</h1><div class="movie-info">
+          }</h3><div class="movie-info">
             <div class="info">
-              <ul>
-                <li>Vote / Votes</li>
-                <li>Popularity</li>
-                <li>Genre</li>
+              <ul class="film-info-list">
+                <li><p class="film-info-item-text">Vote / Votes</p></li>
+                <li><p class="film-info-item-text">Popularity</p></li>
+                <li><p class="film-info-item-text">Genre</p></li>
               </ul>
             </div><div class="params">
-              <ul>
+              <ul class="film=info-params-list">
                 <li>
-                  <div class="vote">${movieDetails.voteAverage}</div>
-                  /
-                  <div class="votes">${movieDetails.voteCount}</div>
+                  <p class="film-info-params-vote"><span class="film-info-params-vote-number">${movieDetails.voteAverage.toFixed(
+                    1
+                  )}</span> / <span class="film-info-params-vote-number">${
+      movieDetails.voteCount
+    }</span></p>
                 </li>
-                <li><span class="popularity">${movieDetails.popularity.toFixed(
+                <li><p class="popularity">${movieDetails.popularity.toFixed(
                   1
-                )}</span></li>
-                <li><span class="genre">${movieDetails.genres}</span></li>  
+                )}</p></li>
+                <li><p class="genre">${movieDetails.genres}</p></li>  
               </ul>  
             </div>
           </div><div class="about">
-            <h2>ABOUT</h2>
+            <p>ABOUT</p>
             <p>${movieDetails.overview}</p>
           </div><div class="btn-list">
             <button class="main-accent-sml-btn btn modal" id="btn-watch-treiller"
             data-id="${currentId}">Watch trailer</button>
-            <button class="rm-dark-bcg-btn btn modal" id="btn-add-to-my-library">Add to my library</button>
+            <button class="add-to-my-library-btn" id="btn-add-to-my-library">Add to my library</button>
           </div>
         </div>`;
     refs.wrap.innerHTML = markup;
@@ -295,6 +315,7 @@ function onCheckLocalStorage() {
 }
 
 function action() {
+  localArr = localStorage.getItem('films-id-array');
   try {
     if (localArr === null) {
       arr.push(cardId);
