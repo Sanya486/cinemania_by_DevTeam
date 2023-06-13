@@ -20,6 +20,12 @@ const refs = {
   wrap: document.querySelector('.flex'),
 };
 
+let arr = [];
+let cardId;
+let btnatlibrary;
+let localArr = localStorage.getItem('films-id-array');
+let filmInfo;
+
 const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
 const timeWindow = 'day';
 
@@ -55,7 +61,7 @@ async function makeMarkUpRandomFilm(films) {
   try {
     const randomIndex = Math.floor(Math.random() * films.length);
     const randomId = films[randomIndex];
-    const filmInfo = await fetchMovieDetails(randomId);
+    filmInfo = await fetchMovieDetails(randomId);
     markUpApiHero(filmInfo);
   } catch (error) {
     throw new Error(error.message);
@@ -117,7 +123,7 @@ function OnWatchTrailerBtn(event) {
 }
 
 function onMoreDetialClick(event) {
-  const cardId = +event.target.dataset.id;
+  cardId = +event.target.dataset.id;
 
   openModalDetails(cardId);
 
@@ -259,11 +265,55 @@ async function markupMoreDetails(currentId) {
     refs.wrap.innerHTML = markup;
 
     const btnatreiller = document.querySelector('#btn-watch-treiller');
-    const btnatlibrary = document.querySelector('#btn-add-to-my-library');
+    btnatlibrary = document.querySelector('#btn-add-to-my-library');
 
     btnatreiller.addEventListener('click', OnWatchTrailerBtn);
     btnatlibrary.addEventListener('click', action);
+
+    onCheckLocalStorage();
   } catch (error) {
     console.log(error);
   }
+}
+function onCheckLocalStorage() {
+  if (JSON.parse(localArr).includes(cardId)) {
+    toggleBtnStyles('Remove from my library');
+  }
+  if (localArr === null) {
+    toggleBtnStyles('Add to my library');
+  }
+}
+
+function action() {
+  try {
+    if (localArr === null) {
+      arr.push(cardId);
+      localStorage.setItem('films-id-array', JSON.stringify(arr));
+      localArr = localStorage.getItem('films-id-array');
+      toggleBtnStyles('Remove from my library');
+      return;
+    }
+    let parseLocalStorage = JSON.parse(localArr);
+
+    if (!parseLocalStorage.includes(cardId)) {
+      parseLocalStorage.push(cardId);
+      localStorage.setItem('films-id-array', JSON.stringify(parseLocalStorage));
+      localArr = localStorage.getItem('films-id-array');
+      toggleBtnStyles('Remove from my library');
+      return;
+    }
+    if (parseLocalStorage.includes(cardId)) {
+      const idx = parseLocalStorage.indexOf(cardId);
+      parseLocalStorage.splice(idx, 1);
+      localStorage.setItem('films-id-array', JSON.stringify(parseLocalStorage));
+      localArr = localStorage.getItem('films-id-array');
+      toggleBtnStyles('Add to my library');
+    }
+  } catch (error) {
+    Notify.failure('Please, try one more time');
+  }
+}
+
+function toggleBtnStyles(text) {
+  btnatlibrary.textContent = text;
 }
