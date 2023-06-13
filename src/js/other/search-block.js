@@ -179,6 +179,8 @@ import {fetchTrendingWeekMovies} from '../fetches/fetch-trendings-week';
 
 import Pagination from 'tui-pagination';
 
+const viewportWidth = document.body.clientWidth;
+
 
 
 const catalogContainer = document.querySelector('.card-list-search-result');
@@ -325,8 +327,15 @@ const options = {
         yearCatalog.innerHTML = addYears();
       }
 
-      scroll({top: 880, behavior: 'smooth'})
-});
+      if (viewportWidth >= 1280){
+        scroll({top: 880, behavior: 'smooth'})
+      }
+      else {
+        scroll({top: 560, behavior: 'smooth'})
+      }
+      }
+      
+);
 }
 
 // ------------------ Query catalog cards markup by keyword ------------------ //

@@ -6,7 +6,7 @@ import { cardMarkup } from './card-markup';
 
 const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
-  trailerModal: document.querySelector('.trailer-modal'),
+  trailerModal: document.querySelector('.trailer-modal-backdrop'),
   trailerModalContent: document.querySelector('.trailer-modal-content'),
   moreDetail: document.querySelector('.modal-film-info'),
   wrap: document.querySelector('.flex'),
@@ -74,7 +74,6 @@ function onClick(e) {
 function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
-console.log(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
 }
 
@@ -144,7 +143,6 @@ async function markupMoreDetails(currentId) {
 
 function OnWatchTrailerBtn(event) {
   const cardId = +event.target.dataset.id;
-  console.log(cardId);
   openModal(cardId);
 }
 

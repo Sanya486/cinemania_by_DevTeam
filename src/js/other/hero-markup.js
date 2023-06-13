@@ -6,7 +6,7 @@ import { fetchTrailers } from '../fetches/fetch-trailer';
 
 const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
-  trailerModal: document.querySelector('.trailer-modal'),
+  trailerModal: document.querySelector('.trailer-modal-backdrop'),
   trailerModalContent: document.querySelector('.trailer-modal-content'),
   moreDetail: document.querySelector('.modal-film-info'),
   poster: document.querySelector('.poster-img'),
@@ -25,6 +25,8 @@ let cardId;
 let btnatlibrary;
 let localArr = localStorage.getItem('films-id-array');
 let filmInfo;
+
+const viewportWidth = document.body.clientWidth;
 
 const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
 const timeWindow = 'day';
@@ -182,7 +184,7 @@ async function watchTrailer(cardId) {
       const trailerKey = trailers[0].key;
 
       const trailerContent = showTrailer(trailerKey);
-      refs.trailerModalContent.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
+      refs.trailerModalContent.innerHTML = trailerContent;
       // if (progress) {
       //   // saveWatchProgress(cardId, progress);
       // }
@@ -195,9 +197,17 @@ async function watchTrailer(cardId) {
   }
 }
 function showTrailer(trailerKey) {
-  return `
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  if(viewportWidth <= 767){
+    return `
+    <iframe width="250" height="160" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
   `;
+  }
+  else{
+    return `
+    <iframe width="600" height="300" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  `;
+  }
+  
 }
 
 function showError() {
