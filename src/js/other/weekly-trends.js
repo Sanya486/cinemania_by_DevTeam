@@ -17,6 +17,8 @@ const refs = {
   scrollUpBtn: document.querySelector('#back-to-top'),
 };
 
+console.log(refs.closeModalBtn);
+
 let arr = [];
 let cardId;
 let btnatlibrary;
@@ -111,9 +113,9 @@ async function markupMoreDetails(currentId) {
               </ul>
             </div><div class="params">
               <ul class="film=info-params-list">
-                <li><p class="film-info-params-vote"><span class="film-info-params-vote-number">${
-                  movieDetails.voteAverage.toFixed(1)
-                }</span> / <span class="film-info-params-vote-number">${
+                <li><p class="film-info-params-vote"><span class="film-info-params-vote-number">${movieDetails.voteAverage.toFixed(
+                  1
+                )}</span> / <span class="film-info-params-vote-number">${
       movieDetails.voteCount
     }</span></p>
                 </li>
