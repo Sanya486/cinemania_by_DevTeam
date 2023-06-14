@@ -149,6 +149,10 @@ body.light .mob-nav-link {
   color: var(--dark-color);
 }
 
+body.light .mob-nav-link:focus {
+  color: var(--accent-color);
+}
+
 .mob-menu {
   position: relative;
   left: 0;
