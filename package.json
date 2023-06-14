@@ -24,6 +24,7 @@
     "@parcel/transformer-sass": "^2.6.0",
     "axios": "^1.4.0",
     "buffer": "^6.0.3",
+    "jquery": "^3.7.0",
     "lodash.debounce": "^4.0.8",
     "notiflix": "^3.2.6",
     "parcel": "^2.6.0",

@@ -65,6 +65,8 @@ gap: 12px;
     font-size: 14px;
     line-height: 1.14;
 }
+
+
 .input-film-name-search-form::placeholder{
     color: var(--dark-theme-dark-text-color);
 }
@@ -84,7 +86,7 @@ body.light .input-film-name-search-form{
 .year-of-film-search-form {
     color: var(--dark-theme-dark-text-color);
     background-color: var(--dark-color);
-    width: 95px;
+    width: 80px;
 height: 40px;
 border: 1px solid var(--light-color);
 border-radius: 8px;
