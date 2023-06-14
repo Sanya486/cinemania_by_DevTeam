@@ -86,6 +86,7 @@ function updateMarkup() {
 }
 
 function onNotMarkup() {
+  Notify.info(`OOPS... You don't have any movies at your library.`)
   const emptyLibrary = `<div class="container-library container">
       <p class="library-empty__mistake">OOPS... <br> We are very sorry! <br> You don't have any movies at your library.</p>
       <button class="main-accent-sml-btn btn library" onclick="window.location.href='catalog.html'">Search movie</button>
