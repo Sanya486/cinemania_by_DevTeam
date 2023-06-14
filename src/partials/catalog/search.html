@@ -1,23 +1,19 @@
-  <!--
-    ❗️❗️❗️ The path to images from the HTML partial
-    is the same as from the index.html file
-  -->
-  <!-- <img src="images/logo.png" alt="" width="320" /> -->
-
-  <section class="search">
+<section class="search">
     <div class="container search-container">
       <h2 class="hidden" >section search block</h2>
       <form class="search-form" id="search-form">
         <div class="field-wrap-search-form">
           <!-- <label class="film-name-search-form">
           </label> -->
-          <input class="input-film-name-search-form" type="text" name="searchQuery" placeholder="Search" autocomplete="off">
-          <!-- <svg class="input-close-svg hidden-search-form-input-close-svg " width="9" height="9">
-            <use href="/src/images/icons/other-icons.svg#closer-icon"></use>
-        </svg> -->
+          <div  class="search-input-wrapper">
+            <input class="input-film-name-search-form" type="text" name="searchQuery" placeholder="Search" autocomplete="off">
+            <svg class="input-close-svg hidden-search-form-input-close-svg hidden" width="12" height="12">
+              <use href="/src/images/icons/other-icons.svg#closer-icon"></use>
+            </svg>
+          </div>
 
-          <!-- <label class="film-year-search-form" for="yearOfFilm">
-          </label> -->
+          <label class="film-year-search-form" for="yearOfFilm">
+          </label>
           <!-- <select class="year-of-film-search-form" type="text" id="yearOfFilm" name="yearOfFilm" placeholder="Year" autocomplete="off">
           <svg class="year-up-arrow-svg"  width="10" height="5">
             <use href="/src/images/icons/other-icons.svg#down-arrow-iicon"></use>

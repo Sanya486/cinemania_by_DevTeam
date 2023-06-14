@@ -25,6 +25,7 @@
     "axios": "^1.4.0",
     "buffer": "^6.0.3",
     "flatpickr": "^4.6.13",
+    "lodash.debounce": "^4.0.8",
     "notiflix": "^3.2.6",
     "parcel": "^2.6.0",
     "parcel-reporter-clean-dist": "^1.0.4",
