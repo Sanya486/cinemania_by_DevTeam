@@ -10,7 +10,6 @@ refs.inputEl.addEventListener('input', debounce(onInput, 300))
 refs.closeBtnEl.addEventListener('click', onCloseBtnClick)
 
 function onInput (e) {
-    console.log("12")
     if(e.target.value !== ""){
         refs.closeBtnEl.classList.remove('hidden');
     }

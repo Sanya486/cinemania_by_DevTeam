@@ -1,11 +1,13 @@
 /* ======================== MOBILE STYLES ======================== */
 
 .card-list-search-result {
+  margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
   row-gap: 16px;
   margin-bottom: 20px;
+  justify-content: center;
 }
 
 .card-item-search-result {
@@ -18,6 +20,20 @@
   background-image: url('../../images/library-hero/tablet/library-hero-1x.jpg');
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.oops-catalog-search{
+  margin-top: 48px;
+  color: var(--light-color);
+
+  font-weight: 400;
+font-size: 20px;
+line-height: 1.4;
+text-align: center;
+}
+
+body.light .oops-catalog-search{
+  color:var(--dark-color)
 }
 
 @media (min-device-pixel-ratio: 2),
@@ -71,6 +87,14 @@
 
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
+
+  .oops-catalog-search{
+    margin-top: 80px;
+    font-weight: 400;
+    font-size: 24px;
+    line-height: 1.33;
+  }
+
   .card-list-search-result {
     flex-direction: row;
     column-gap: 16px;
@@ -105,6 +129,14 @@
 
 @media screen and (min-width: 1280px) {
   /* .container прописувати не потрібно */
+
+  .oops-catalog-search{
+    margin-top: 120px;
+    font-weight: 400;
+    font-size: 32px;
+    line-height: 1.12;
+  }
+
   .card-list-search-result {
     column-gap: 15.5px;
     row-gap: 32px;

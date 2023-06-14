@@ -1,5 +1,5 @@
 import axios from 'axios';
-export { fetchGenres };
+
   
 const URL = 'https://api.themoviedb.org/3/genre/movie/list';
 const params = new URLSearchParams({
@@ -9,8 +9,10 @@ const params = new URLSearchParams({
 async function fetchGenres() {
   try {
     const response = await axios.get(`${URL}?${params}`);
-    return response.genres;
+    return response.data.genres;
   } catch (error) {
     throw new Error(error.message);
   }
 }
+
+export { fetchGenres };

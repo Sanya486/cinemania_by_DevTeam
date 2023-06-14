@@ -1,8 +1,14 @@
-import { cardMarkup } from './card-markup';
 import { addYears } from './sort-films-years';
 
-import {fetchTrendingWeekMovies} from '../fetches/fetch-trendings-week';
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
+
+import {fetchTrendingWeekMovies} from '../fetches/fetch-trendings-week';
+import { fetchGenres } from '../fetches/fetch-genres';
+import { catalogMarkup } from './catalog-markup';
+
+import placeHolder from '../../images/components/post-holder.jpg'
+import trailerPlaceholder from  '../../images/trailer-placeholder/desktop/trailer-placeholder-1@1x.png'
+
 import { fetchTrailers } from '../fetches/fetch-trailer';
 import Pagination from 'tui-pagination';
 
@@ -17,6 +23,9 @@ const refs = {
   homeTrendsList: document.querySelector('.home-trends-list'),
   body: document.querySelector('body'),
   scrollUpBtn: document.querySelector('#back-to-top'),
+  cardListSearchResult: document.querySelector('.card-list-search-result'),
+  paginationEl: document.querySelector('.tui-pagination'),
+  searchResult: document.querySelector('.search-result'),
 };
 
 let arr = [];
@@ -36,37 +45,52 @@ refs.closeModalBtn.addEventListener('click', closeMoreDetails);
 // ------------------ Onload window catalog cards markup ------------------ //
 
 async function displayWeeklyTrendsCatalog (page) {
-  const trendData = await fetchTrendingWeekMovies();
-// console.log(trendData);
-  const trendFilmList = trendData.weeklyTrendsList;
-  // console.log(trendFilmList);
-  const catalogMovies = await Promise.all(
-    trendFilmList.map(async (movie) => {
-      // addYears();
-      // console.log(addYears);
-      const card = await cardMarkup(movie.id);
-      return card;
-    })
-  );    
-  if (catalogContainer) {
-    catalogContainer.innerHTML = catalogMovies.join('');
-  }
-  if (yearCatalog) {
-    yearCatalog.innerHTML = addYears();
-  }
+  
+  try {
+    const genresData = await fetchGenres()
+    let trendData = await fetchTrendingWeekMovies(page);
+
+  let genresObjectData = trendData.weeklyTrendsList.map(film => {
+    return film.genre_ids.map(genre => {
+      return genresData.find(option => option.id === genre)
+    })  
+  })
+
+  trendData.weeklyTrendsList.forEach((film, index) => film.genre_ids = genresObjectData[index])
+
+  console.log(trendData)
+
+  trendData.weeklyTrendsList.forEach(film => { 
+    refs.cardListSearchResult.insertAdjacentHTML('beforeend', catalogMarkup(film))
+  })
+
 
   onAddEventListener()
 
   pagination(
     {totalItems: trendData.weeklyTrendsTotal,
-      itemsPerPage: trendData.weeklyTrendsList.length,
-      fetchCallBack: OnFetchTrendingWeeks,
+    itemsPerPage: trendData.weeklyTrendsList.length,
+    fetchCallBack: OnFetchTrendingWeeks,
     })
+  } catch (error) {
+    console.log(error)
+  }
 
-  // console.log(catalogContainer);
+
 };
 
-window.addEventListener('load', displayWeeklyTrendsCatalog);
+window.addEventListener('load', displayWeeklyTrendsCatalog(1));
+
+function onAddEventListener() {
+  refs.cardListSearchResult.addEventListener('click', (e) => {
+    if (e.target !== e.currentTarget){
+      cardId = +e.target.parentNode.id 
+      openModalDetails(cardId);
+      refs.body.style.overflow = 'hidden';
+      refs.scrollUpBtn.style.display = 'none';
+    }
+  })
+}
 
 // ------------------ Query catalog cards markup by keyword ------------------ //
 import {fetchSearch} from '../fetches/fetch-search';
@@ -88,28 +112,42 @@ const onSubmit = (event) => {
 searchForm.addEventListener('submit', onSubmit);
 
 const displayQueryFilmCatalog  = async (inputValue) => {
-  const queryData = await fetchSearch(inputValue, 1);
+  refs.cardListSearchResult.innerHTML = "";
+  let queryData = await fetchSearch(inputValue, 1);
   console.log(queryData);
-  const catalogMovies = await Promise.all(
-    queryData.results.map(async (movie) => {
+  if(queryData.total_results !== 0){
+    const genresData = await fetchGenres()
 
-      // const year = new Date().getFullYear();
-      // console.log(year);
-
-      const card = await cardMarkup(movie.id);
-      return card;
+    let genresObjectData = queryData.results.map(film => {
+      return film.genre_ids.map(genre => {
+        return genresData.find(option => option.id === genre)
+      })  
     })
-  ); 
-  if (catalogContainer) {
-    catalogContainer.innerHTML = catalogMovies.join('');
+  
+    queryData.results.forEach((film, index) => film.genre_ids = genresObjectData[index])
+  // ======================================
+  
+  
+    queryData.results.forEach(film => { 
+      refs.cardListSearchResult.insertAdjacentHTML('beforeend', catalogMarkup(film))
+    })
+  
+    pagination(
+      {totalItems: +queryData.total_results,
+        itemsPerPage: +queryData.results.length,
+        fetchCallBack: OnSearchFetch,
+      })
   }
-  console.log(queryData.total_results)
+  else{
+  
+    refs.paginationEl.innerHTML = ``;
+    refs.cardListSearchResult.innerHTML = `<p class="oops-catalog-search">OOPS...</br>
+    We are very sorry!</br>
+    We don’t have any results matching your search.</p>`
+  }
+// =======================================
 
-  pagination(
-    {totalItems: +queryData.total_results,
-      itemsPerPage: +queryData.results.length,
-      fetchCallBack: OnSearchFetch,
-    })
+
 
 
 }
@@ -168,21 +206,25 @@ function pagination ({totalItems, itemsPerPage, fetchCallBack = un}) {
     pagination.on('afterMove', fetchCallBack);
   }
 
-async function OnFetchTrendingWeeks (eventData) {
-  const trendData = await fetchTrendingWeekMovies(eventData.page);
-  const trendFilmList = trendData.weeklyTrendsList;
+async function OnFetchTrendingWeeks (event) {
+  refs.cardListSearchResult.innerHTML = "";
 
-  const catalogMovies = await Promise.all(
-    trendFilmList.map(async (movie) => {
-      // addYears();
-      // console.log(addYears);
-      const card = await cardMarkup(movie.id);
-      return card;
-    })
-  );    
-  if (catalogContainer) {
-    catalogContainer.innerHTML = catalogMovies.join('');
-  }
+  const genresData = await fetchGenres()
+  let trendData = await fetchTrendingWeekMovies(event.page);
+
+  let genresObjectData = trendData.weeklyTrendsList.map(film => {
+    return film.genre_ids.map(genre => {
+      return genresData.find(option => option.id === genre)
+    })  
+  })
+
+  trendData.weeklyTrendsList.forEach((film, index) => film.genre_ids = genresObjectData[index])
+
+  console.log(trendData)
+
+  trendData.weeklyTrendsList.forEach(film => { 
+    refs.cardListSearchResult.insertAdjacentHTML('beforeend', catalogMarkup(film))
+  })
   // if (yearCatalog) {
   //   yearCatalog.innerHTML = addYears();
   // }
@@ -190,22 +232,23 @@ async function OnFetchTrendingWeeks (eventData) {
 }
 
 async function OnSearchFetch (eventData){
+  refs.cardListSearchResult.innerHTML = "";
   const inputValue = searchNameInput.value.trim() 
-  const queryData = await fetchSearch(inputValue, eventData.page);
-  // console.log(queryData);
-  const catalogMovies = await Promise.all(
-    queryData.results.map(async (movie) => {
+  let queryData = await fetchSearch(inputValue, eventData.page);
 
-      // const year = new Date().getFullYear();
-      // console.log(year);
+  const genresData = await fetchGenres()
 
-      const card = await cardMarkup(movie.id);
-      return card;
-    })
-  ); 
-  if (catalogContainer) {
-    catalogContainer.innerHTML = catalogMovies.join('');
-  }
+  let genresObjectData = queryData.results.map(film => {
+    return film.genre_ids.map(genre => {
+      return genresData.find(option => option.id === genre)
+    })  
+  })
+
+  queryData.results.forEach((film, index) => film.genre_ids = genresObjectData[index])
+
+  queryData.results.forEach(film => { 
+    refs.cardListSearchResult.insertAdjacentHTML('beforeend', catalogMarkup(film))
+  })
   scrollUp()
 }
 
@@ -219,20 +262,8 @@ function scrollUp () {
 }
 // ------------------ Query catalog cards markup by keyword ------------------ //
 
-function onAddEventListener() {
-  cardsArrRef = document.querySelectorAll('.film-card');
-  for (const card of cardsArrRef) {
-    card.addEventListener('click', onClick);
-  }
-}
 
-function onClick(e) {
-  e.preventDefault();
-  cardId = +e.currentTarget.id;
-  openModalDetails(cardId);
-  refs.body.style.overflow = 'hidden';
-  refs.scrollUpBtn.style.display = 'none';
-}
+
 
 function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
@@ -243,6 +274,10 @@ function openModalDetails(cardId) {
 
 function closeOnBacdropMoreDetails (e) {
   closeOnBackdropClick(e, closeMoreDetails)
+}
+
+function closeOnBacdropTrailer (e) {
+  closeOnBackdropClick(e, closeTrailerModal)
 }
 
 function closeOnBackdropClick (e, callback){
@@ -269,11 +304,18 @@ function onEscapeMoreDetails(e) {
 
 async function markupMoreDetails(currentId) {
   try {
+    const picturePAth = `https://image.tmdb.org/t/p/original`
+    let picture;
     const movieDetails = await fetchMovieDetails(currentId);
+
+    if(!movieDetails.smallPoster){
+      picture = placeHolder
+    }
+    else{
+      picture = picturePAth + movieDetails.smallPoster
+    }
     const markup = `<div class="poster"> 
-          <img src="https://image.tmdb.org/t/p/original/${
-            movieDetails.smallPoster
-          }" class="poster-img" alt="the poster of the movie you have chosen"/>
+          <img src="${picture}" class="poster-img" alt="the poster of the movie you have chosen"/>
         </div><div>
           <h3 class="movie-title">${
             movieDetails.title
@@ -322,15 +364,17 @@ async function markupMoreDetails(currentId) {
 
 function OnWatchTrailerBtn(event) {
   const cardId = +event.target.dataset.id;
-  openModal(cardId);
+  openTrailerModal(cardId);
 }
 
-function openModal(cardId) {
+function openTrailerModal(cardId) {
   refs.trailerModal.classList.remove('is-hidden');
   watchTrailer(cardId);
 
   document.addEventListener('keydown', onEscape);
-  refs.closeTrailerBtn.addEventListener('click', closeModal);
+  refs.closeTrailerBtn.addEventListener('click', closeTrailerModal);
+  refs.trailerModal.addEventListener('click', closeOnBacdropTrailer)
+
 }
 
 async function watchTrailer(cardId) {
@@ -344,7 +388,7 @@ async function watchTrailer(cardId) {
       refs.trailerModalContent.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
     } else {
       const errorContent = showError();
-      refs.trailerModal.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
+      refs.trailerModalContent.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
     }
   } catch (error) {
     console.error('Error fetching trailer:', error);
@@ -359,39 +403,36 @@ function showTrailer(trailerKey) {
 
 function showError() {
   return `
-    <div class="trailer-error-info">
-      <p>OOPS...</p>
+  <div class="trailer-error-mode-content is-hidden">
+
+        <div class="trailer-error-info">
+          <p>OOPS...</p>
       <p>We are very sorry!</p>
       <p>But we couldn't find the trailer.</p>
-    </div>
-    <picture>
-      <source srcset="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/mobile/trailer-placeholder-2x.png, 2x" 
-              media="(max-width: 320px)">
-      <source srcset="../../images/trailer-placeholder/tablet/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/tablet/trailer-placeholder-2x.png, 2x" 
-              media="(max-width: 768px)">
-      <source srcset="../../images/trailer-placeholder/desktop/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/desktop/trailer-placeholder-2x.png, 2x" 
-              media="(min-width: 769px)">
-      <img src="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png" alt="Traier is not found">
-    </picture>
-    </div>
+        </div>
+        <div class="error-img-placeholder is-hidden">
+             <img
+          src="${trailerPlaceholder}"
+          alt="Trailer is not found"
+          />
+         </div>
+      </div>
   `;
 }
 
 function onEscape(event) {
   if (event.key === 'Escape') {
-    closeModal();
+    closeTrailerModal();
   }
 }
 
-function closeModal() {
+function closeTrailerModal() {
   refs.trailerModal.classList.add('is-hidden');
 
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
-  refs.closeModalBtn.removeEventListener('click', closeModal);
+  refs.closeModalBtn.removeEventListener('click', closeTrailerModal);
+  refs.trailerModal.removeEventListener('click', closeOnBacdropTrailer)
 }
 
 function onCheckLocalStorage() {
