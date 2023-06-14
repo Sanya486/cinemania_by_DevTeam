@@ -234,6 +234,7 @@ function onEscape(event) {
   }
 }
 
+
 function closeTrailerModal() {
   refs.trailerModal.classList.add('is-hidden');
 
