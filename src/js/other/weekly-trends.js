@@ -86,7 +86,6 @@ function closeOnBacdropMoreDetails (e) {
   closeOnBackdropClick(e, closeMoreDetails)
 }
 
-
 function closeOnBackdropClick (e, callback){
   if (e.target !== e.currentTarget){
     return 
@@ -248,14 +247,6 @@ function closeOnBacdropTrailer (e) {
   closeOnBackdropClick(e, closeTrailerModal)
 }
 
-function closeOnBackdropClick (e, callback){
-  if (e.target !== e.currentTarget){
-    return 
-  }
-  else {
-    callback();
-  }
-}
 
 
 function onCheckLocalStorage() {
