@@ -15,4 +15,5 @@ async function fetchGenres() {
   }
 }
 
+
 export { fetchGenres };
