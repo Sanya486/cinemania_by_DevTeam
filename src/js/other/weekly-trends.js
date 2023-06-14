@@ -164,15 +164,16 @@ async function markupMoreDetails(currentId) {
 
 function OnWatchTrailerBtn(event) {
   const cardId = +event.target.dataset.id;
-  openModal(cardId);
+  openTrailerModal(cardId);
 }
 
-function openModal(cardId) {
+function openTrailerModal(cardId) {
   refs.trailerModal.classList.remove('is-hidden');
   watchTrailer(cardId);
 
   document.addEventListener('keydown', onEscape);
-  refs.closeTrailerBtn.addEventListener('click', closeModal);
+  refs.closeTrailerBtn.addEventListener('click', closeTrailerModal);
+  refs.trailerModal.addEventListener('click', closeOnBacdropTrailer);
 }
 
 async function watchTrailer(cardId) {
@@ -229,18 +230,32 @@ function showError() {
 
 function onEscape(event) {
   if (event.key === 'Escape') {
-    closeModal();
+    closeTrailerModal();
   }
 }
 
-function closeModal() {
+function closeTrailerModal() {
   refs.trailerModal.classList.add('is-hidden');
 
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
-  refs.closeModalBtn.removeEventListener('click', closeModal);
-  refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails)
+  refs.closeModalBtn.removeEventListener('click', closeTrailerModal);
+  refs.moreDetail.removeEventListener('click', closeOnBacdropTrailer)
 }
+
+function closeOnBacdropTrailer (e) {
+  closeOnBackdropClick(e, closeTrailerModal)
+}
+
+function closeOnBackdropClick (e, callback){
+  if (e.target !== e.currentTarget){
+    return 
+  }
+  else {
+    callback();
+  }
+}
+
 
 function onCheckLocalStorage() {
   if (JSON.parse(localArr).includes(cardId)) {

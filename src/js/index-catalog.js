@@ -2,7 +2,6 @@
 
 import "./fetches/fetch-upcoming";
 import "./fetches/fetch-movie-details";
-// import "./fetches/fetch-movie-genre";
 import "./fetches/fetch-genres"
 import "./fetches/fetch-trailer";
 import "./fetches/fetch-search";

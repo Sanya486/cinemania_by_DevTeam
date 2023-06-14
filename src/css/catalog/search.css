@@ -52,18 +52,18 @@ gap: 12px;
     background-color: var(--dark-color);
     border: 1px solid var(--light-color);
     border-radius: 8px;
-padding-top: 14px;
-padding-bottom: 14px;
-padding-left: 20px;
-padding-right: 40px;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    padding-left: 20px;
+    padding-right: 40px;
 
-width: 224px;
-height: 40px;
+    width: 224px;
+    height: 40px;
 
-font-family: inherit;
-font-weight: 500;
-font-size: 14px;
-line-height: 1.14;
+    font-family: inherit;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 1.14;
 }
 .input-film-name-search-form::placeholder{
     color: var(--dark-theme-dark-text-color);
