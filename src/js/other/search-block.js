@@ -7,9 +7,9 @@ import {fetchTrendingWeekMovies} from '../fetches/fetch-trendings-week';
 
 import Pagination from 'tui-pagination';
 
+
+
 const viewportWidth = document.body.clientWidth;
-
-
 
 const catalogContainer = document.querySelector('.card-list-search-result');
 
@@ -18,22 +18,33 @@ const yearCatalog = document.querySelector('.year-of-film-search-form');
 
 // ------------------ Onload window catalog cards markup ------------------ //
 
+import {catalogMarkup} from './catalog-markup';
+
 const displayWeeklyTrendsCatalog = async (page) => {
-  const trendData = await fetchTrendingWeekMovies();
-// console.log(trendData);
-  const trendFilmList = trendData.weeklyTrendsList;
-  // console.log(trendFilmList);
-  const catalogMovies = await Promise.all(
-    trendFilmList.map(async (movie) => {
-      // addYears();
-      // console.log(addYears);
-      const card = await cardMarkup(movie.id);
-      return card;
-    })
-  );    
+
+  catalogMarkup();
   if (catalogContainer) {
-    catalogContainer.innerHTML = catalogMovies.join('');
+    catalogContainer.innerHTML = catalogMarkup().join('');
   }
+  // const trendData = await fetchTrendingWeekMovies();
+  // console.log(`trendData - ${trendData}`);
+
+  // const trendFilmList = trendData.results;
+  // console.log(`trendFilmList: ${trendFilmList}`);
+  // console.log(typeof(trendFilmList));
+
+  // const catalogMovies = await Promise.all(
+  //   trendFilmList.map(async (movie) => {
+  //     const card = await cardMarkup(movie.id);
+  //     return card;
+  //   })
+  // );    
+  // if (catalogContainer) {
+  //   catalogContainer.innerHTML = catalogMovies.join('');
+  // }
+
+  //--------------------------
+
   if (yearCatalog) {
     yearCatalog.innerHTML = addYears();
   }
@@ -73,7 +84,7 @@ searchForm.addEventListener('submit', onSubmit);
 const displayQueryFilmCatalog  = async (inputValue) => {
   const queryData = await fetchSearch(inputValue, 1);
   console.log(queryData);
-  const catalogMovies = await Promise.all(
+  const catalogMovies = await 
     queryData.results.map(async (movie) => {
 
       // const year = new Date().getFullYear();
@@ -82,7 +93,7 @@ const displayQueryFilmCatalog  = async (inputValue) => {
       const card = await cardMarkup(movie.id);
       return card;
     })
-  ); 
+; 
   if (catalogContainer) {
     catalogContainer.innerHTML = catalogMovies.join('');
   }
