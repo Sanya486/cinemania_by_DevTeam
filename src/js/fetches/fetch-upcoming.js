@@ -11,6 +11,6 @@ async function fetchUpcoming() {
     const response = await axios.get(`${URL}?${params}`);
     return response.data.results;
   } catch (error) {
-    throw new Error(error.message);
+    console.log(error)
   }
 }

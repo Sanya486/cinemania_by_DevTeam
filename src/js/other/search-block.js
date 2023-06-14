@@ -58,8 +58,6 @@ async function displayWeeklyTrendsCatalog (page) {
 
   trendData.weeklyTrendsList.forEach((film, index) => film.genre_ids = genresObjectData[index])
 
-  console.log(trendData)
-
   trendData.weeklyTrendsList.forEach(film => { 
     refs.cardListSearchResult.insertAdjacentHTML('beforeend', catalogMarkup(film))
   })
@@ -103,7 +101,6 @@ const searchNameInput = document.querySelector('.input-film-name-search-form')
 const onSubmit = (event) => {
   event.preventDefault();
   const searchInputValue = searchNameInput.value.trim();
-  console.log(searchInputValue);
 
   if (searchInputValue !== '') {
     displayQueryFilmCatalog(searchInputValue);
@@ -114,7 +111,6 @@ searchForm.addEventListener('submit', onSubmit);
 const displayQueryFilmCatalog  = async (inputValue) => {
   refs.cardListSearchResult.innerHTML = "";
   let queryData = await fetchSearch(inputValue, 1);
-  console.log(queryData);
   if(queryData.total_results !== 0){
     const genresData = await fetchGenres()
 
@@ -219,8 +215,6 @@ async function OnFetchTrendingWeeks (event) {
   })
 
   trendData.weeklyTrendsList.forEach((film, index) => film.genre_ids = genresObjectData[index])
-
-  console.log(trendData)
 
   trendData.weeklyTrendsList.forEach(film => { 
     refs.cardListSearchResult.insertAdjacentHTML('beforeend', catalogMarkup(film))

@@ -10,9 +10,8 @@ async function fetchTrendingMovies() {
     );
     return response.data.results;
   } catch (error) {
-    throw new Error;
+    console.log(error)
   }
-  
 };
 
 export { fetchTrendingMovies };
