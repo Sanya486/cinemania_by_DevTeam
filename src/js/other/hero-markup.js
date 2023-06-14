@@ -8,7 +8,7 @@ const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
   trailerModal: document.querySelector('.trailer-modal-backdrop'),
   trailerModalContent: document.querySelector('.trailer-modal-content'),
-  trailerErrorImage: document.querySelector('.trailer-placeholder-default'),
+  trailerErrorModeContent: document.querySelector('.trailer-error-mode-content'),
   moreDetail: document.querySelector('.modal-film-info'),
   poster: document.querySelector('.poster-img'),
   title: document.querySelector('.movie-title'),
@@ -242,7 +242,6 @@ async function watchTrailer(cardId) {
       showErrorModal();
     }
   } catch (error) {
-    console.error('Error fetching trailer:', error);
     showErrorModal();
   }
 }
@@ -260,16 +259,7 @@ function showTrailer(trailerKey) {
 }
 
 function showErrorModal() {
-  const errorContent = `
-    <div class="error-mode-content">
-      <div class="trailer-error-info">
-        <p>OOPS...</p>
-        <p>We are very sorry!</p>
-        <p>But we couldn't find the trailer.</p>
-      </div>
-  `;
-  trailerErrorImage.classList.remove('is-hidden');
-  refs.trailerModalContent.innerHTML = errorContent;
+  trailerErrorModeContent.classList.remove('is-hidden');
 }
 
 async function markupMoreDetails(currentId) {
