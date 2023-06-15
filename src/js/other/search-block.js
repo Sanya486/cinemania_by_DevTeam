@@ -249,10 +249,10 @@ async function OnSearchFetch (eventData){
 
 function scrollUp () {
   if (viewportWidth >= 1280){
-    scroll({top: 880, behavior: 'smooth'})
+    scroll({top: 790, behavior: 'smooth'})
   }
   else {
-    scroll({top: 560, behavior: 'smooth'})
+    scroll({top: 500, behavior: 'smooth'})
   }
 }
 // ------------------ Query catalog cards markup by keyword ------------------ //
