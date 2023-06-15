@@ -16,6 +16,7 @@
 
 .yearpicker-container {
     position: absolute;
+    right:-35px;
     color: var(--text-color);
     width: 280px;
     border: 1px solid var(--border-color);
@@ -26,6 +27,14 @@
     z-index: 10;
     margin-top: 0.2rem;
 }
+
+@media screen and (min-width:768px)  {
+    .yearpicker-container{
+        right:-100px;
+    }
+}
+
+
 
 .yearpicker-header {
     display: flex;
