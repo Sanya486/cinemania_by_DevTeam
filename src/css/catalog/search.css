@@ -83,6 +83,10 @@ body.light .input-film-name-search-form{
 .film-year-search-form {
     position: relative;
 }
+
+.year-input-container{
+    position: relative;
+}
 .year-of-film-search-form {
     color: var(--dark-theme-dark-text-color);
     background-color: var(--dark-color);
@@ -97,6 +101,19 @@ padding-left: 20px;
 font-weight: 500;
 font-size: 14px;
 line-height: 1.14;
+}
+
+.year-drop-arrow-icon{
+    position: absolute;
+    top: 15px;
+    right: 13px;
+
+    stroke: var(--light-color);
+    pointer-events: none;
+}
+
+body.light .year-drop-arrow-icon{
+    stroke: var(--dark-color)
 }
 
 body.light .year-of-film-search-form.yearpicker{
@@ -233,7 +250,12 @@ body.light .year-up-arrow-svg {
         top: 15px;
         
     }
+    .year-drop-arrow-icon{
+        top: 17px
+    }
+    
 }
+
 
 
 /* ======================== DESKTOP STYLES ======================== */
@@ -259,5 +281,8 @@ body.light .year-up-arrow-svg {
 }
 .input-close-svg{
     top: 19px;
+}
+.year-drop-arrow-icon{
+    top: 19px
 }
 }

@@ -25,5 +25,6 @@ import "./other/search-input"
 import "./other/search-block"
 import "./other/scroll-up"
 import "./other/pagination"
+import "./other/year-arrow"
 
 
