@@ -29,6 +29,7 @@
 /* ================= LIBRARY-PAGE ================= */
 
 @import './library/hero.css';
+@import './library/filter-genre.css';
 @import './library/film-list.css';
 
 /* ================= MODALS-PAGE ================= */
