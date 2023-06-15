@@ -26,6 +26,9 @@ const sectionLibrary = document.querySelector('.library-film-list');
 const libraryCardList = document.querySelector('.card-list-search-result');
 const loadMoreBtn = document.querySelector('#js-loadmore');
 const librariesKey = 'films-id-array';
+const resetBtn = document.querySelector('.reset-filter-button');
+
+
 
 let arr = [];
 let cardId;
@@ -35,6 +38,9 @@ let currentGenre;
 
 refs.closeModalBtn.addEventListener('click', closeMoreDetails);
 window.addEventListener('load', renderCards);
+resetBtn.addEventListener('click', () => {
+  Location.reload();
+});
 
 const perPage = 9;
 let page = 1;
