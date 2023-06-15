@@ -1,5 +1,7 @@
 import { addYears } from './sort-films-years';
 
+import {fetchSearch} from '../fetches/fetch-search';
+
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
 
 import {fetchTrendingWeekMovies} from '../fetches/fetch-trendings-week';
@@ -26,6 +28,7 @@ const refs = {
   cardListSearchResult: document.querySelector('.card-list-search-result'),
   paginationEl: document.querySelector('.tui-pagination'),
   searchResult: document.querySelector('.search-result'),
+  yearInputValue: document.querySelector('.year-of-film-search-form'),
 };
 
 let arr = [];
@@ -90,10 +93,7 @@ function onAddEventListener() {
   })
 }
 
-// ------------------ Query catalog cards markup by keyword ------------------ //
-import {fetchSearch} from '../fetches/fetch-search';
-// import flatpickr from 'flatpickr';
-// import 'flatpickr/dist/flatpickr.min.css';
+
 
 const searchForm = document.querySelector('.search-form');
 const searchNameInput = document.querySelector('.input-film-name-search-form')
@@ -101,16 +101,17 @@ const searchNameInput = document.querySelector('.input-film-name-search-form')
 const onSubmit = (event) => {
   event.preventDefault();
   const searchInputValue = searchNameInput.value.trim();
+  const yearInputValue = refs.yearInputValue.value.trim();
 
   if (searchInputValue !== '') {
-    displayQueryFilmCatalog(searchInputValue);
+    displayQueryFilmCatalog(searchInputValue, 1, yearInputValue);
       };
 }
 searchForm.addEventListener('submit', onSubmit);
 
-const displayQueryFilmCatalog  = async (inputValue) => {
+const displayQueryFilmCatalog  = async (inputValue, page, year) => {
   refs.cardListSearchResult.innerHTML = "";
-  let queryData = await fetchSearch(inputValue, 1);
+  let queryData = await fetchSearch(inputValue, page, year);
   if(queryData.total_results !== 0){
     const genresData = await fetchGenres()
 
@@ -228,7 +229,7 @@ async function OnFetchTrendingWeeks (event) {
 async function OnSearchFetch (eventData){
   refs.cardListSearchResult.innerHTML = "";
   const inputValue = searchNameInput.value.trim() 
-  let queryData = await fetchSearch(inputValue, eventData.page);
+  let queryData = await fetchSearch(inputValue, eventData.page, refs.yearInputValue.value.trim());
 
   const genresData = await fetchGenres()
 

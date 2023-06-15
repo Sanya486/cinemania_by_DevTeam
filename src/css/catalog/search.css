@@ -57,7 +57,7 @@ gap: 12px;
     padding-left: 20px;
     padding-right: 40px;
 
-    width: 224px;
+    width: 170px;
     height: 40px;
 
     font-family: inherit;
@@ -77,7 +77,7 @@ body.light .input-film-name-search-form::placeholder{
 body.light .input-film-name-search-form{
     color: var(--light-theme-medium-text-color);
     background-color: #F5F5F5;
-    border: 1px solid var(--light-theme-medium-text-color);
+    border: 1px solid var(--dark-theme-dark-text-color);
 
 }
 .film-year-search-form {
@@ -98,6 +98,22 @@ font-weight: 500;
 font-size: 14px;
 line-height: 1.14;
 }
+
+body.light .year-of-film-search-form.yearpicker{
+    border: 1px solid var(--dark-theme-dark-text-color);
+}
+
+.year-of-film-search-form::-webkit-outer-spin-button,
+.year-of-film-search-form::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+
+.year-of-film-search-form[type=number] {
+  -moz-appearance: textfield;
+}
+
 .year-of-film-search-form :focus {
     outline: none;
     border: none;

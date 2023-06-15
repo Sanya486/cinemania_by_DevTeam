@@ -4,7 +4,7 @@ import Notiflix from 'notiflix';
 const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
 const URL = 'https://api.themoviedb.org/3/search/movie?';
 
-const fetchSearch = async (keyword, page = 1) => {
+const fetchSearch = async (keyword, page = 1, year) => {
   if (!keyword) {
     Notiflix.Notify.failure(
       'Please enter the title of the movie, the year of release or both.'
@@ -21,9 +21,9 @@ const fetchSearch = async (keyword, page = 1) => {
     params.query = keyword;
   }
 
-  // if (year) {
-  //   params.year = year;
-  // }
+  if (year) {
+    params.year = year;
+  }
 
   const response = await axios.get(URL, {
     params,

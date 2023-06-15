@@ -3,6 +3,14 @@
     --border-color: #595959;
     --text-color: #B7B7B7;
     --selected-text-color: #F87719;
+    --hover-background-color: #302f2f;
+}
+
+:root body.light{
+    --background-color: #ffffff;
+    --border-color: #595959;
+    --text-color: #000000;
+    --selected-text-color: #F87719;
     --hover-background-color: #000000;
 }
 
