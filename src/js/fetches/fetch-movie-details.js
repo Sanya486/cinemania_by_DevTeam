@@ -18,7 +18,8 @@ const fetchMovieDetails = async (movieId) => {
     const date = data.release_date;
     const id = data.id;
 
-    return {
+  return {
+      data,
       poster,
       title,
       overview,
