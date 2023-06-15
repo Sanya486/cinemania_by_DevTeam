@@ -7,6 +7,7 @@ const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
   trailerModal: document.querySelector('.trailer-modal-backdrop'),
   trailerModalContent: document.querySelector('.trailer-modal-content'),
+  trailerErrorImage: document.querySelector('.trailer-placeholder-default'),
   moreDetail: document.querySelector('.modal-film-info'),
   closeModalBtn: document.querySelector('.modal-film-info .close-modal'),
   closeTrailerBtn: document.querySelector('.close-trailer-btn'),
@@ -85,6 +86,7 @@ function updateMarkup() {
 }
 
 function onNotMarkup() {
+  Notify.info(`OOPS... You don't have any movies at your library.`)
   const emptyLibrary = `<div class="container-library container">
       <p class="library-empty__mistake">OOPS... <br> We are very sorry! <br> You don't have any movies at your library.</p>
       <button class="main-accent-sml-btn btn library" onclick="window.location.href='catalog.html'">Search movie</button>
@@ -226,43 +228,42 @@ async function watchTrailer(cardId) {
       const trailerKey = trailers[0].key;
 
       const trailerContent = showTrailer(trailerKey);
-      refs.trailerModalContent.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
+      refs.trailerModalContent.innerHTML = trailerContent;
+      // if (progress) {
+      //   // saveWatchProgress(cardId, progress);
+      // }
     } else {
-      const errorContent = showError();
-      refs.trailerModal.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
+      showErrorModal();
     }
   } catch (error) {
     console.error('Error fetching trailer:', error);
+    showErrorModal();
   }
 }
 
 function showTrailer(trailerKey) {
-  return `
-    <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-  `;
+  if (viewportWidth <= 767) {
+    return `
+      <iframe width="250" height="160" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    `;
+  } else {
+    return `
+      <iframe width="600" height="300" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    `;
+  }
 }
 
-function showError() {
-  return `
-    <div class="trailer-error-info">
-      <p>OOPS...</p>
-      <p>We are very sorry!</p>
-      <p>But we couldn't find the trailer.</p>
-    </div>
-    <picture>
-      <source srcset="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/mobile/trailer-placeholder-2x.png, 2x" 
-              media="(max-width: 320px)">
-      <source srcset="../../images/trailer-placeholder/tablet/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/tablet/trailer-placeholder-2x.png, 2x" 
-              media="(max-width: 768px)">
-      <source srcset="../../images/trailer-placeholder/desktop/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/desktop/trailer-placeholder-2x.png, 2x" 
-              media="(min-width: 769px)">
-      <img src="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png" alt="Traier is not found">
-    </picture>
-    </div>
+function showErrorModal() {
+  const errorContent = `
+    <div class="error-mode-content">
+      <div class="trailer-error-info">
+        <p>OOPS...</p>
+        <p>We are very sorry!</p>
+        <p>But we couldn't find the trailer.</p>
+      </div>
   `;
+  trailerErrorImage.classList.remove('is-hidden');
+  refs.trailerModalContent.innerHTML = errorContent;
 }
 
 function onEscape(event) {
