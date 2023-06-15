@@ -15,11 +15,6 @@ const refs = {
   body: document.querySelector('body'),
   scrollUpBtn: document.querySelector('#back-to-top'),
   wrap: document.querySelector('.flex'),
-  selectSection: document.querySelector('.genre-filter'),
-  select: document.querySelector('.select'),
-  selectList: document.querySelector('.select-options'),
-  selectStyled: document.querySelector('.select-styled-content'),
-  selectAll: document.querySelector('.select-styled'),
 };
 
 const sectionLibrary = document.querySelector('.library-film-list');
@@ -31,7 +26,6 @@ let arr = [];
 let cardId;
 let btnatlibrary;
 let localArr = localStorage.getItem(librariesKey);
-let currentGenre;
 
 refs.closeModalBtn.addEventListener('click', closeMoreDetails);
 window.addEventListener('load', renderCards);
@@ -67,7 +61,6 @@ function renderCards() {
         console.error('Error rendering film cards:', error);
       });
   }
-  refs.select.addEventListener('click', onSelectGenre);
 }
 
 function updateMarkup() {
@@ -90,17 +83,15 @@ function updateMarkup() {
         console.error('Error rendering film cards:', error);
       });
   }
-  refs.select.addEventListener('click', onSelectGenre);
 }
 
 function onNotMarkup() {
-  Notify.info(`OOPS... You don't have any movies at your library.`);
+  Notify.info(`OOPS... You don't have any movies at your library.`)
   const emptyLibrary = `<div class="container-library container">
       <p class="library-empty__mistake">OOPS... <br> We are very sorry! <br> You don't have any movies at your library.</p>
       <button class="main-accent-sml-btn btn library" onclick="window.location.href='catalog.html'">Search movie</button>
     </div>`;
   sectionLibrary.innerHTML = emptyLibrary;
-  refs.selectSection.classList.add('hidden');
 }
 
 function toggleLoadMore() {
@@ -131,17 +122,18 @@ function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails);
+  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails)
 }
 
-function closeOnBacdropMoreDetails(e) {
-  closeOnBackdropClick(e, closeMoreDetails);
+function closeOnBacdropMoreDetails (e) {
+  closeOnBackdropClick(e, closeMoreDetails)
 }
 
-function closeOnBackdropClick(e, callback) {
-  if (e.target !== e.currentTarget) {
-    return;
-  } else {
+function closeOnBackdropClick (e, callback){
+  if (e.target !== e.currentTarget){
+    return 
+  }
+  else {
     callback();
   }
 }
@@ -151,8 +143,6 @@ function closeMoreDetails() {
   document.removeEventListener('keydown', onEscapeMoreDetails);
   refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails);
   refs.body.style.overflow = 'auto';
-  refs.selectStyled.textContent = 'Genre';
-  refs.selectStyled.style.color = '#b7b7b7';
 }
 
 function onEscapeMoreDetails(e) {
@@ -225,7 +215,10 @@ function openModal(cardId) {
 
   document.addEventListener('keydown', onEscape);
   refs.closeTrailerBtn.addEventListener('click', closeModal);
+
 }
+
+
 
 async function watchTrailer(cardId) {
   try {
@@ -236,6 +229,9 @@ async function watchTrailer(cardId) {
 
       const trailerContent = showTrailer(trailerKey);
       refs.trailerModalContent.innerHTML = trailerContent;
+      // if (progress) {
+      //   // saveWatchProgress(cardId, progress);
+      // }
     } else {
       showErrorModal();
     }
@@ -282,6 +278,7 @@ function closeModal() {
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeModal);
+
 }
 
 function onCheckLocalStorage() {
@@ -330,51 +327,4 @@ function action() {
 
 function toggleBtnStyles(text) {
   btnatlibrary.textContent = text;
-}
-
-function onSelectGenre(e) {
-  currentGenre = e.target;
-  if (!currentGenre.hasAttribute('id')) {
-    onToggleList();
-    return;
-  }
-  refs.selectStyled.textContent = currentGenre.textContent;
-  onToggleList();
-  onToggleGenreColor(currentGenre);
-  checkFilmsList(currentGenre.textContent);
-}
-
-async function checkFilmsList(currentGenre) {
-  libraryCardList.innerHTML = '';
-  let currentFilms = ``;
-  try {
-    JSON.parse(localArr).forEach(async id => {
-      const data = await fetchMovieDetails(id);
-      if (data.genres.includes(currentGenre)) {
-        const card = await cardMarkup(data.id);
-        libraryCardList.innerHTML += card;
-        onAddEventListener();
-      }
-    });
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-function onToggleGenreColor(currentGenre) {
-  if (currentGenre.id !== '' && refs.body.classList.contains('light')) {
-    refs.selectStyled.style.color = '#282828';
-    return;
-  }
-  if (currentGenre.id !== '') {
-    refs.selectStyled.style.color = '#ffffff';
-  }
-}
-
-function onToggleList() {
-  if (refs.selectList.style.display === 'none') {
-    refs.selectList.style.display = 'block';
-    return;
-  }
-  refs.selectList.style.display = 'none';
 }
