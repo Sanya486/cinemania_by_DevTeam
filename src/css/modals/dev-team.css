@@ -79,7 +79,7 @@ body.light .title-team-name {
 
 .team-member-name {
     font-weight: 500;
-    font-size: 16px;
+    font-size: 17px;
     text-transform: uppercase;
     text-align: center;
 
@@ -103,11 +103,10 @@ body.light .team-member-name {
     color: #B7B7B7;
     
     margin: 0;
-    margin-top: 9px;
     margin-left: auto;
     margin-right: auto;
     padding: 5px;
-    max-width: 160px;
+    min-width: 200px;
 
     border: 1px solid #F84119;
     border-radius: 15px;
@@ -119,6 +118,10 @@ body.light .team-member-role {
 }
 
 .team-member-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
     padding: 15px;
 }
 
@@ -201,6 +204,28 @@ body.light .icon-right {
     stroke:#111111;
 }
 
+.github-icon {
+    fill: #F84119;
+    stroke: #F84119;
+    width: 30px;
+    height: 30px;
+}
+
+.github-icon:hover,
+.github-icon:focus {
+    fill: #ffffff;
+    stroke: #ffffff;
+}
+
+/* LIGTH THEME */
+body.light .github-icon:hover,
+.github-icon:focus {
+    fill: #000000;
+    stroke: #000000;
+}
+
+
+
 
 
 
@@ -241,18 +266,26 @@ body.light .icon-right {
 
 .team-member-role {
     font-size: 8px;
-    max-width: 100px;
+    min-width: 90px;
 }
 
 .team-member-info {
     padding: 5px;
-    margin-top: 13px;
+    margin-top: 8px;
+    gap: 8px;
 }
+
+
 
 .btn-wrapper-slider-modal-team {
     gap: 100px;
     margin-top: 25px;
     
+}
+
+.github-icon {
+    width: 18px;
+    height: 18px;
 }
 
 }
@@ -277,12 +310,12 @@ body.light .icon-right {
 }
 
 .team-member-name {
-    font-size: 12px;
+    font-size: 13px;
 }
 
 .team-member-role {
     font-size: 11px;
-    max-width: 140px;
+    min-width: 160px;
 }
 
 .title-team-name {
@@ -291,10 +324,16 @@ body.light .icon-right {
 
 .team-member-info {
     padding: 0px;
-    margin-top: 13px;
+    margin-top: 10px;
+    gap: 10px;
 }
 
 .btn-wrapper-slider-modal-team {
     margin-top: 40px;
+}
+
+.github-icon {
+    width: 23px;
+    height: 23px;
 }
 }
