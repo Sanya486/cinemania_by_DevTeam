@@ -41,7 +41,7 @@ const genresArray = [];
   }
 
   if (!releaseYear) {
-    year = film.first_air_date.slice(0, 4);
+    year = `-`;
   } else {
     year = releaseYear.slice(0, 4);
   }

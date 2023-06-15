@@ -36,6 +36,8 @@ let cardId;
 let btnatlibrary;
 let localArr = localStorage.getItem('films-id-array');
 let cardsArrRef;
+let inputValue;
+let year;
 
 const viewportWidth = document.body.clientWidth;
 
@@ -99,6 +101,8 @@ const searchForm = document.querySelector('.search-form');
 const searchNameInput = document.querySelector('.input-film-name-search-form')
 
 const onSubmit = (event) => {
+  inputValue = searchNameInput.value.trim() 
+  year = refs.yearInputValue.value.trim()
   event.preventDefault();
   const searchInputValue = searchNameInput.value.trim();
   const yearInputValue = refs.yearInputValue.value.trim();
@@ -226,10 +230,11 @@ async function OnFetchTrendingWeeks (event) {
   scrollUp();
 }
 
+
+
 async function OnSearchFetch (eventData){
   refs.cardListSearchResult.innerHTML = "";
-  const inputValue = searchNameInput.value.trim() 
-  let queryData = await fetchSearch(inputValue, eventData.page, refs.yearInputValue.value.trim());
+  let queryData = await fetchSearch(inputValue, eventData.page, year);
 
   const genresData = await fetchGenres()
 
