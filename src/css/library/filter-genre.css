@@ -98,10 +98,6 @@ body.light .select-options {
   border: 1px solid var(--light-theme-medium-text-color);
 }
 
-/* body.light .select-styled-content {
-  color: var(--light-theme-medium-text-color);
-} */
-
 body.light .select-styled::after {
   content: '';
   background: url(../../images/icons/arrow-down-light.svg) center / cover
@@ -114,8 +110,6 @@ body.light .select-styled::after {
   width: 16px;
   height: 16px;
 }
-
-/* body.light */
 
 /* ======================== TABLET STYLES ======================== */
 
