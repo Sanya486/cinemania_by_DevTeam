@@ -58,7 +58,7 @@ const genresArray = [];
   const moviesListArr = `
     <li class="film-card" id="${id}">
     <div class="img-ovelay"></div>
-    <img class ="film-poster" src="${picture}" alt="${filmName}, ${year}, ${genres}">
+    <img class ="film-poster" loading="lazy" src="${picture}" alt="${filmName}, ${year}, ${genres}">
     <div class="film-card-info">
     <p class="film-name">${filmName}</p>
     <div class="film-wrap">

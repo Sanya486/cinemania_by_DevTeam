@@ -157,7 +157,7 @@ async function markupMoreDetails(currentId) {
     const markup = `<div class="poster"> 
           <img src="https://image.tmdb.org/t/p/original/${
             movieDetails.smallPoster
-          }" class="poster-img" alt="the poster of the movie you have chosen"/>
+          }" class="poster-img" loading="lazy" alt="the poster of the movie you have chosen"/>
         </div><div>
           <h3 class="movie-title">${
             movieDetails.title

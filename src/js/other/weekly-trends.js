@@ -114,7 +114,7 @@ async function markupMoreDetails(currentId) {
     const markup = `<div class="poster"> 
           <img src="https://image.tmdb.org/t/p/original/${
             movieDetails.smallPoster
-          }" class="poster-img" alt="the poster of the movie you have chosen"/>
+          }" class="poster-img" loading="lazy" alt="the poster of the movie you have chosen"/>
         </div><div>
           <h3 class="movie-title">${
             movieDetails.title
@@ -221,7 +221,7 @@ function showError() {
       <source srcset="../../images/trailer-placeholder/desktop/trailer-placeholder-1x.png, 1x, 
                     ../../images/trailer-placeholder/desktop/trailer-placeholder-2x.png, 2x" 
               media="(min-width: 769px)">
-      <img src="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png" alt="Traier is not found">
+      <img src="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png"  loading="lazy" alt="Traier is not found">
     </picture>
     </div>
   `;

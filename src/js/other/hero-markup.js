@@ -123,7 +123,7 @@ function markUpApiHero(filmInfo) {
     </div>
   </div>
   <div class="home-hero-api-movie-bg">
-    <img
+    <img loading="lazy"
       src="https://image.tmdb.org/t/p/original/${smallPoster}"
       srcset="
         https://image.tmdb.org/t/p/original/${smallPoster}  320w,

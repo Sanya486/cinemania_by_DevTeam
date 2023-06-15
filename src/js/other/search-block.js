@@ -310,7 +310,7 @@ async function markupMoreDetails(currentId) {
       picture = picturePAth + movieDetails.smallPoster
     }
     const markup = `<div class="poster"> 
-          <img src="${picture}" class="poster-img" alt="the poster of the movie you have chosen"/>
+          <img src="${picture}" class="poster-img" loading="lazy" alt="the poster of the movie you have chosen"/>
         </div><div>
           <h3 class="movie-title">${
             movieDetails.title
@@ -409,6 +409,7 @@ function showError() {
              <img
           src="${trailerPlaceholder}"
           alt="Trailer is not found"
+          loading="lazy"
           />
          </div>
       </div>

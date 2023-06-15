@@ -30,7 +30,7 @@ const cardMarkup = async movieId => {
           <div class="film-card" id="${fetchData.id}">
           <a class="card-link" href="">
           <div class="img-ovelay"></div>
-          <img class ="film-poster" src="https://image.tmdb.org/t/p/original${fetchData.smallPoster}" alt="${fetchData.title}, ${fetchData.year}, ${fetchData.genres}">
+          <img class ="film-poster" loading="lazy" src="https://image.tmdb.org/t/p/original${fetchData.smallPoster}" alt="${fetchData.title}, ${fetchData.year}, ${fetchData.genres}">
           <div class="film-card-info">
           <p class="film-name">${fetchData.title}</p>
           <div class="film-wrap">
