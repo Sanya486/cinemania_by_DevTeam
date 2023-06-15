@@ -47,6 +47,11 @@
       max-height: 574px;
       border-radius: 5px;
 }
+
+.home-trends-list .film-card:not(:last-of-type) {
+  margin-bottom: 16px;
+}
+
 .home-trends-card-poster:hover {
   transform: scale(1.01);
   box-shadow: 1px 1px 5px 1px rgba(255, 107, 8, 0.42);

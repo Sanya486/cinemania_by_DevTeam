@@ -7,7 +7,6 @@ const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
   trailerModal: document.querySelector('.trailer-modal-backdrop'),
   trailerModalContent: document.querySelector('.trailer-modal-content'),
-  trailerErrorImage: document.querySelector('.trailer-placeholder-default'),
   moreDetail: document.querySelector('.modal-film-info'),
   closeModalBtn: document.querySelector('.modal-film-info .close-modal'),
   closeTrailerBtn: document.querySelector('.close-trailer-btn'),
@@ -15,8 +14,12 @@ const refs = {
   body: document.querySelector('body'),
   scrollUpBtn: document.querySelector('#back-to-top'),
   wrap: document.querySelector('.flex'),
+  emptyLibrary: document.querySelector('.not-genres-wrap'),
+  selectSection: document.querySelector('.genre-filter'),
+  select: document.querySelector('.select'),
+  selectList: document.querySelector('.select-options'),
+  selectStyled: document.querySelector('.select-styled-content'),
 };
-
 const sectionLibrary = document.querySelector('.library-film-list');
 const libraryCardList = document.querySelector('.card-list-search-result');
 const loadMoreBtn = document.querySelector('#js-loadmore');
@@ -26,6 +29,8 @@ let arr = [];
 let cardId;
 let btnatlibrary;
 let localArr = localStorage.getItem(librariesKey);
+let allAvailableGenres;
+let currentGenre;
 
 refs.closeModalBtn.addEventListener('click', closeMoreDetails);
 window.addEventListener('load', renderCards);
@@ -54,6 +59,8 @@ function renderCards() {
       .then(filmCards => {
         const filmCardsHTML = filmCards.join('');
         libraryCardList.innerHTML += filmCardsHTML;
+        allAvailableGenres = document.querySelectorAll('.film-feature');
+
         toggleLoadMore();
         onAddEventListener();
       })
@@ -61,37 +68,44 @@ function renderCards() {
         console.error('Error rendering film cards:', error);
       });
   }
+  refs.select.addEventListener('click', onSelectGenre);
 }
 
-function updateMarkup() {
+async function updateMarkup() {
   page = 1;
   localArr = localStorage.getItem(librariesKey);
   if (localArr === null || JSON.parse(localArr).length === 0) {
     onNotMarkup();
-  } else {
-    const renderPromises = JSON.parse(localArr)
-      .map(id => cardMarkup(id))
-      .slice((page - 1) * perPage, page * perPage);
-
-    Promise.all(renderPromises)
-      .then(filmCards => {
-        const filmCardsHTML = filmCards.join('');
-        libraryCardList.innerHTML = filmCardsHTML;
-        toggleLoadMore();
-      })
-      .catch(error => {
-        console.error('Error rendering film cards:', error);
-      });
+    return;
   }
+  const renderPromises = JSON.parse(localArr)
+    .map(id => cardMarkup(id))
+    .slice((page - 1) * perPage, page * perPage);
+
+  Promise.all(renderPromises)
+    .then(filmCards => {
+      const filmCardsHTML = filmCards.join('');
+      libraryCardList.innerHTML = filmCardsHTML;
+      allAvailableGenres = document.querySelectorAll('.film-feature');
+      toggleLoadMore();
+      onAddEventListener();
+      if (refs.selectStyled.textContent !== 'Genre') {
+        onFilterFilms(refs.selectStyled);
+      }
+    })
+    .catch(error => {
+      console.error('Error rendering film cards:', error);
+    });
+  refs.select.addEventListener('click', onSelectGenre);
 }
 
 function onNotMarkup() {
-  Notify.info(`OOPS... You don't have any movies at your library.`)
   const emptyLibrary = `<div class="container-library container">
       <p class="library-empty__mistake">OOPS... <br> We are very sorry! <br> You don't have any movies at your library.</p>
       <button class="main-accent-sml-btn btn library" onclick="window.location.href='catalog.html'">Search movie</button>
     </div>`;
   sectionLibrary.innerHTML = emptyLibrary;
+  refs.selectSection.classList.add('hidden');
 }
 
 function toggleLoadMore() {
@@ -114,6 +128,7 @@ function onClick(e) {
   e.preventDefault();
   cardId = +e.currentTarget.id;
   openModalDetails(cardId);
+  refs.selectList.style.display = 'none';
   refs.body.style.overflow = 'hidden';
   refs.scrollUpBtn.style.display = 'none';
 }
@@ -122,18 +137,17 @@ function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails)
+  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails);
 }
 
-function closeOnBacdropMoreDetails (e) {
-  closeOnBackdropClick(e, closeMoreDetails)
+function closeOnBacdropMoreDetails(e) {
+  closeOnBackdropClick(e, closeMoreDetails);
 }
 
-function closeOnBackdropClick (e, callback){
-  if (e.target !== e.currentTarget){
-    return 
-  }
-  else {
+function closeOnBackdropClick(e, callback) {
+  if (e.target !== e.currentTarget) {
+    return;
+  } else {
     callback();
   }
 }
@@ -157,7 +171,7 @@ async function markupMoreDetails(currentId) {
     const markup = `<div class="poster"> 
           <img src="https://image.tmdb.org/t/p/original/${
             movieDetails.smallPoster
-          }" class="poster-img" loading="lazy" alt="the poster of the movie you have chosen"/>
+          }" class="poster-img" alt="the poster of the movie you have chosen"/>
         </div><div>
           <h3 class="movie-title">${
             movieDetails.title
@@ -215,10 +229,7 @@ function openModal(cardId) {
 
   document.addEventListener('keydown', onEscape);
   refs.closeTrailerBtn.addEventListener('click', closeModal);
-
 }
-
-
 
 async function watchTrailer(cardId) {
   try {
@@ -228,42 +239,43 @@ async function watchTrailer(cardId) {
       const trailerKey = trailers[0].key;
 
       const trailerContent = showTrailer(trailerKey);
-      refs.trailerModalContent.innerHTML = trailerContent;
-      // if (progress) {
-      //   // saveWatchProgress(cardId, progress);
-      // }
+      refs.trailerModalContent.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
     } else {
-      showErrorModal();
+      const errorContent = showError();
+      refs.trailerModal.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
     }
   } catch (error) {
     console.error('Error fetching trailer:', error);
-    showErrorModal();
   }
 }
 
 function showTrailer(trailerKey) {
-  if (viewportWidth <= 767) {
-    return `
-      <iframe width="250" height="160" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    `;
-  } else {
-    return `
-      <iframe width="600" height="300" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    `;
-  }
+  return `
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+  `;
 }
 
-function showErrorModal() {
-  const errorContent = `
-    <div class="error-mode-content">
-      <div class="trailer-error-info">
-        <p>OOPS...</p>
-        <p>We are very sorry!</p>
-        <p>But we couldn't find the trailer.</p>
-      </div>
+function showError() {
+  return `
+    <div class="trailer-error-info">
+      <p>OOPS...</p>
+      <p>We are very sorry!</p>
+      <p>But we couldn't find the trailer.</p>
+    </div>
+    <picture>
+      <source srcset="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png, 1x, 
+                    ../../images/trailer-placeholder/mobile/trailer-placeholder-2x.png, 2x" 
+              media="(max-width: 320px)">
+      <source srcset="../../images/trailer-placeholder/tablet/trailer-placeholder-1x.png, 1x, 
+                    ../../images/trailer-placeholder/tablet/trailer-placeholder-2x.png, 2x" 
+              media="(max-width: 768px)">
+      <source srcset="../../images/trailer-placeholder/desktop/trailer-placeholder-1x.png, 1x, 
+                    ../../images/trailer-placeholder/desktop/trailer-placeholder-2x.png, 2x" 
+              media="(min-width: 769px)">
+      <img src="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png" alt="Traier is not found">
+    </picture>
+    </div>
   `;
-  trailerErrorImage.classList.remove('is-hidden');
-  refs.trailerModalContent.innerHTML = errorContent;
 }
 
 function onEscape(event) {
@@ -278,7 +290,6 @@ function closeModal() {
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeModal);
-
 }
 
 function onCheckLocalStorage() {
@@ -327,4 +338,74 @@ function action() {
 
 function toggleBtnStyles(text) {
   btnatlibrary.textContent = text;
+}
+
+function onSelectGenre(e) {
+  currentGenre = e.target;
+  if (!currentGenre.hasAttribute('id')) {
+    onToggleList();
+    return;
+  }
+  refs.selectStyled.textContent = currentGenre.textContent;
+  onToggleList();
+  onToggleGenreColor(currentGenre);
+  onFilterFilms(currentGenre);
+}
+
+function onToggleGenreColor(currentGenre) {
+  if (currentGenre.id !== '' && refs.body.classList.contains('light')) {
+    refs.selectStyled.style.color = '#282828';
+    return;
+  }
+  if (currentGenre.id !== '') {
+    refs.selectStyled.style.color = '#ffffff';
+  }
+}
+
+function onToggleList() {
+  if (refs.selectList.style.display === 'none') {
+    refs.selectList.style.display = 'block';
+    return;
+  }
+  refs.selectList.style.display = 'none';
+}
+
+async function onFilterFilms(currentGenre) {
+  libraryCardList.classList.remove('hidden');
+  refs.emptyLibrary.innerHTML = '';
+
+  if (currentGenre.textContent === 'All') {
+    updateMarkup();
+    return;
+  }
+  const arrayOfAllAvailableGenres = [...allAvailableGenres];
+
+  if (arrayOfAllAvailableGenres.length <= perPage) {
+    loadMoreBtn.classList.add('hidden');
+  }
+
+  const filmWithChooseGenre = arrayOfAllAvailableGenres.filter(el =>
+    el.textContent.includes(currentGenre.textContent)
+  );
+
+  if (filmWithChooseGenre.length === 0) {
+    const notGenresString = `<p class="library-genres-empty">OOPS...<br>We are very sorry!<br>You don't have any movies with this genre at your library.</p>`;
+    refs.selectList.style.display = 'block';
+    refs.selectList.style.display = 'none';
+    libraryCardList.classList.add('hidden');
+    refs.emptyLibrary.innerHTML = notGenresString;
+    return;
+  }
+
+  let stringFilms = '';
+
+  for (const film of filmWithChooseGenre) {
+    const cardRef = film.parentNode.parentNode.parentNode.parentNode;
+    const updatedMarkup = await cardMarkup(cardRef.id);
+    stringFilms += updatedMarkup;
+  }
+
+  libraryCardList.innerHTML = stringFilms;
+
+  toggleLoadMore();
 }

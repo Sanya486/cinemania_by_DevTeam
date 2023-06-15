@@ -5,21 +5,13 @@ body.light .container-library {
 }
 
 .container-library {
-  padding-top: 44px;
   padding-right: 20px;
-  padding-bottom: 42px;
   padding-left: 20px;
-
   text-align: center;
   font-size: 20px;
   color: var(--light-color);
 
   line-height: 1.4;
-}
-
-.container.library {
-  padding-top: 140px;
-  padding-bottom: 60px;
 }
 
 .library-empty__mistake {
@@ -31,9 +23,34 @@ body.light .container-library {
   margin-left: auto;
 }
 
+.library-film-list {
+  padding-top: 16px;
+  padding-bottom: 40px;
+}
+
+.library-film-list .card-list-search-result {
+  margin: 0;
+}
+
+.library-genres-empty {
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.4;
+  text-align: center;
+  color: var(--light-color);
+}
+
+body.light .library-genres-empty {
+  color: var(--dark-color);
+}
+
 /* ======================== TABLET STYLES ======================== */
 @media screen and (min-width: 768px) {
   /* .container прописувати не потрібно */
+  .library-film-list {
+    padding-top: 48px;
+    padding-bottom: 96px;
+  }
 }
 
 /* ======================== DESKTOP STYLES ======================== */

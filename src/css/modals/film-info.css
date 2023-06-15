@@ -1,9 +1,6 @@
 /* ======================== MOBILE STYLES ======================== */
 
 .modal-film-info{
-    /* display: flex;
-    justify-content: center;
-    align-items: center; */
 
     z-index: 5;
     width: 100%;
@@ -49,14 +46,26 @@ body.light .modal-film-info .film-info {
     border: none;
 }
 
+
+
 .modal-film-info .film-info .close-modal svg {
    stroke: var(--dark-theme-light-text-color);
-
    transition: stroke 250ms var(--action-transition);
 }
 
+.modal-film-info .film-info .close-modal svg:hover {
+    stroke: #ff6b086b;
+
+}
+
 body.light .modal-film-info .film-info .close-modal svg {
-    stroke: var(--light-theme-dark-text-color)
+    stroke: var(--light-theme-dark-text-color);
+    transition: stroke 250ms var(--action-transition);
+
+}
+
+body.light .modal-film-info .film-info .close-modal svg:hover {
+    stroke: #ff6b086b;
 }
 
 .modal-film-info .film-info .close-modal svg:hover {
