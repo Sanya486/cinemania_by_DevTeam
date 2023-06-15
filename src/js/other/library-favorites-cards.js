@@ -38,9 +38,7 @@ let currentGenre;
 
 refs.closeModalBtn.addEventListener('click', closeMoreDetails);
 window.addEventListener('load', renderCards);
-resetBtn.addEventListener('click', () => {
-  Location.reload();
-});
+
 
 const perPage = 9;
 let page = 1;
@@ -74,6 +72,9 @@ function renderCards() {
       });
   }
   refs.select.addEventListener('click', onSelectGenre);
+  resetBtn.addEventListener('click', () => {
+    document.location.reload()
+  });
 }
 
 function updateMarkup() {
@@ -97,6 +98,9 @@ function updateMarkup() {
       });
   }
   refs.select.addEventListener('click', onSelectGenre);
+  resetBtn.addEventListener('click', () => {
+    document.location.reload()
+  });
 }
 
 function onNotMarkup() {
