@@ -85,6 +85,21 @@
   height: 16px;
 }
 
+.reset-filter-button {
+  position: absolute;
+  height: 41px;
+  right: -128px;
+  padding: 12px 16px;
+  background-color: var(--dark-color);
+  border: 1px solid var(--light-color);
+  border-radius: 8px;
+  transition: all 250ms var(--action-transition);
+  color: var(--dark-theme-dark-text-color);
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.14;
+}
+
 /* ligth-theme */
 
 body.light .select-styled {
@@ -111,6 +126,12 @@ body.light .select-styled::after {
   height: 16px;
 }
 
+body.light .reset-filter-button {
+  background-color: var(--light-color);
+  color: #b7b7b7;
+  border: 1px solid var(--light-theme-medium-text-color);
+}
+
 /* ======================== TABLET STYLES ======================== */
 
 @media screen and (min-width: 768px) {
@@ -129,6 +150,10 @@ body.light .select-styled::after {
 
   .select-styled {
     padding: 14px 86px 14px 20px;
+  }
+
+  .reset-filter-button {
+    height: 44px;
   }
 }
 
@@ -154,5 +179,9 @@ body.light .select-styled::after {
     font-weight: 500;
     font-size: 16px;
     line-height: 1.19;
+  }
+
+  .reset-filter-button {
+    height: 49px;
   }
 }
