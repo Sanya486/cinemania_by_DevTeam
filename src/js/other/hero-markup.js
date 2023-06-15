@@ -124,11 +124,11 @@ function markUpApiHero(filmInfo) {
   </div>
   <div class="home-hero-api-movie-bg">
     <img loading="lazy"
-      src="https://image.tmdb.org/t/p/original/${smallPoster}"
+      src="https://image.tmdb.org/t/p/w400/${smallPoster}"
       srcset="
-        https://image.tmdb.org/t/p/original/${smallPoster}  320w,
-        https://image.tmdb.org/t/p/original/${poster}  768w,
-        https://image.tmdb.org/t/p/original/${poster} 1280w
+        https://image.tmdb.org/t/p/w400/${smallPoster}  320w,
+        https://image.tmdb.org/t/p/w400/${poster}  768w,
+        https://image.tmdb.org/t/p/w400/${poster} 1280w
       "
       sizes="(max-width: 320px) 320px,
           (max-width: 768px) 380px,
@@ -277,7 +277,7 @@ async function markupMoreDetails(currentId) {
   try {
     const movieDetails = await fetchMovieDetails(currentId);
     const markup = `<div class="poster"> 
-          <img src="https://image.tmdb.org/t/p/original/${
+          <img src="https://image.tmdb.org/t/p/w400/${
             movieDetails.smallPoster
           }" class="poster-img" alt="the poster of the movie you have chosen"/>
         </div><div>

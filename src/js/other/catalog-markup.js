@@ -3,7 +3,7 @@ import placeHolder from '../../images/components/post-holder.jpg'
 
 
 function catalogMarkup(film) {
-  const picturePAth = `https://image.tmdb.org/t/p/original`
+  const picturePAth = `https://image.tmdb.org/t/p/w400`
   try {
 
 const genresArray = [];

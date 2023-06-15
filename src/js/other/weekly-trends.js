@@ -112,7 +112,7 @@ async function markupMoreDetails(currentId) {
   try {
     const movieDetails = await fetchMovieDetails(currentId);
     const markup = `<div class="poster"> 
-          <img src="https://image.tmdb.org/t/p/original/${
+          <img src="https://image.tmdb.org/t/p/w400/${
             movieDetails.smallPoster
           }" class="poster-img" loading="lazy" alt="the poster of the movie you have chosen"/>
         </div><div>

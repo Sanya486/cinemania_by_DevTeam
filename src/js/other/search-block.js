@@ -304,7 +304,7 @@ function onEscapeMoreDetails(e) {
 
 async function markupMoreDetails(currentId) {
   try {
-    const picturePAth = `https://image.tmdb.org/t/p/original`
+    const picturePAth = `https://image.tmdb.org/t/p/w400`
     let picture;
     const movieDetails = await fetchMovieDetails(currentId);
 
