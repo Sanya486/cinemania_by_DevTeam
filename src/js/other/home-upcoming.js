@@ -113,9 +113,9 @@ function onCheckViewport() {
 function onCheckOrientation(e) {
   let poster;
   if (e.matches) {
-    poster = `https://image.tmdb.org/t/p/w400/${filmInfo.smallPoster}`;
+    poster = `https://image.tmdb.org/t/p/original/${filmInfo.smallPoster}`;
   } else {
-    poster = `https://image.tmdb.org/t/p/w400/${filmInfo.poster}`;
+    poster = `https://image.tmdb.org/t/p/original/${filmInfo.poster}`;
   }
   try {
     const voteAv = onCheckRating(filmInfo);
@@ -129,9 +129,9 @@ function onCheckOrientation(e) {
 
 function onCheckCurrentPoster(currentPoster, film) {
   if (currentPoster === 'poster') {
-    return `https://image.tmdb.org/t/p/w400/${film.poster}`;
+    return `https://image.tmdb.org/t/p/original/${film.poster}`;
   }
-  return `https://image.tmdb.org/t/p/w400/${film.smallPoster}`;
+  return `https://image.tmdb.org/t/p/original/${film.smallPoster}`;
 }
 
 function onAddBtnListener() {
