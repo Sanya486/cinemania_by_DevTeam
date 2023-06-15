@@ -199,6 +199,7 @@ function closeOnBackdropClick (e, callback){
 
 function closeMoreDetails() {
   refs.moreDetail.classList.add('is-hidden');
+  refs.body.style.overflow = 'auto';
 
   document.removeEventListener('keydown', onEscapeMoreDetails);
   refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails)
