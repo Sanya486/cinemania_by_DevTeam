@@ -192,6 +192,7 @@ body.light .home-hero {
   line-height: 1.16;
   position: relative;
   /* margin: 1px; */
+  color: var(--dark-color)
 }
 
 .home-hero-api-movie-btns .main-accent-sml-btn::before {
