@@ -6,6 +6,7 @@ export { homeUpcoming };
 const refs = {
   filmBlock: document.querySelector('.home-upcoming-film-wrap-js'),
 };
+
 let filmInfo;
 let arr = [];
 let btnRef;
