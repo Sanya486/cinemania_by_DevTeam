@@ -1,4 +1,4 @@
-import { rateArray } from './rate-markup';
+import { rateArray } from '../utils/rate-markup';
 import placeHolder from '../../images/components/post-holder.jpg';
 
 function catalogMarkup(film) {
@@ -13,12 +13,12 @@ function catalogMarkup(film) {
         return genresArray.push(genre.name);
       }
     });
-    
+
     const id = film.id;
     const poster = film.poster_path;
     const genres = genresArray.join(', ');
     const releaseYear = film.release_date;
-    
+
     let year = '';
     let picture;
     let filmName;

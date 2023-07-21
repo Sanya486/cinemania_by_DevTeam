@@ -1,15 +1,13 @@
-import { addYears } from './sort-films-years';
-
-import {fetchSearch} from '../fetches/fetch-search';
+import { fetchSearch } from '../fetches/fetch-search';
 
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
 
-import {fetchTrendingWeekMovies} from '../fetches/fetch-trendings-week';
+import { fetchTrendingWeekMovies } from '../fetches/fetch-trendings-week';
 import { fetchGenres } from '../fetches/fetch-genres';
 import { catalogMarkup } from './catalog-markup';
 
-import placeHolder from '../../images/components/post-holder.jpg'
-import trailerPlaceholder from  '../../images/trailer-placeholder/desktop/trailer-placeholder-1@1x.png'
+import placeHolder from '../../images/components/post-holder.jpg';
+import trailerPlaceholder from '../../images/trailer-placeholder/desktop/trailer-placeholder-1@1x.png';
 
 import { fetchTrailers } from '../fetches/fetch-trailer';
 import Pagination from 'tui-pagination';
@@ -49,242 +47,239 @@ refs.closeModalBtn.addEventListener('click', closeMoreDetails);
 
 // ------------------ Onload window catalog cards markup ------------------ //
 
-async function displayWeeklyTrendsCatalog (page) {
-  
+async function displayWeeklyTrendsCatalog(page) {
   try {
-    const genresData = await fetchGenres()
+    const genresData = await fetchGenres();
     let trendData = await fetchTrendingWeekMovies(page);
 
-  let genresObjectData = trendData.weeklyTrendsList.map(film => {
-    return film.genre_ids.map(genre => {
-      return genresData.find(option => option.id === genre)
-    })  
-  })
+    let genresObjectData = trendData.weeklyTrendsList.map(film => {
+      return film.genre_ids.map(genre => {
+        return genresData.find(option => option.id === genre);
+      });
+    });
 
-  trendData.weeklyTrendsList.forEach((film, index) => film.genre_ids = genresObjectData[index])
+    trendData.weeklyTrendsList.forEach(
+      (film, index) => (film.genre_ids = genresObjectData[index])
+    );
 
-  trendData.weeklyTrendsList.forEach(film => { 
-    refs.cardListSearchResult.insertAdjacentHTML('beforeend', catalogMarkup(film))
-  })
+    trendData.weeklyTrendsList.forEach(film => {
+      refs.cardListSearchResult.insertAdjacentHTML(
+        'beforeend',
+        catalogMarkup(film)
+      );
+    });
 
+    onAddEventListener();
 
-  onAddEventListener()
-
-  pagination(
-    {totalItems: trendData.weeklyTrendsTotal,
-    itemsPerPage: trendData.weeklyTrendsList.length,
-    fetchCallBack: OnFetchTrendingWeeks,
-    })
+    pagination({
+      totalItems: trendData.weeklyTrendsTotal,
+      itemsPerPage: trendData.weeklyTrendsList.length,
+      fetchCallBack: OnFetchTrendingWeeks,
+    });
   } catch (error) {
-    console.log(error)
+    console.log(error);
   }
-
-
-};
+}
 
 window.addEventListener('load', displayWeeklyTrendsCatalog(1));
 
 function onAddEventListener() {
-  refs.cardListSearchResult.addEventListener('click', (e) => {
-    if (e.target !== e.currentTarget){
-      cardId = +e.target.parentNode.id 
+  refs.cardListSearchResult.addEventListener('click', e => {
+    if (e.target !== e.currentTarget) {
+      cardId = +e.target.parentNode.id;
       openModalDetails(cardId);
       refs.body.style.overflow = 'hidden';
       refs.scrollUpBtn.style.display = 'none';
     }
-  })
+  });
 }
 
-
-
 const searchForm = document.querySelector('.search-form');
-const searchNameInput = document.querySelector('.input-film-name-search-form')
+const searchNameInput = document.querySelector('.input-film-name-search-form');
 
-const onSubmit = (event) => {
-  inputValue = searchNameInput.value.trim() 
-  year = refs.yearInputValue.value.trim()
+const onSubmit = event => {
+  inputValue = searchNameInput.value.trim();
+  year = refs.yearInputValue.value.trim();
   event.preventDefault();
   const searchInputValue = searchNameInput.value.trim();
   const yearInputValue = refs.yearInputValue.value.trim();
 
   if (searchInputValue !== '') {
     displayQueryFilmCatalog(searchInputValue, 1, yearInputValue);
-      };
-}
+  }
+};
 searchForm.addEventListener('submit', onSubmit);
 
-const displayQueryFilmCatalog  = async (inputValue, page, year) => {
-  refs.cardListSearchResult.innerHTML = "";
+const displayQueryFilmCatalog = async (inputValue, page, year) => {
+  refs.cardListSearchResult.innerHTML = '';
   let queryData = await fetchSearch(inputValue, page, year);
-  if(queryData.total_results !== 0){
-    const genresData = await fetchGenres()
+  if (queryData.total_results !== 0) {
+    const genresData = await fetchGenres();
 
     let genresObjectData = queryData.results.map(film => {
       return film.genre_ids.map(genre => {
-        return genresData.find(option => option.id === genre)
-      })  
-    })
-  
-    queryData.results.forEach((film, index) => film.genre_ids = genresObjectData[index])
-  // ======================================
-  
-  
-    queryData.results.forEach(film => { 
-      refs.cardListSearchResult.insertAdjacentHTML('beforeend', catalogMarkup(film))
-    })
-  
-    pagination(
-      {totalItems: +queryData.total_results,
-        itemsPerPage: +queryData.results.length,
-        fetchCallBack: OnSearchFetch,
-      })
-  }
-  else{
-  
+        return genresData.find(option => option.id === genre);
+      });
+    });
+
+    queryData.results.forEach(
+      (film, index) => (film.genre_ids = genresObjectData[index])
+    );
+    // ======================================
+
+    queryData.results.forEach(film => {
+      refs.cardListSearchResult.insertAdjacentHTML(
+        'beforeend',
+        catalogMarkup(film)
+      );
+    });
+
+    pagination({
+      totalItems: +queryData.total_results,
+      itemsPerPage: +queryData.results.length,
+      fetchCallBack: OnSearchFetch,
+    });
+  } else {
     refs.paginationEl.innerHTML = ``;
     refs.cardListSearchResult.innerHTML = `<p class="oops-catalog-search">OOPS...</br>
     We are very sorry!</br>
-    We don’t have any results matching your search.</p>`
+    We don’t have any results matching your search.</p>`;
   }
-// =======================================
+  // =======================================
+};
 
-
-
-
-}
-
-function pagination ({totalItems, itemsPerPage, fetchCallBack = un}) {
-  
+function pagination({ totalItems, itemsPerPage, fetchCallBack = un }) {
   const refs = {
-      tuiPaginationEl: document.querySelector('#pagination')
-  }
+    tuiPaginationEl: document.querySelector('#pagination'),
+  };
 
-  refs.tuiPaginationEl.innerHTML = "";
+  refs.tuiPaginationEl.innerHTML = '';
 
   function formatPageNumber(pageNumber) {
-      return pageNumber.toString().padStart(2, '0');
-  }  
-
-
-  const options = {
-      totalItems,
-      itemsPerPage,
-      visiblePages: 3,
-      page: 1,
-      centerAlign: false,
-      firstItemClassName: 'tui-first-child',
-      lastItemClassName: 'tui-last-child',
-      template: {
-          page: function (data) {
-              const currentPage = data.page; 
-              const pageNumber = formatPageNumber(currentPage); 
-              return `<span class="tui-page-btn btn">${pageNumber}</span>`;
-            },
-        currentPage: function (data) {
-          const cuurentPage = data.page;
-          const pageNumber = formatPageNumber(cuurentPage); 
-          return `<strong class="tui-page-btn tui-is-selected btn">${pageNumber}</strong>`;
-        },    
-
-        moveButton:
-          '<a href="#" class="tui-page-btn tui-{{type}}">' +
-            '<span class="tui-ico-{{type}}">{{type}}</span>' +
-          '</a>',
-        disabledMoveButton:
-          '<div class="tui-page-btn tui-is-disabled tui-{{type}}">' +
-            '<div class="tui-ico-{{type}}">{{type}}</div>' +
-          '</div>',
-        moreButton:
-          '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip btn">' +
-            '<span class="tui-ico-ellip">...</span>' +
-          '</a>'
-      },
-      
-    };
-    
-    const pagination = new Pagination('pagination', options);
-
-    pagination.on('afterMove', fetchCallBack);
+    return pageNumber.toString().padStart(2, '0');
   }
 
-async function OnFetchTrendingWeeks (event) {
-  refs.cardListSearchResult.innerHTML = "";
+  const options = {
+    totalItems,
+    itemsPerPage,
+    visiblePages: 3,
+    page: 1,
+    centerAlign: false,
+    firstItemClassName: 'tui-first-child',
+    lastItemClassName: 'tui-last-child',
+    template: {
+      page: function (data) {
+        const currentPage = data.page;
+        const pageNumber = formatPageNumber(currentPage);
+        return `<span class="tui-page-btn btn">${pageNumber}</span>`;
+      },
+      currentPage: function (data) {
+        const cuurentPage = data.page;
+        const pageNumber = formatPageNumber(cuurentPage);
+        return `<strong class="tui-page-btn tui-is-selected btn">${pageNumber}</strong>`;
+      },
 
-  const genresData = await fetchGenres()
+      moveButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}">' +
+        '<span class="tui-ico-{{type}}">{{type}}</span>' +
+        '</a>',
+      disabledMoveButton:
+        '<div class="tui-page-btn tui-is-disabled tui-{{type}}">' +
+        '<div class="tui-ico-{{type}}">{{type}}</div>' +
+        '</div>',
+      moreButton:
+        '<a href="#" class="tui-page-btn tui-{{type}}-is-ellip btn">' +
+        '<span class="tui-ico-ellip">...</span>' +
+        '</a>',
+    },
+  };
+
+  const pagination = new Pagination('pagination', options);
+
+  pagination.on('afterMove', fetchCallBack);
+}
+
+async function OnFetchTrendingWeeks(event) {
+  refs.cardListSearchResult.innerHTML = '';
+
+  const genresData = await fetchGenres();
   let trendData = await fetchTrendingWeekMovies(event.page);
 
   let genresObjectData = trendData.weeklyTrendsList.map(film => {
     return film.genre_ids.map(genre => {
-      return genresData.find(option => option.id === genre)
-    })  
-  })
+      return genresData.find(option => option.id === genre);
+    });
+  });
 
-  trendData.weeklyTrendsList.forEach((film, index) => film.genre_ids = genresObjectData[index])
+  trendData.weeklyTrendsList.forEach(
+    (film, index) => (film.genre_ids = genresObjectData[index])
+  );
 
-  trendData.weeklyTrendsList.forEach(film => { 
-    refs.cardListSearchResult.insertAdjacentHTML('beforeend', catalogMarkup(film))
-  })
+  trendData.weeklyTrendsList.forEach(film => {
+    refs.cardListSearchResult.insertAdjacentHTML(
+      'beforeend',
+      catalogMarkup(film)
+    );
+  });
   // if (yearCatalog) {
   //   yearCatalog.innerHTML = addYears();
   // }
   scrollUp();
 }
 
-
-
-async function OnSearchFetch (eventData){
-  refs.cardListSearchResult.innerHTML = "";
+async function OnSearchFetch(eventData) {
+  refs.cardListSearchResult.innerHTML = '';
   let queryData = await fetchSearch(inputValue, eventData.page, year);
 
-  const genresData = await fetchGenres()
+  const genresData = await fetchGenres();
 
   let genresObjectData = queryData.results.map(film => {
     return film.genre_ids.map(genre => {
-      return genresData.find(option => option.id === genre)
-    })  
-  })
+      return genresData.find(option => option.id === genre);
+    });
+  });
 
-  queryData.results.forEach((film, index) => film.genre_ids = genresObjectData[index])
+  queryData.results.forEach(
+    (film, index) => (film.genre_ids = genresObjectData[index])
+  );
 
-  queryData.results.forEach(film => { 
-    refs.cardListSearchResult.insertAdjacentHTML('beforeend', catalogMarkup(film))
-  })
-  scrollUp()
+  queryData.results.forEach(film => {
+    refs.cardListSearchResult.insertAdjacentHTML(
+      'beforeend',
+      catalogMarkup(film)
+    );
+  });
+  scrollUp();
 }
 
-function scrollUp () {
-  if (viewportWidth >= 1280){
-    scroll({top: 790, behavior: 'smooth'})
-  }
-  else {
-    scroll({top: 500, behavior: 'smooth'})
+function scrollUp() {
+  if (viewportWidth >= 1280) {
+    scroll({ top: 790, behavior: 'smooth' });
+  } else {
+    scroll({ top: 500, behavior: 'smooth' });
   }
 }
 // ------------------ Query catalog cards markup by keyword ------------------ //
-
-
-
 
 function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails)
+  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails);
 }
 
-function closeOnBacdropMoreDetails (e) {
-  closeOnBackdropClick(e, closeMoreDetails)
+function closeOnBacdropMoreDetails(e) {
+  closeOnBackdropClick(e, closeMoreDetails);
 }
 
-function closeOnBacdropTrailer (e) {
-  closeOnBackdropClick(e, closeTrailerModal)
+function closeOnBacdropTrailer(e) {
+  closeOnBackdropClick(e, closeTrailerModal);
 }
 
-function closeOnBackdropClick (e, callback){
-  if (e.target !== e.currentTarget){
-    return 
-  }
-  else {
+function closeOnBackdropClick(e, callback) {
+  if (e.target !== e.currentTarget) {
+    return;
+  } else {
     callback();
   }
 }
@@ -292,7 +287,7 @@ function closeOnBackdropClick (e, callback){
 function closeMoreDetails() {
   refs.moreDetail.classList.add('is-hidden');
   document.removeEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails)
+  refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails);
   refs.body.style.overflow = 'auto';
 }
 
@@ -304,15 +299,14 @@ function onEscapeMoreDetails(e) {
 
 async function markupMoreDetails(currentId) {
   try {
-    const picturePAth = `https://image.tmdb.org/t/p/w400`
+    const picturePAth = `https://image.tmdb.org/t/p/w400`;
     let picture;
     const movieDetails = await fetchMovieDetails(currentId);
 
-    if(!movieDetails.smallPoster){
-      picture = placeHolder
-    }
-    else{
-      picture = picturePAth + movieDetails.smallPoster
+    if (!movieDetails.smallPoster) {
+      picture = placeHolder;
+    } else {
+      picture = picturePAth + movieDetails.smallPoster;
     }
     const markup = `<div class="poster"> 
           <img src="${picture}" class="poster-img" loading="lazy" alt="the poster of the movie you have chosen"/>
@@ -373,8 +367,7 @@ function openTrailerModal(cardId) {
 
   document.addEventListener('keydown', onEscape);
   refs.closeTrailerBtn.addEventListener('click', closeTrailerModal);
-  refs.trailerModal.addEventListener('click', closeOnBacdropTrailer)
-
+  refs.trailerModal.addEventListener('click', closeOnBacdropTrailer);
 }
 
 async function watchTrailer(cardId) {
@@ -433,7 +426,7 @@ function closeTrailerModal() {
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeTrailerModal);
-  refs.trailerModal.removeEventListener('click', closeOnBacdropTrailer)
+  refs.trailerModal.removeEventListener('click', closeOnBacdropTrailer);
 }
 
 function onCheckLocalStorage() {
@@ -477,5 +470,5 @@ function action() {
 }
 
 function toggleBtnStyles(text) {
-  btnatlibrary.textContent = text
+  btnatlibrary.textContent = text;
 }

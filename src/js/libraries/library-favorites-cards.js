@@ -1,64 +1,122 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { fetchTrendingMovies } from '../fetches/fetch-trendings';
+import { cardMarkup } from '../utils/card-markup';
 import { fetchTrailers } from '../fetches/fetch-trailer';
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
-import { cardMarkup } from './card-markup';
 
 const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
   trailerModal: document.querySelector('.trailer-modal-backdrop'),
   trailerModalContent: document.querySelector('.trailer-modal-content'),
+  trailerErrorImage: document.querySelector('.trailer-placeholder-default'),
   moreDetail: document.querySelector('.modal-film-info'),
-  wrap: document.querySelector('.flex'),
   closeModalBtn: document.querySelector('.modal-film-info .close-modal'),
   closeTrailerBtn: document.querySelector('.close-trailer-btn'),
   homeTrendsList: document.querySelector('.home-trends-list'),
   body: document.querySelector('body'),
   scrollUpBtn: document.querySelector('#back-to-top'),
+  wrap: document.querySelector('.flex'),
+  selectSection: document.querySelector('.genre-filter'),
+  select: document.querySelector('.select'),
+  selectList: document.querySelector('.select-options'),
+  selectStyled: document.querySelector('.select-styled-content'),
+  selectAll: document.querySelector('.select-styled'),
 };
+
+const sectionLibrary = document.querySelector('.library-film-list');
+const libraryCardList = document.querySelector('.card-list-search-result');
+const loadMoreBtn = document.querySelector('#js-loadmore');
+const librariesKey = 'films-id-array';
+const resetBtn = document.querySelector('.reset-filter-button');
 
 let arr = [];
 let cardId;
 let btnatlibrary;
-let localArr = localStorage.getItem('films-id-array');
+let localArr = localStorage.getItem(librariesKey);
+let currentGenre;
 
-window.addEventListener('load', onLoad);
 refs.closeModalBtn.addEventListener('click', closeMoreDetails);
-const viewportWidth = document.body.clientWidth;
+window.addEventListener('load', renderCards);
 
-async function onLoad() {
-  try {
-    const movies = await fetchTrendingMovies();
-    if (movies.length === 0) {
-      Notify.failure("We are sorry but we don't have any upcoming films");
-      return;
-    }
-    const randomFilmsArr = onChooseRandomFilms(movies);
-    onRenderMarkup(randomFilmsArr);
-  } catch (error) {
-    console.log(error.message);
-  }
+const perPage = 9;
+let page = 1;
+
+function showMoreCards() {
+  return JSON.parse(localArr).length > perPage * page;
 }
 
-async function onRenderMarkup(randomFilmsArr) {
-  try {
-    const movieCards = await Promise.all(
-      randomFilmsArr.map(async movie => {
-        const card = await cardMarkup(movie.id);
-        return card;
+loadMoreBtn.addEventListener('click', () => {
+  page += 1;
+  renderCards();
+});
+
+function renderCards() {
+  if (localArr === null || JSON.parse(localArr).length === 0) {
+    onNotMarkup();
+  } else {
+    const renderPromises = JSON.parse(localArr)
+      .slice((page - 1) * perPage, page * perPage)
+      .map(id => cardMarkup(id));
+
+    Promise.all(renderPromises)
+      .then(filmCards => {
+        const filmCardsHTML = filmCards.join('');
+        libraryCardList.innerHTML += filmCardsHTML;
+        toggleLoadMore();
+        onAddEventListener();
       })
-    );
-    refs.homeTrendsList.innerHTML = movieCards.join('');
-    onAddEventListener();
-  } catch (error) {
-    console.log(error.message);
+      .catch(error => {
+        console.error('Error rendering film cards:', error);
+      });
   }
+  refs.select.addEventListener('click', onSelectGenre);
+  resetBtn.addEventListener('click', () => {
+    document.location.reload();
+  });
 }
 
-function onChooseRandomFilms(movies) {
-  const randomFirstFilm = Math.floor(Math.random() * 5);
-  const randomFilmsArr = movies.slice(randomFirstFilm, randomFirstFilm + 3);
-  return randomFilmsArr;
+function updateMarkup() {
+  page = 1;
+  localArr = localStorage.getItem(librariesKey);
+  if (localArr === null || JSON.parse(localArr).length === 0) {
+    onNotMarkup();
+  } else {
+    const renderPromises = JSON.parse(localArr)
+      .map(id => cardMarkup(id))
+      .slice((page - 1) * perPage, page * perPage);
+
+    Promise.all(renderPromises)
+      .then(filmCards => {
+        const filmCardsHTML = filmCards.join('');
+        libraryCardList.innerHTML = filmCardsHTML;
+        toggleLoadMore();
+      })
+      .catch(error => {
+        console.error('Error rendering film cards:', error);
+      });
+  }
+  refs.select.addEventListener('click', onSelectGenre);
+  resetBtn.addEventListener('click', () => {
+    document.location.reload();
+  });
+}
+
+function onNotMarkup() {
+  Notify.info(`OOPS... You don't have any movies at your library.`);
+  const emptyLibrary = `<div class="container-library container">
+      <p class="library-empty__mistake">OOPS... <br> We are very sorry! <br> You don't have any movies at your library.</p>
+      <button class="main-accent-sml-btn btn library" onclick="window.location.href='catalog.html'">Search movie</button>
+    </div>`;
+  sectionLibrary.innerHTML = emptyLibrary;
+  refs.selectSection.classList.add('hidden');
+}
+
+function toggleLoadMore() {
+  if (showMoreCards()) {
+    loadMoreBtn.style.display = 'block';
+  } else {
+    loadMoreBtn.style.display = 'none';
+  }
+  onAddEventListener();
 }
 
 function onAddEventListener() {
@@ -75,6 +133,7 @@ function onClick(e) {
   refs.body.style.overflow = 'hidden';
   refs.scrollUpBtn.style.display = 'none';
 }
+
 function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
   markupMoreDetails(cardId);
@@ -99,6 +158,8 @@ function closeMoreDetails() {
   document.removeEventListener('keydown', onEscapeMoreDetails);
   refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails);
   refs.body.style.overflow = 'auto';
+  refs.selectStyled.textContent = 'Genre';
+  refs.selectStyled.style.color = '#b7b7b7';
 }
 
 function onEscapeMoreDetails(e) {
@@ -162,16 +223,15 @@ async function markupMoreDetails(currentId) {
 
 function OnWatchTrailerBtn(event) {
   const cardId = +event.target.dataset.id;
-  openTrailerModal(cardId);
+  openModal(cardId);
 }
 
-function openTrailerModal(cardId) {
+function openModal(cardId) {
   refs.trailerModal.classList.remove('is-hidden');
   watchTrailer(cardId);
 
   document.addEventListener('keydown', onEscape);
-  refs.closeTrailerBtn.addEventListener('click', closeTrailerModal);
-  refs.trailerModal.addEventListener('click', closeOnBacdropTrailer);
+  refs.closeTrailerBtn.addEventListener('click', closeModal);
 }
 
 async function watchTrailer(cardId) {
@@ -182,15 +242,16 @@ async function watchTrailer(cardId) {
       const trailerKey = trailers[0].key;
 
       const trailerContent = showTrailer(trailerKey);
-      refs.trailerModalContent.innerHTML = `<div class="trailer-modal-content">${trailerContent}</div>`;
+      refs.trailerModalContent.innerHTML = trailerContent;
     } else {
-      const errorContent = showError();
-      refs.trailerModal.innerHTML = `<div class="trailer-modal-content">${errorContent}</div>`;
+      showErrorModal();
     }
   } catch (error) {
     console.error('Error fetching trailer:', error);
+    showErrorModal();
   }
 }
+
 function showTrailer(trailerKey) {
   if (viewportWidth <= 767) {
     return `
@@ -203,46 +264,31 @@ function showTrailer(trailerKey) {
   }
 }
 
-function showError() {
-  return `
-    <div class="trailer-error-info">
-      <p>OOPS...</p>
-      <p>We are very sorry!</p>
-      <p>But we couldn't find the trailer.</p>
-    </div>
-    <picture>
-      <source srcset="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/mobile/trailer-placeholder-2x.png, 2x" 
-              media="(max-width: 320px)">
-      <source srcset="../../images/trailer-placeholder/tablet/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/tablet/trailer-placeholder-2x.png, 2x" 
-              media="(max-width: 768px)">
-      <source srcset="../../images/trailer-placeholder/desktop/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/desktop/trailer-placeholder-2x.png, 2x" 
-              media="(min-width: 769px)">
-      <img src="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png"  loading="lazy" alt="Traier is not found">
-    </picture>
-    </div>
+function showErrorModal() {
+  const errorContent = `
+    <div class="error-mode-content">
+      <div class="trailer-error-info">
+        <p>OOPS...</p>
+        <p>We are very sorry!</p>
+        <p>But we couldn't find the trailer.</p>
+      </div>
   `;
+  trailerErrorImage.classList.remove('is-hidden');
+  refs.trailerModalContent.innerHTML = errorContent;
 }
 
 function onEscape(event) {
   if (event.key === 'Escape') {
-    closeTrailerModal();
+    closeModal();
   }
 }
 
-function closeTrailerModal() {
+function closeModal() {
   refs.trailerModal.classList.add('is-hidden');
 
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
-  refs.closeModalBtn.removeEventListener('click', closeTrailerModal);
-  refs.moreDetail.removeEventListener('click', closeOnBacdropTrailer);
-}
-
-function closeOnBacdropTrailer(e) {
-  closeOnBackdropClick(e, closeTrailerModal);
+  refs.closeModalBtn.removeEventListener('click', closeModal);
 }
 
 function onCheckLocalStorage() {
@@ -255,30 +301,34 @@ function onCheckLocalStorage() {
 }
 
 function action() {
-  localArr = localStorage.getItem('films-id-array');
+  closeMoreDetails();
+  localArr = localStorage.getItem(librariesKey);
   try {
     if (localArr === null) {
       arr.push(cardId);
-      localStorage.setItem('films-id-array', JSON.stringify(arr));
-      localArr = localStorage.getItem('films-id-array');
+      localStorage.setItem(librariesKey, JSON.stringify(arr));
+      localArr = localStorage.getItem(librariesKey);
       toggleBtnStyles('Remove from my library');
+      updateMarkup();
       return;
     }
     let parseLocalStorage = JSON.parse(localArr);
 
     if (!parseLocalStorage.includes(cardId)) {
       parseLocalStorage.push(cardId);
-      localStorage.setItem('films-id-array', JSON.stringify(parseLocalStorage));
-      localArr = localStorage.getItem('films-id-array');
+      localStorage.setItem(librariesKey, JSON.stringify(parseLocalStorage));
+      localArr = localStorage.getItem(librariesKey);
       toggleBtnStyles('Remove from my library');
+      updateMarkup();
       return;
     }
     if (parseLocalStorage.includes(cardId)) {
       const idx = parseLocalStorage.indexOf(cardId);
       parseLocalStorage.splice(idx, 1);
-      localStorage.setItem('films-id-array', JSON.stringify(parseLocalStorage));
-      localArr = localStorage.getItem('films-id-array');
+      localStorage.setItem(librariesKey, JSON.stringify(parseLocalStorage));
+      localArr = localStorage.getItem(librariesKey);
       toggleBtnStyles('Add to my library');
+      updateMarkup();
     }
   } catch (error) {
     Notify.failure('Please, try one more time');
@@ -287,4 +337,51 @@ function action() {
 
 function toggleBtnStyles(text) {
   btnatlibrary.textContent = text;
+}
+
+function onSelectGenre(e) {
+  currentGenre = e.target;
+  if (!currentGenre.hasAttribute('id')) {
+    onToggleList();
+    return;
+  }
+  refs.selectStyled.textContent = currentGenre.textContent;
+  onToggleList();
+  onToggleGenreColor(currentGenre);
+  checkFilmsList(currentGenre.textContent);
+}
+
+async function checkFilmsList(currentGenre) {
+  libraryCardList.innerHTML = '';
+  let currentFilms = ``;
+  try {
+    JSON.parse(localArr).forEach(async id => {
+      const data = await fetchMovieDetails(id);
+      if (data.genres.includes(currentGenre)) {
+        const card = await cardMarkup(data.id);
+        libraryCardList.innerHTML += card;
+        onAddEventListener();
+      }
+    });
+  } catch (error) {
+    console.log(error);
+  }
+}
+
+function onToggleGenreColor(currentGenre) {
+  if (currentGenre.id !== '' && refs.body.classList.contains('light')) {
+    refs.selectStyled.style.color = '#282828';
+    return;
+  }
+  if (currentGenre.id !== '') {
+    refs.selectStyled.style.color = '#ffffff';
+  }
+}
+
+function onToggleList() {
+  if (refs.selectList.style.display === 'none') {
+    refs.selectList.style.display = 'block';
+    return;
+  }
+  refs.selectList.style.display = 'none';
 }

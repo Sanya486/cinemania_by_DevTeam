@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
-import { rateArray } from './rate-markup';
+import { rateArray } from '../utils/rate-markup';
 
 import { fetchTrailers } from '../fetches/fetch-trailer';
 
@@ -165,11 +165,11 @@ function openModalDetails(cardId) {
   markupMoreDetails(cardId);
 
   document.addEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails)
+  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails);
 }
 
-function closeOnBacdropMoreDetails (e) {
-  closeOnBackdropClick(e, closeMoreDetails)
+function closeOnBacdropMoreDetails(e) {
+  closeOnBackdropClick(e, closeMoreDetails);
 }
 
 function openModal(cardId) {
@@ -181,18 +181,17 @@ function openModal(cardId) {
 
   document.addEventListener('keydown', onEscape);
   refs.closeModalBtn.addEventListener('click', closeModal);
-  refs.trailerModal.addEventListener('click', closeBackdropOnwWatchTrailer)
+  refs.trailerModal.addEventListener('click', closeBackdropOnwWatchTrailer);
 }
 
-function closeBackdropOnwWatchTrailer  (e) {
-  closeOnBackdropClick(e, closeModal)
+function closeBackdropOnwWatchTrailer(e) {
+  closeOnBackdropClick(e, closeModal);
 }
 
-function closeOnBackdropClick (e, callback){
-  if (e.target !== e.currentTarget){
-    return 
-  }
-  else {
+function closeOnBackdropClick(e, callback) {
+  if (e.target !== e.currentTarget) {
+    return;
+  } else {
     callback();
   }
 }
@@ -202,7 +201,7 @@ function closeMoreDetails() {
   refs.body.style.overflow = 'auto';
 
   document.removeEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails)
+  refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails);
 }
 
 function closeModal() {
@@ -212,7 +211,7 @@ function closeModal() {
   refs.trailerModalContent.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeModal);
-  refs.trailerModal.removeEventListener('click', closeBackdropOnwWatchTrailer)
+  refs.trailerModal.removeEventListener('click', closeBackdropOnwWatchTrailer);
 }
 
 function onEscapeMoreDetails(event) {
