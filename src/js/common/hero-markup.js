@@ -8,8 +8,10 @@ import { showTrailer } from '../utils/moreDetails';
 
 const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
-  trailerModal: document.querySelector('.trailer-modal-backdrop'),
+  trailerModalBackDrop: document.querySelector('.trailer-modal-backdrop'),
   trailerModalContent: document.querySelector('.trailer-modal-content'),
+  trailerAvaible: document.querySelector('.trailer-avaible'),
+  trailerErrorContent: document.querySelector('.trailer-error-mode-content'),
   trailerErrorImage: document.querySelector('.trailer-placeholder-default'),
   moreDetail: document.querySelector('.modal-film-info'),
   poster: document.querySelector('.poster-img'),
@@ -146,12 +148,12 @@ function closeOnBacdropMoreDetails(e) {
 }
 
 function openModal(cardId) {
-  refs.trailerModal.classList.remove('is-hidden');
+  refs.trailerModalBackDrop.classList.remove('is-hidden');
   refs.body.style.overflow = 'hidden';
   watchTrailer(cardId);
   document.addEventListener('keydown', onEscape);
   refs.closeModalBtn.addEventListener('click', closeModal);
-  refs.trailerModal.addEventListener('click', closeBackdropOnwWatchTrailer);
+  refs.trailerModalBackDrop.addEventListener('click', closeBackdropOnwWatchTrailer);
 }
 
 function closeBackdropOnwWatchTrailer(e) {
@@ -174,12 +176,12 @@ function closeMoreDetails() {
 }
 
 function closeModal() {
-  refs.trailerModal.classList.add('is-hidden');
+  refs.trailerModalBackDrop.classList.add('is-hidden');
   refs.body.style.overflow = 'auto';
-  refs.trailerModalContent.innerHTML = '';
+  refs.trailerAvaible.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeModal);
-  refs.trailerModal.removeEventListener('click', closeBackdropOnwWatchTrailer);
+  refs.trailerModalBackDrop.removeEventListener('click', closeBackdropOnwWatchTrailer);
 }
 
 function onEscapeMoreDetails(event) {
@@ -203,26 +205,14 @@ async function watchTrailer(cardId) {
       const trailerContent = showTrailer(trailerKey);
       refs.trailerModalContent.innerHTML = trailerContent;
     } else {
-      showErrorModal();
+      refs.trailerErrorContent.classList.remove('hidden');
     }
   } catch (error) {
     console.error('Error fetching trailer:', error);
-    showErrorModal();
+   refs.trailerErrorContent.classList.remove('hidden');
   }
 }
 
-function showErrorModal() {
-  const errorContent = `
-    <div class="error-mode-content">
-      <div class="trailer-error-info">
-        <p>OOPS...</p>
-        <p>We are very sorry!</p>
-        <p>But we couldn't find the trailer.</p>
-      </div>
-  `;
-  trailerErrorImage.classList.remove('is-hidden');
-  refs.trailerModalContent.innerHTML = errorContent;
-}
 
 async function onShowMoreDetails(currentId) {
   try {
