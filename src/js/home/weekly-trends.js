@@ -1,9 +1,7 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { fetchTrendingMovies } from '../fetches/fetch-trendings-day';
 import { fetchTrailers } from '../fetches/fetch-trailer';
-import { fetchMovieDetails } from '../fetches/fetch-movie-details';
 import { cardMarkup } from '../utils/card-markup';
-import { showError } from '../utils/moreDetails';
 import { markupMoreDetails } from '../utils/moreDetailsCardMarkup';
 
 const refs = {
