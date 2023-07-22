@@ -21,8 +21,6 @@ const cardMarkup = async movieId => {
     if (!fetchData.smallPoster) picture = placeholder;
     else picture = `https://image.tmdb.org/t/p/w400${fetchData.smallPoster}`;
 
-    console.log(picture)
-
     const quaryRate = rateArray(fetchData.rate);
 
     const rateMarkup = quaryRate
@@ -38,7 +36,7 @@ const cardMarkup = async movieId => {
           <div class="film-card" id="${fetchData.id}">
           <a class="card-link" href="">
           <div class="img-ovelay"></div>
-          <img class ="film-poster" loading="lazy" src='${picture}'>
+          <img class ="film-poster" loading="lazy" src='${fetchData.smallPoster}'>
           <div class="film-card-info">
           <p class="film-name">${fetchData.title}</p>
           <div class="film-wrap">

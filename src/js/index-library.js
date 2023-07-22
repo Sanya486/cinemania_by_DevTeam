@@ -5,7 +5,7 @@ import './fetches/fetch-movie-details';
 import './fetches/fetch-movie-genre';
 import './fetches/fetch-trailer';
 import './fetches/fetch-search';
-import './fetches/fetch-trendings';
+import './fetches/fetch-trendings-day';
 
 // =============Modals-JS =============
 

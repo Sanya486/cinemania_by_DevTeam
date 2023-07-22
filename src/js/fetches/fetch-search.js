@@ -1,7 +1,8 @@
 import axios from 'axios';
 import Notiflix from 'notiflix';
+import { API_KEY } from '../utils/api-key';
 
-const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
+
 const URL = 'https://api.themoviedb.org/3/search/movie?';
 
 const fetchSearch = async (keyword, page = 1, year) => {

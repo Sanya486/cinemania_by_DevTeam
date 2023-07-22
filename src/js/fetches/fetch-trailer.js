@@ -1,5 +1,6 @@
 import axios from 'axios';
-const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
+import { API_KEY } from '../utils/api-key';
+
 
 const fetchTrailers = async movieId => {
   try {

@@ -1,8 +1,10 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { fetchTrendingMovies } from '../fetches/fetch-trendings';
+import { fetchTrendingMovies } from '../fetches/fetch-trendings-day';
 import { fetchTrailers } from '../fetches/fetch-trailer';
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
 import { cardMarkup } from '../utils/card-markup';
+import { showError } from '../utils/moreDetails';
+import { markupMoreDetails } from '../utils/moreDetailsCardMarkup';
 
 const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
@@ -77,7 +79,7 @@ function onClick(e) {
 }
 function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
-  markupMoreDetails(cardId);
+  onShowMoreDetails(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
   refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails);
 }
@@ -107,45 +109,9 @@ function onEscapeMoreDetails(e) {
   }
 }
 
-async function markupMoreDetails(currentId) {
+async function onShowMoreDetails(currentId) {
   try {
-    const movieDetails = await fetchMovieDetails(currentId);
-    const markup = `<div class="poster"> 
-          <img src="https://image.tmdb.org/t/p/w400/${
-            movieDetails.smallPoster
-          }" class="poster-img" loading="lazy" alt="the poster of the movie you have chosen"/>
-        </div><div>
-          <h3 class="movie-title">${
-            movieDetails.title
-          }</h3><div class="movie-info">
-            <div class="info">
-              <ul class="film-info-list">
-                <li><p class="film-info-item-text">Vote / Votes</p></li>
-                <li><p class="film-info-item-text">Popularity</p></li>
-                <li><p class="film-info-item-text">Genre</p></li>
-              </ul>
-            </div><div class="params">
-              <ul class="film=info-params-list">
-                <li><p class="film-info-params-vote"><span class="film-info-params-vote-number">${movieDetails.voteAverage.toFixed(
-                  1
-                )}</span> / <span class="film-info-params-vote-number">${
-      movieDetails.voteCount
-    }</span></p>
-                </li>
-                <li><p class="popularity">${movieDetails.popularity.toFixed(
-                  1
-                )}</p></li>
-                <li><p class="genre">${movieDetails.genres}</p></li>  
-              </ul>  
-            </div>
-          </div><div class="about">
-            <p>About</p>
-            <p>${movieDetails.overview}</p>
-          </div><div class="btn-list">
-            <button class="main-accent-sml-btn btn modal" id="btn-watch-treiller" data-id="${currentId}">Watch trailer</button>
-            <button class="add-to-my-library-btn btn modal" id="btn-add-to-my-library">Add to my library</button>
-          </div>
-        </div>`;
+    const markup = await markupMoreDetails(currentId)
     refs.wrap.innerHTML = markup;
 
     const btnatreiller = document.querySelector('#btn-watch-treiller');
@@ -201,29 +167,6 @@ function showTrailer(trailerKey) {
       <iframe width="600" height="300" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     `;
   }
-}
-
-function showError() {
-  return `
-    <div class="trailer-error-info">
-      <p>OOPS...</p>
-      <p>We are very sorry!</p>
-      <p>But we couldn't find the trailer.</p>
-    </div>
-    <picture>
-      <source srcset="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/mobile/trailer-placeholder-2x.png, 2x" 
-              media="(max-width: 320px)">
-      <source srcset="../../images/trailer-placeholder/tablet/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/tablet/trailer-placeholder-2x.png, 2x" 
-              media="(max-width: 768px)">
-      <source srcset="../../images/trailer-placeholder/desktop/trailer-placeholder-1x.png, 1x, 
-                    ../../images/trailer-placeholder/desktop/trailer-placeholder-2x.png, 2x" 
-              media="(min-width: 769px)">
-      <img src="../../images/trailer-placeholder/mobile/trailer-placeholder-1x.png"  loading="lazy" alt="Traier is not found">
-    </picture>
-    </div>
-  `;
 }
 
 function onEscape(event) {
