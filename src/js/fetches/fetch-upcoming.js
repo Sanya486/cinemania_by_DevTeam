@@ -3,8 +3,8 @@ export { fetchUpcoming };
 
 const URL = 'https://api.themoviedb.org/3/movie/upcoming';
 const params = new URLSearchParams({
-  api_key: '3e1aa277fd6b8a3cd0a3e29dfce20a5c',
-});
+  api_key: "21fa942e61d6ee3418d7f0261882e82d"
+})
 
 async function fetchUpcoming() {
   try {

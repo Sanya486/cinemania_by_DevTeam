@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 
-const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
+const API_KEY = "21fa942e61d6ee3418d7f0261882e82d"
 
 async function fetchTrendingMovies() {
   try {
