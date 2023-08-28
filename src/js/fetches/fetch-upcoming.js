@@ -1,9 +1,11 @@
 import axios from 'axios';
+import { API_KEY } from '../utils/api-key';
+
 export { fetchUpcoming };
 
 const URL = 'https://api.themoviedb.org/3/movie/upcoming';
 const params = new URLSearchParams({
-  api_key: '3e1aa277fd6b8a3cd0a3e29dfce20a5c',
+  api_key: API_KEY,
 });
 
 async function fetchUpcoming() {

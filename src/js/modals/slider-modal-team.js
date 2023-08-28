@@ -61,6 +61,3 @@ window.addEventListener('resize', updateSlider);
 
 updateSlider();
 
-
-
-

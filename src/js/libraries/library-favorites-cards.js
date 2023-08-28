@@ -1,12 +1,17 @@
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
-import { cardMarkup } from './card-markup';
+import { cardMarkup } from '../utils/card-markup';
 import { fetchTrailers } from '../fetches/fetch-trailer';
 import { fetchMovieDetails } from '../fetches/fetch-movie-details';
+import { markupMoreDetails } from '../utils/moreDetailsCardMarkup';
+import { closeOnBacdrop, showTrailer } from '../utils/moreDetails';
+import { showTrailer } from '../utils/moreDetails';
 
 const refs = {
   heroContainer: document.querySelector('.home-hero > .container'),
-  trailerModal: document.querySelector('.trailer-modal-backdrop'),
+  trailerModalBackDrop: document.querySelector('.trailer-modal-backdrop'),
   trailerModalContent: document.querySelector('.trailer-modal-content'),
+  trailerAvaible: document.querySelector('.trailer-avaible'),
+  trailerErrorContent: document.querySelector('.trailer-error-mode-content'),
   trailerErrorImage: document.querySelector('.trailer-placeholder-default'),
   moreDetail: document.querySelector('.modal-film-info'),
   closeModalBtn: document.querySelector('.modal-film-info .close-modal'),
@@ -20,15 +25,13 @@ const refs = {
   selectList: document.querySelector('.select-options'),
   selectStyled: document.querySelector('.select-styled-content'),
   selectAll: document.querySelector('.select-styled'),
+  sectionLibrary: document.querySelector('.library-film-list'),
+  libraryCardList: document.querySelector('.card-list-search-result'),
+  loadMoreBtn: document.querySelector('#js-loadmore'),
+  resetBtn: document.querySelector('.reset-filter-button'),
 };
 
-const sectionLibrary = document.querySelector('.library-film-list');
-const libraryCardList = document.querySelector('.card-list-search-result');
-const loadMoreBtn = document.querySelector('#js-loadmore');
 const librariesKey = 'films-id-array';
-const resetBtn = document.querySelector('.reset-filter-button');
-
-
 
 let arr = [];
 let cardId;
@@ -36,18 +39,17 @@ let btnatlibrary;
 let localArr = localStorage.getItem(librariesKey);
 let currentGenre;
 
-refs.closeModalBtn.addEventListener('click', closeMoreDetails);
-window.addEventListener('load', renderCards);
-
-
 const perPage = 9;
 let page = 1;
+
+refs.closeModalBtn.addEventListener('click', closeMoreDetails);
+window.addEventListener('load', renderCards);
 
 function showMoreCards() {
   return JSON.parse(localArr).length > perPage * page;
 }
 
-loadMoreBtn.addEventListener('click', () => {
+refs.loadMoreBtn.addEventListener('click', () => {
   page += 1;
   renderCards();
 });
@@ -63,17 +65,17 @@ function renderCards() {
     Promise.all(renderPromises)
       .then(filmCards => {
         const filmCardsHTML = filmCards.join('');
-        libraryCardList.innerHTML += filmCardsHTML;
+        refs.libraryCardList.innerHTML += filmCardsHTML;
         toggleLoadMore();
-        onAddEventListener();
+        onToggleMoreAddEventListener();
       })
       .catch(error => {
         console.error('Error rendering film cards:', error);
       });
   }
   refs.select.addEventListener('click', onSelectGenre);
-  resetBtn.addEventListener('click', () => {
-    document.location.reload()
+  refs.resetBtn.addEventListener('click', () => {
+    document.location.reload();
   });
 }
 
@@ -90,16 +92,17 @@ function updateMarkup() {
     Promise.all(renderPromises)
       .then(filmCards => {
         const filmCardsHTML = filmCards.join('');
-        libraryCardList.innerHTML = filmCardsHTML;
+        refs.libraryCardList.innerHTML = filmCardsHTML;
         toggleLoadMore();
       })
       .catch(error => {
         console.error('Error rendering film cards:', error);
       });
   }
+
   refs.select.addEventListener('click', onSelectGenre);
-  resetBtn.addEventListener('click', () => {
-    document.location.reload()
+  refs.resetBtn.addEventListener('click', () => {
+    document.location.reload();
   });
 }
 
@@ -109,27 +112,27 @@ function onNotMarkup() {
       <p class="library-empty__mistake">OOPS... <br> We are very sorry! <br> You don't have any movies at your library.</p>
       <button class="main-accent-sml-btn btn library" onclick="window.location.href='catalog.html'">Search movie</button>
     </div>`;
-  sectionLibrary.innerHTML = emptyLibrary;
+  refs.sectionLibrary.innerHTML = emptyLibrary;
   refs.selectSection.classList.add('hidden');
 }
 
 function toggleLoadMore() {
   if (showMoreCards()) {
-    loadMoreBtn.style.display = 'block';
+    refs.loadMoreBtn.style.display = 'block';
   } else {
-    loadMoreBtn.style.display = 'none';
+    refs.loadMoreBtn.style.display = 'none';
   }
-  onAddEventListener();
+  onToggleMoreAddEventListener();
 }
 
-function onAddEventListener() {
+function onToggleMoreAddEventListener() {
   let cardsArrRef = document.querySelectorAll('.film-card');
   for (const card of cardsArrRef) {
-    card.addEventListener('click', onClick);
+    card.addEventListener('click', onCardClick);
   }
 }
 
-function onClick(e) {
+function onCardClick(e) {
   e.preventDefault();
   cardId = +e.currentTarget.id;
   openModalDetails(cardId);
@@ -139,30 +142,18 @@ function onClick(e) {
 
 function openModalDetails(cardId) {
   refs.moreDetail.classList.remove('is-hidden');
-  markupMoreDetails(cardId);
+  onShowMoreDetail(cardId);
   document.addEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.addEventListener('click', closeOnBacdropMoreDetails);
-}
-
-function closeOnBacdropMoreDetails(e) {
-  closeOnBackdropClick(e, closeMoreDetails);
-}
-
-function closeOnBackdropClick(e, callback) {
-  if (e.target !== e.currentTarget) {
-    return;
-  } else {
-    callback();
-  }
+  refs.moreDetail.addEventListener('click', e =>
+    closeOnBacdrop(e, closeMoreDetails)
+  );
 }
 
 function closeMoreDetails() {
   refs.moreDetail.classList.add('is-hidden');
   document.removeEventListener('keydown', onEscapeMoreDetails);
-  refs.moreDetail.removeEventListener('click', closeOnBacdropMoreDetails);
+  refs.moreDetail.removeEventListener('click', closeOnBacdrop);
   refs.body.style.overflow = 'auto';
-  refs.selectStyled.textContent = 'Genre';
-  refs.selectStyled.style.color = '#b7b7b7';
 }
 
 function onEscapeMoreDetails(e) {
@@ -171,45 +162,9 @@ function onEscapeMoreDetails(e) {
   }
 }
 
-async function markupMoreDetails(currentId) {
+async function onShowMoreDetail(currentId) {
   try {
-    const movieDetails = await fetchMovieDetails(currentId);
-    const markup = `<div class="poster"> 
-          <img src="https://image.tmdb.org/t/p/w400/${
-            movieDetails.smallPoster
-          }" class="poster-img" loading="lazy" alt="the poster of the movie you have chosen"/>
-        </div><div>
-          <h3 class="movie-title">${
-            movieDetails.title
-          }</h3><div class="movie-info">
-            <div class="info">
-              <ul class="film-info-list">
-                <li><p class="film-info-item-text">Vote / Votes</p></li>
-                <li><p class="film-info-item-text">Popularity</p></li>
-                <li><p class="film-info-item-text">Genre</p></li>
-              </ul>
-            </div><div class="params">
-              <ul class="film=info-params-list">
-                <li><p class="film-info-params-vote"><span class="film-info-params-vote-number">${movieDetails.voteAverage.toFixed(
-                  1
-                )}</span> / <span class="film-info-params-vote-number">${
-      movieDetails.voteCount
-    }</span></p>
-                </li>
-                <li><p class="popularity">${movieDetails.popularity.toFixed(
-                  1
-                )}</p></li>
-                <li><p class="genre">${movieDetails.genres}</p></li>  
-              </ul>  
-            </div>
-          </div><div class="about">
-            <p>About</p>
-            <p>${movieDetails.overview}</p>
-          </div><div class="btn-list">
-            <button class="main-accent-sml-btn btn modal" id="btn-watch-treiller" data-id="${currentId}">Watch trailer</button>
-            <button class="add-to-my-library-btn btn modal" id="btn-add-to-my-library">Add to my library</button>
-          </div>
-        </div>`;
+    const markup = await markupMoreDetails(currentId);
     refs.wrap.innerHTML = markup;
 
     const btnatreiller = document.querySelector('#btn-watch-treiller');
@@ -230,11 +185,16 @@ function OnWatchTrailerBtn(event) {
 }
 
 function openModal(cardId) {
-  refs.trailerModal.classList.remove('is-hidden');
+  refs.trailerModalBackDrop.classList.remove('is-hidden');
   watchTrailer(cardId);
 
   document.addEventListener('keydown', onEscape);
   refs.closeTrailerBtn.addEventListener('click', closeModal);
+  refs.trailerModalBackDrop.addEventListener('click', closeOnBacdropTrailer);
+}
+
+function closeOnBacdropTrailer(e) {
+  closeOnBackdropClick(e, closeModal);
 }
 
 async function watchTrailer(cardId) {
@@ -243,41 +203,15 @@ async function watchTrailer(cardId) {
 
     if (trailers.length > 0) {
       const trailerKey = trailers[0].key;
-
       const trailerContent = showTrailer(trailerKey);
-      refs.trailerModalContent.innerHTML = trailerContent;
+      refs.trailerAvaible.innerHTML = trailerContent;
     } else {
-      showErrorModal();
+      refs.trailerErrorContent.classList.remove('hidden');
     }
   } catch (error) {
     console.error('Error fetching trailer:', error);
-    showErrorModal();
+    refs.trailerErrorContent.classList.remove('hidden');
   }
-}
-
-function showTrailer(trailerKey) {
-  if (viewportWidth <= 767) {
-    return `
-      <iframe width="250" height="160" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    `;
-  } else {
-    return `
-      <iframe width="600" height="300" src="https://www.youtube.com/embed/${trailerKey}" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-    `;
-  }
-}
-
-function showErrorModal() {
-  const errorContent = `
-    <div class="error-mode-content">
-      <div class="trailer-error-info">
-        <p>OOPS...</p>
-        <p>We are very sorry!</p>
-        <p>But we couldn't find the trailer.</p>
-      </div>
-  `;
-  trailerErrorImage.classList.remove('is-hidden');
-  refs.trailerModalContent.innerHTML = errorContent;
 }
 
 function onEscape(event) {
@@ -287,11 +221,12 @@ function onEscape(event) {
 }
 
 function closeModal() {
-  refs.trailerModal.classList.add('is-hidden');
-
-  refs.trailerModalContent.innerHTML = '';
+  refs.trailerModalBackDrop.classList.add('is-hidden');
+  refs.trailerErrorContent.classList.add('hidden');
+  refs.trailerAvaible.innerHTML = '';
   document.removeEventListener('keydown', onEscape);
   refs.closeModalBtn.removeEventListener('click', closeModal);
+  refs.trailerModalBackDrop.removeEventListener('click', closeOnBacdropTrailer);
 }
 
 function onCheckLocalStorage() {
@@ -355,15 +290,14 @@ function onSelectGenre(e) {
 }
 
 async function checkFilmsList(currentGenre) {
-  libraryCardList.innerHTML = '';
-  let currentFilms = ``;
+  refs.libraryCardList.innerHTML = '';
   try {
     JSON.parse(localArr).forEach(async id => {
       const data = await fetchMovieDetails(id);
       if (data.genres.includes(currentGenre)) {
         const card = await cardMarkup(data.id);
-        libraryCardList.innerHTML += card;
-        onAddEventListener();
+        refs.libraryCardList.innerHTML += card;
+        onToggleMoreAddEventListener();
       }
     });
   } catch (error) {

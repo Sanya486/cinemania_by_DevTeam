@@ -1,14 +1,17 @@
 import axios from 'axios';
+import placeholder from '../../images/components/post-holder.jpg'
+import { API_KEY } from '../utils/api-key';
 
 const fetchMovieDetails = async (movieId) => {
-  const API_KEY = '3e1aa277fd6b8a3cd0a3e29dfce20a5c';
+
   const URL = `https://api.themoviedb.org/3/movie/${movieId}?api_key=${API_KEY}&language=en-US`;
   
     const response = await axios.get(URL);
-    const data = response.data;
+  const data = response.data;
 
+
+  let smallPoster = !data.poster_path? placeholder : `https://image.tmdb.org/t/p/w400/${data.poster_path}`
     const poster = data.backdrop_path;
-    const smallPoster = data.poster_path;
     const title = data.title;
     const overview = data.overview;
     const voteAverage = data.vote_average;

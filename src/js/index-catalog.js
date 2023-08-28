@@ -1,30 +1,27 @@
 // =============Fetches-JS =============
 
-import "./fetches/fetch-upcoming";
-import "./fetches/fetch-movie-details";
-import "./fetches/fetch-genres"
-import "./fetches/fetch-trailer";
-import "./fetches/fetch-search";
-import "./fetches/fetch-trendings";
-import "./fetches/fetch-trendings-week";
+import './fetches/fetch-upcoming';
+import './fetches/fetch-movie-details';
+import './fetches/fetch-genres';
+import './fetches/fetch-trailer';
+import './fetches/fetch-search';
+import './fetches/fetch-trendings-day';
+import './fetches/fetch-trendings-week';
 
 // =============Modals-JS =============
 
-import "./modals/modal-team"
-import "./modals/slider-modal-team"
-
+import './modals/modal-team';
+import './modals/slider-modal-team';
 
 // =============Other-JS =============
 
-import './other/yearpickerLogic'
-import "./other/hero-markup"
-import "./other/switch-theme-btn"
-import "./other/mob-menu"
-import "./other/current-page-track"
-import "./other/search-input"
-import "./other/search-block"
-import "./other/scroll-up"
-import "./other/pagination"
-import "./other/year-arrow"
-
-
+import './utils/yearpickerLogic';
+import './common/hero-markup';
+import './utils/switch-theme-btn';
+import './common/mob-menu';
+import './utils/current-page-track';
+import './catalog/search-input';
+import './catalog/search-block';
+import './utils/scroll-up';
+import './utils/pagination';
+import './utils/year-arrow';
